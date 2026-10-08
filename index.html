@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,19 +9,25 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link href="./frontend/css/style.css" rel="stylesheet">
   <style>
+    body {
+      background-image: url('./frontend/assets/dashboard1.png') !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-attachment: fixed !important;
+    }
     .hero-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; position: relative; overflow: hidden; }
-    .hero-bg-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
-    .feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 2rem 1.5rem; transition: all 0.3s ease; cursor: pointer; text-decoration: none; display: block; height: 100%; }
-    .feature-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-6px); border-color: rgba(124,58,237,0.35); text-decoration: none; }
+    .hero-bg-orb { display: none; /* Hide glowing orbs for pixel theme */ }
+    .feature-card { background: var(--edu-warm-white, #FFFFFF); border: 3px solid #0F172A; box-shadow: 4px 4px 0px #0F172A; border-radius: 0; padding: 2rem 1.5rem; transition: all 0.15s ease; cursor: pointer; text-decoration: none; display: block; height: 100%; color: #0F172A; }
+    .feature-card:hover { background: #FEF3C7; transform: translate(-4px, -4px); box-shadow: 8px 8px 0px #0F172A; text-decoration: none; border-color: #0F172A; }
     .feature-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-    .feature-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
-    .feature-desc { font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
-    .nav-landing { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; background: rgba(15,10,30,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.3); border-radius: 999px; padding: 0.4rem 1rem; font-size: 0.78rem; font-weight: 700; color: #DDD6FE; margin-bottom: 1.5rem; }
-    .hero-title { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 1.25rem; }
-    .hero-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.55); max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.7; }
-    .tech-stack { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
-    .tech-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 0.3rem 0.75rem; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 600; }
+    .feature-title { font-size: 1.2rem; font-family: "Pixelify Sans", monospace; font-weight: 700; color: #0F172A; margin-bottom: 0.5rem; text-transform: uppercase; }
+    .feature-desc { font-size: 0.95rem; color: #0F172A; line-height: 1.6; font-weight: 500; }
+    .nav-landing { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; background: #0F172A; border-bottom: 3px solid #0F172A; box-shadow: 0 4px 0px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: space-between; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #2E1B4E; border: 3px solid #0F172A; box-shadow: 4px 4px 0px #0F172A; border-radius: 0; padding: 0.6rem 1.2rem; font-size: 0.9rem; font-weight: 700; color: #FFFFFF; margin-bottom: 1.5rem; text-transform: uppercase; font-family: "Pixelify Sans", monospace; }
+    .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-family: "Pixelify Sans", monospace; font-weight: 700; line-height: 1.1; letter-spacing: 2px; margin-bottom: 1.25rem; color: #FFFFFF; text-transform: uppercase; text-shadow: 4px 4px 0px #2E1B4E; }
+    .hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.3rem); color: #F8FAFC; font-weight: 600; max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+    .tech-stack { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+    .tech-pill { background: #FFFFFF; border: 2px solid #0F172A; box-shadow: 2px 2px 0px #0F172A; padding: 0.4rem 0.8rem; font-size: 0.85rem; color: #0F172A; font-weight: 700; font-family: "Pixelify Sans", monospace; text-transform: uppercase; }
   </style>
 </head>
 <body>
@@ -170,7 +176,7 @@
   <section style="padding:4rem 2rem 6rem;text-align:center;position:relative;z-index:1;" class="animate-fade-in-up">
     <div style="max-width:500px;margin:0 auto;">
       <div style="font-size:3rem;margin-bottom:1rem;" class="animate-float">🚀</div>
-      <h2 class="section-title">Ready to ignite your curiosity?</h2>
+      <h2 class="section-title">Ready to ignite your curiosity</h2>
       <p class="section-subtitle">No account. No data collection. Works offline. Open the app and start learning in 30 seconds.</p>
       <a href="./frontend/login.html" class="btn-edu-brand" style="font-size:1rem;padding:0.9rem 2.5rem;">
         <i class="fa-solid fa-rocket me-2"></i>Launch Pragya-Edu

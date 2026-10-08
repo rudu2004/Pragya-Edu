@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="networkBanner" class="network-banner offline">
-    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode Active � Local Intelligence Engine Running
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode Active  Local Intelligence Engine Running
   </div>
 
   <div class="app-container">
@@ -50,14 +50,14 @@
           <span style="font-weight:700;font-size:0.9rem;">Module 1 <span class="badge-edu violet ms-1"><i class="fa-solid fa-bolt me-1"></i>Vibe Check</span></span>
         </div>
         <div class="d-flex align-items-center gap-2">
-          <span id="userGreet" style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Hey, Learner!</span>
+          <span id="userGreet" style="font-size:0.85rem;color:rgba(15,23,42,0.6);">Hey, Learner!</span>
           <div id="topConnPill" class="connectivity-pill offline"><span class="connectivity-dot"></span><span>Offline</span></div>
         </div>
       </div>
 
       <!-- Hero Header -->
       <div class="text-center mb-4 animate-fade-in-up" style="padding:1.5rem 0 0.5rem;">
-        <div style="font-size:3rem;margin-bottom:0.5rem;" class="animate-float">?</div>
+        <div style="font-size:3rem;margin-bottom:0.5rem;" class="animate-float">✨</div>
         <h1 class="section-title gradient-text">Curiosity & Vibe Check</h1>
         <p class="section-subtitle">3-min check-in to calibrate your learning experience. No wrong answers!</p>
         <div id="timerDisplay" style="display:none;" class="mt-2">
@@ -68,8 +68,8 @@
       <!-- Progress Bar -->
       <div class="mb-4 animate-fade-in-up delay-1">
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <small style="color:rgba(255,255,255,0.5);">Progress</small>
-          <small style="color:rgba(255,255,255,0.5);" id="progressLabel">0 / 5 answered</small>
+          <small style="color:rgba(15,23,42,0.6);">Progress</small>
+          <small style="color:rgba(15,23,42,0.6);" id="progressLabel">0 / 5 answered</small>
         </div>
         <div class="progress-edu"><div class="progress-edu-fill" id="progressFill" style="width:0%"></div></div>
       </div>
@@ -82,7 +82,7 @@
         <button class="btn-edu-brand" onclick="submitVibeCheck()" id="submitBtn">
           <i class="fa-solid fa-chart-radar me-2"></i>Generate My Curiosity Radar
         </button>
-        <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:0.5rem;">Instant personalized learning profile</p>
+        <p style="font-size:0.8rem;color:rgba(15,23,42,0.5);margin-top:0.5rem;">Instant personalized learning profile</p>
       </div>
 
       <!-- Results Panel (hidden initially) -->
@@ -90,21 +90,21 @@
         <div class="row g-3">
           <div class="col-lg-6">
             <div class="card-edu card-glow-violet">
-              <h5 style="font-weight:800;color:#fff;margin-bottom:0.5rem;"><i class="fa-solid fa-chart-radar me-2 text-violet" style="color:var(--edu-violet);"></i>Your Curiosity Radar</h5>
-              <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);" class="mb-3">Cognitive readiness profile</p>
+              <h5 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.5rem;"><i class="fa-solid fa-chart-radar me-2 text-violet" style="color:var(--edu-violet);"></i>Your Curiosity Radar</h5>
+              <p style="font-size:0.8rem;color:rgba(15,23,42,0.6);" class="mb-3">Cognitive readiness profile</p>
               <div class="radar-wrapper"><canvas id="curiosityRadar"></canvas></div>
             </div>
           </div>
           <div class="col-lg-6 d-flex flex-column gap-3">
             <div class="card-edu card-glow-amber" id="vibeResultCard">
-              <div style="font-size:2rem;margin-bottom:0.5rem;" id="vibeEmoji">??</div>
-              <h5 style="font-weight:800;color:#fff;" id="vibeLevelTitle">High Energy Achiever</h5>
-              <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);" id="vibeLevelDesc">You're ready to absorb complex material!</p>
+              <div style="font-size:2rem;margin-bottom:0.5rem;" id="vibeEmoji">👾</div>
+              <h5 style="font-weight:800;color:var(--edu-ink);" id="vibeLevelTitle">High Energy Achiever</h5>
+              <p style="font-size:0.85rem;color:rgba(15,23,42,0.7);" id="vibeLevelDesc">You're ready to absorb complex material!</p>
             </div>
             <div class="card-edu" id="contextResultCard">
               <div class="badge-edu emerald mb-2"><i class="fa-solid fa-puzzle-piece me-1"></i>Preferred Context</div>
-              <h6 style="color:#fff;font-weight:700;" id="contextTitle">Sci-Fi Scenarios</h6>
-              <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);" id="contextDesc">Your lessons will use Sci-Fi metaphors.</p>
+              <h6 style="color:var(--edu-ink);font-weight:700;" id="contextTitle">Sci-Fi Scenarios</h6>
+              <p style="font-size:0.82rem;color:rgba(15,23,42,0.6);" id="contextDesc">Your lessons will use Sci-Fi metaphors.</p>
             </div>
             <div class="d-flex flex-column gap-2" id="statsGrid"></div>
             <button class="btn-edu-primary" onclick="window.location.href='curriculum-adapter.html'">
@@ -130,71 +130,71 @@
     const QUESTIONS = [
       {
         id: 'energy',
-        icon: '?',
+        icon: '✨',
         title: 'How are you feeling RIGHT NOW?',
-        subtitle: 'Be honest � no judgment here',
+        subtitle: 'Be honest  no judgment here',
         type: 'single',
         options: [
-          { id: 'burnout', label: 'Totally burned out', icon: '??', color: 'danger', desc: 'Need gentle, short content' },
-          { id: 'low',     label: 'A bit drained',      icon: '??', color: 'amber',  desc: 'Short bursts work best' },
-          { id: 'medium',  label: 'Okay, let\'s do this', icon: '??', color: 'violet', desc: 'Regular pace' },
-          { id: 'high',    label: 'Pumped & ready!',    icon: '??', color: 'emerald',desc: 'Bring on the challenge' },
-          { id: 'lost',    label: 'Completely lost / Need guidance', icon: '??', color: 'pink', desc: 'Start from basics' }
+          { id: 'burnout', label: 'Totally burned out', icon: '👾', color: 'danger', desc: 'Need gentle, short content' },
+          { id: 'low',     label: 'A bit drained',      icon: '👾', color: 'amber',  desc: 'Short bursts work best' },
+          { id: 'medium',  label: 'Okay, let\'s do this', icon: '👾', color: 'violet', desc: 'Regular pace' },
+          { id: 'high',    label: 'Pumped & ready!',    icon: '👾', color: 'emerald',desc: 'Bring on the challenge' },
+          { id: 'lost',    label: 'Completely lost / Need guidance', icon: '👾', color: 'pink', desc: 'Start from basics' }
         ]
       },
       {
         id: 'context',
-        icon: '??',
+        icon: '👾',
         title: 'What kind of examples click for you?',
         subtitle: 'Your answer shapes how we explain things',
         type: 'single',
         options: [
-          { id: 'gaming',    label: 'Gaming & RPGs',         icon: '??', color: 'violet' },
-          { id: 'scifi',     label: 'Sci-Fi & Space',        icon: '??', color: 'cyan' },
-          { id: 'sports',    label: 'Sports & Competition',  icon: '?', color: 'emerald' },
-          { id: 'realworld', label: 'Real-world Problems',   icon: '??', color: 'amber' },
-          { id: 'stories',   label: 'Stories & Mysteries',   icon: '??', color: 'pink' }
+          { id: 'gaming',    label: 'Gaming & RPGs',         icon: '👾', color: 'violet' },
+          { id: 'scifi',     label: 'Sci-Fi & Space',        icon: '👾', color: 'cyan' },
+          { id: 'sports',    label: 'Sports & Competition',  icon: '✨', color: 'emerald' },
+          { id: 'realworld', label: 'Real-world Problems',   icon: '👾', color: 'amber' },
+          { id: 'stories',   label: 'Stories & Mysteries',   icon: '👾', color: 'pink' }
         ]
       },
       {
         id: 'baseline',
-        icon: '??',
+        icon: '👾',
         title: 'How well do you know this topic?',
         subtitle: 'Honest self-rating helps us calibrate',
         type: 'single',
         options: [
-          { id: 'zero',    label: 'Never heard of it', icon: '??', color: 'amber' },
-          { id: 'basic',   label: 'Heard the name',   icon: '??', color: 'cyan' },
-          { id: 'some',    label: 'Know the basics',  icon: '??', color: 'violet' },
-          { id: 'good',    label: 'Solid foundation', icon: '?', color: 'emerald' },
-          { id: 'expert',  label: 'Pretty advanced',  icon: '??', color: 'pink' }
+          { id: 'zero',    label: 'Never heard of it', icon: '👾', color: 'amber' },
+          { id: 'basic',   label: 'Heard the name',   icon: '👾', color: 'cyan' },
+          { id: 'some',    label: 'Know the basics',  icon: '👾', color: 'violet' },
+          { id: 'good',    label: 'Solid foundation', icon: '✨', color: 'emerald' },
+          { id: 'expert',  label: 'Pretty advanced',  icon: '👾', color: 'pink' }
         ]
       },
       {
         id: 'attention',
-        icon: '??',
+        icon: '👾',
         title: 'How long can you focus in one stretch?',
         subtitle: 'This shapes content chunk sizes',
         type: 'single',
         options: [
-          { id: 'micro',   label: 'Under 5 minutes',       icon: '?', color: 'amber' },
-          { id: 'short',   label: '5-15 minutes',          icon: '??', color: 'violet' },
-          { id: 'medium',  label: '15-30 minutes',         icon: '??', color: 'cyan' },
-          { id: 'long',    label: '30+ minutes, no prob!', icon: '??', color: 'emerald' }
+          { id: 'micro',   label: 'Under 5 minutes',       icon: '✨', color: 'amber' },
+          { id: 'short',   label: '5-15 minutes',          icon: '👾', color: 'violet' },
+          { id: 'medium',  label: '15-30 minutes',         icon: '👾', color: 'cyan' },
+          { id: 'long',    label: '30+ minutes, no prob!', icon: '👾', color: 'emerald' }
         ]
       },
       {
         id: 'goal',
-        icon: '??',
+        icon: '👾',
         title: 'What brings you here today?',
         subtitle: 'Optional but helps us personalize deeply',
         type: 'single',
         options: [
-          { id: 'exam',    label: 'Exam / Test prep',        icon: '??', color: 'amber' },
-          { id: 'curious', label: 'Pure curiosity',          icon: '??', color: 'violet' },
-          { id: 'project', label: 'Working on a project',    icon: '???', color: 'cyan' },
-          { id: 'stuck',   label: 'Stuck & need clarity',   icon: '??', color: 'pink' },
-          { id: 'fun',     label: 'Just exploring / fun',   icon: '??', color: 'emerald' }
+          { id: 'exam',    label: 'Exam / Test prep',        icon: '👾', color: 'amber' },
+          { id: 'curious', label: 'Pure curiosity',          icon: '👾', color: 'violet' },
+          { id: 'project', label: 'Working on a project',    icon: '🚀', color: 'cyan' },
+          { id: 'stuck',   label: 'Stuck & need clarity',   icon: '👾', color: 'pink' },
+          { id: 'fun',     label: 'Just exploring / fun',   icon: '👾', color: 'emerald' }
         ]
       }
     ];
@@ -214,8 +214,8 @@
           <div class="d-flex align-items-center gap-3 mb-3">
             <div style="font-size:1.75rem;">${q.icon}</div>
             <div>
-              <h5 style="font-weight:800;color:#fff;margin:0;">${q.title}</h5>
-              <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin:0;">${q.subtitle}</p>
+              <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">${q.title}</h5>
+              <p style="font-size:0.8rem;color:rgba(15,23,42,0.5);margin:0;">${q.subtitle}</p>
             </div>
             <div class="ms-auto">
               <span class="badge-edu violet" id="answered_${q.id}" style="display:none;"><i class="fa-solid fa-check me-1"></i>Answered</span>
@@ -227,8 +227,8 @@
                 <div class="mcq-radio" id="radio_${q.id}_${opt.id}"></div>
                 <span style="font-size:1.2rem;">${opt.icon}</span>
                 <div>
-                  <div style="font-weight:600;color:#E2E8F0;">${opt.label}</div>
-                  ${opt.desc ? `<div style="font-size:0.78rem;color:rgba(255,255,255,0.45);">${opt.desc}</div>` : ''}
+                  <div style="font-weight:600;color:var(--edu-ink);">${opt.label}</div>
+                  ${opt.desc ? `<div style="font-size:0.78rem;color:rgba(15,23,42,0.46);">${opt.desc}</div>` : ''}
                 </div>
               </div>
             `).join('')}
@@ -285,11 +285,11 @@
 
     function renderResults(profile) {
       const energyMap = {
-        burnout: { emoji:'??', title:'Rest & Recover Mode', desc:'We\'ll serve gentle, calming short content.', color:'danger' },
-        low:     { emoji:'??', title:'Low-Power Explorer', desc:'Quick bites and easy wins to rebuild momentum.', color:'amber' },
-        medium:  { emoji:'??', title:'Steady Learner', desc:'Regular paced learning, balanced challenges.', color:'violet' },
-        high:    { emoji:'??', title:'High Energy Achiever', desc:'You\'re ready! We\'ll push your limits.', color:'emerald' },
-        lost:    { emoji:'??', title:'Guided Discovery Mode', desc:'We\'ll start from scratch and build up slowly.', color:'pink' }
+        burnout: { emoji:'👾', title:'Rest & Recover Mode', desc:'We\'ll serve gentle, calming short content.', color:'danger' },
+        low:     { emoji:'👾', title:'Low-Power Explorer', desc:'Quick bites and easy wins to rebuild momentum.', color:'amber' },
+        medium:  { emoji:'👾', title:'Steady Learner', desc:'Regular paced learning, balanced challenges.', color:'violet' },
+        high:    { emoji:'👾', title:'High Energy Achiever', desc:'You\'re ready! We\'ll push your limits.', color:'emerald' },
+        lost:    { emoji:'👾', title:'Guided Discovery Mode', desc:'We\'ll start from scratch and build up slowly.', color:'pink' }
       };
 
       const contextMap = {
@@ -324,8 +324,8 @@
       ].map(s => `
         <div class="card-edu p-2">
           <div class="d-flex justify-content-between mb-1">
-            <small style="color:rgba(255,255,255,0.6);font-weight:600;">${s.label}</small>
-            <small style="font-weight:800;color:#fff;">${s.val}%</small>
+            <small style="color:rgba(15,23,42,0.7);font-weight:600;">${s.label}</small>
+            <small style="font-weight:800;color:var(--edu-ink);">${s.val}%</small>
           </div>
           <div class="progress-edu"><div class="progress-edu-fill ${s.color}" style="width:${s.val}%"></div></div>
         </div>
@@ -353,14 +353,14 @@
           },
           options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { labels: { color: 'rgba(255,255,255,0.7)', font: { family: 'Outfit', size: 12 } } } },
+            plugins: { legend: { labels: { color: 'rgba(15,23,42,0.8)', font: { family: 'Outfit', size: 12 } } } },
             scales: {
               r: {
                 min: 0, max: 100,
-                grid: { color: 'rgba(255,255,255,0.08)' },
-                angleLines: { color: 'rgba(255,255,255,0.08)' },
-                ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 10 }, backdropColor: 'transparent' },
-                pointLabels: { color: 'rgba(255,255,255,0.7)', font: { size: 11, weight: 'bold' } }
+                grid: { color: 'rgba(15,23,42,0.9)' },
+                angleLines: { color: 'rgba(15,23,42,0.9)' },
+                ticks: { color: 'rgba(15,23,42,0.5)', font: { size: 10 }, backdropColor: 'transparent' },
+                pointLabels: { color: 'rgba(15,23,42,0.8)', font: { size: 11, weight: 'bold' } }
               }
             }
           }
@@ -377,8 +377,8 @@
         const online = navigator.onLine;
         banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
         banner.innerHTML = online
-          ? '<i class="fa-solid fa-wifi me-2"></i>Connected � AI Engine Active'
-          : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode � Local Vector Engine Running';
+          ? '<i class="fa-solid fa-wifi me-2"></i>Connected  AI Engine Active'
+          : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  Local Vector Engine Running';
         pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
         pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
         sidebar.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';

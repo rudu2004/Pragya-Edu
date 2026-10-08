@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="networkBanner" class="network-banner offline">
-    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Socratic Engine Active
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  Local Socratic Engine Active
   </div>
 
   <div class="app-container">
@@ -65,9 +65,9 @@
         <div class="col-lg-8">
           <div class="card-edu card-glow-violet" style="background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(236,72,153,0.05));">
             <div class="d-flex align-items-center gap-3">
-              <div style="width:64px;height:64px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:1.75rem;flex-shrink:0;box-shadow:0 8px 24px rgba(124,58,237,0.4);">??</div>
+              <div style="width:64px;height:64px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:1.75rem;flex-shrink:0;box-shadow:0 8px 24px rgba(124,58,237,0.4);"></div>
               <div>
-                <h1 class="section-title" style="font-size:1.4rem;">Socrates — Your Curiosity Mentor</h1>
+                <h1 class="section-title" style="font-size:1.4rem;">Socrates  Your Curiosity Mentor</h1>
                 <p class="section-subtitle" style="margin:0;">I don't lecture. I ask questions that make YOU think.</p>
               </div>
               <div class="ms-auto text-end" style="flex-shrink:0;">
@@ -85,13 +85,13 @@
         <div class="col-lg-4">
           <div class="card-edu h-100">
             <div class="label-edu mb-2"><i class="fa-solid fa-book me-1"></i>Current Topic</div>
-            <div style="font-size:1rem;font-weight:700;color:#fff;" id="currentTopicDisplay">Loading...</div>
+            <div style="font-size:1rem;font-weight:700;color:var(--edu-ink);" id="currentTopicDisplay">Loading...</div>
             <div class="divider-edu"></div>
             <div class="label-edu mb-2">Session Progress</div>
             <div class="progress-edu"><div class="progress-edu-fill" id="sessionProgress" style="width:0%"></div></div>
             <div class="d-flex justify-content-between mt-1">
-              <small style="color:rgba(255,255,255,0.4);" id="qCountLabel">0 questions explored</small>
-              <small style="color:rgba(255,255,255,0.4);" id="depthLabel">Depth: Surface</small>
+              <small style="color:rgba(15,23,42,0.5);" id="qCountLabel">0 questions explored</small>
+              <small style="color:rgba(15,23,42,0.5);" id="depthLabel">Depth: Surface</small>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@
 
         <!-- Typing indicator -->
         <div id="typingIndicator" style="display:none;padding:0.5rem 1rem;">
-          <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:0.82rem;">
+          <div style="display:flex;align-items:center;gap:8px;color:rgba(15,23,42,0.5);font-size:0.82rem;">
             <div style="display:flex;gap:4px;align-items:center;">
               <span style="width:6px;height:6px;border-radius:50%;background:var(--edu-violet);animation:pulse 1s infinite;"></span>
               <span style="width:6px;height:6px;border-radius:50%;background:var(--edu-violet);animation:pulse 1s infinite 0.2s;"></span>
@@ -122,9 +122,9 @@
           <div class="label-edu mb-2"><i class="fa-solid fa-bolt me-1"></i>Quick Responses</div>
           <div class="d-flex flex-wrap gap-2" id="quickResponses">
             <button class="btn-edu-ghost" onclick="sendQuick('I think I understand this...')">I think I understand...</button>
-            <button class="btn-edu-ghost" onclick="sendQuick('I\'m not sure, can you rephrase?')">Not sure, rephrase?</button>
-            <button class="btn-edu-ghost" onclick="sendQuick('Can you give me a real-world example?')">Real-world example?</button>
-            <button class="btn-edu-ghost" onclick="sendQuick('What happens if I challenge this assumption?')">Challenge assumption?</button>
+            <button class="btn-edu-ghost" onclick="sendQuick('I\'m not sure, can you rephrase')">Not sure, rephrase</button>
+            <button class="btn-edu-ghost" onclick="sendQuick('Can you give me a real-world example')">Real-world example</button>
+            <button class="btn-edu-ghost" onclick="sendQuick('What happens if I challenge this assumption')">Challenge assumption</button>
           </div>
         </div>
         <div class="divider-edu"></div>
@@ -158,26 +158,26 @@
 
     const SOCRATIC_QUESTIONS = {
       opening: [
-        "Before we dive in, let me ask you this: What do you already *think* you know about {topic}? Sometimes our assumptions are our biggest obstacles.",
-        "Interesting challenge ahead! Here's my first question: If you had to explain {topic} to a 10-year-old using only 3 words, what would they be?",
-        "Welcome! Let's start with something provocative: What would happen to the world if {topic} suddenly stopped existing?"
+        "Before we dive in, let me ask you this: What do you already *think* you know about {topic} Sometimes our assumptions are our biggest obstacles.",
+        "Interesting challenge ahead! Here's my first question: If you had to explain {topic} to a 10-year-old using only 3 words, what would they be",
+        "Welcome! Let's start with something provocative: What would happen to the world if {topic} suddenly stopped existing"
       ],
       followup: [
-        "Fascinating! But here's the deeper question — WHY does that happen? What's the underlying mechanism?",
-        "You're on the right track! Now challenge yourself: Can you think of a situation where this would be completely WRONG?",
-        "Excellent thinking! Let me push you further: How would someone who DISAGREES with you argue their point?",
-        "Good observation! Now connect the dots — how does this relate to something you already know really well?",
-        "Interesting perspective! The Socratic challenge: What would change if we DOUBLED the scale of this problem?"
+        "Fascinating! But here's the deeper question  WHY does that happen What's the underlying mechanism",
+        "You're on the right track! Now challenge yourself: Can you think of a situation where this would be completely WRONG",
+        "Excellent thinking! Let me push you further: How would someone who DISAGREES with you argue their point",
+        "Good observation! Now connect the dots  how does this relate to something you already know really well",
+        "Interesting perspective! The Socratic challenge: What would change if we DOUBLED the scale of this problem"
       ],
       deeper: [
-        "Let's go to the root cause. Aristotle would ask: What is the FINAL CAUSE here — the ultimate purpose or end goal?",
-        "Consider this paradox: If {topic} is so important, why do so many people misunderstand it?",
-        "The master question: What would you need to UNLEARN to truly understand this at a deeper level?"
+        "Let's go to the root cause. Aristotle would ask: What is the FINAL CAUSE here  the ultimate purpose or end goal",
+        "Consider this paradox: If {topic} is so important, why do so many people misunderstand it",
+        "The master question: What would you need to UNLEARN to truly understand this at a deeper level"
       ],
       simpler: [
-        "Let's zoom way out. Forget all the details. At its most basic: what is the ONE thing {topic} is really about?",
-        "Imagine explaining this to your grandmother who has no background knowledge. What's the single most important thing to convey?",
-        "Strip away everything complex. The core of {topic} in one sentence — what is it?"
+        "Let's zoom way out. Forget all the details. At its most basic: what is the ONE thing {topic} is really about",
+        "Imagine explaining this to your grandmother who has no background knowledge. What's the single most important thing to convey",
+        "Strip away everything complex. The core of {topic} in one sentence  what is it"
       ]
     };
 
@@ -202,7 +202,7 @@
           const container = document.getElementById('chatContainer');
           const bubble = document.createElement('div');
           bubble.className = 'chat-bubble mentor';
-          bubble.innerHTML = '<div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-bottom:4px;"><span style="font-size:1rem;">??</span> Socrates</div>' + text;
+          bubble.innerHTML = '<div style="font-size:0.75rem;color:rgba(15,23,42,0.36);margin-bottom:4px;"><span style="font-size:1rem;"></span> Socrates</div>' + text;
           container.appendChild(bubble);
           container.scrollTop = container.scrollHeight;
           questionCount++;
@@ -216,7 +216,7 @@
       const container = document.getElementById('chatContainer');
       const bubble = document.createElement('div');
       bubble.className = 'chat-bubble student';
-      bubble.innerHTML = '<div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-bottom:4px;">You</div>' + text;
+      bubble.innerHTML = '<div style="font-size:0.75rem;color:rgba(15,23,42,0.36);margin-bottom:4px;">You</div>' + text;
       container.appendChild(bubble);
       container.scrollTop = container.scrollHeight;
     }
@@ -323,7 +323,7 @@
       function update() {
         const online = navigator.onLine;
         banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
-        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected — Full AI Mentor Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Socratic Engine Active';
+        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected  Full AI Mentor Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  Local Socratic Engine Active';
         pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
         pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
         sConn.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';

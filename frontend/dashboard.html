@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="networkBanner" class="network-banner offline">
-    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Syncing when connected
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  Syncing when connected
   </div>
 
   <div class="app-container">
@@ -58,10 +58,10 @@
         <div class="row align-items-center">
           <div class="col-lg-8">
             <div class="d-flex align-items-center gap-3 mb-2">
-              <div id="avatarBig" style="width:56px;height:56px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 8px 20px rgba(124,58,237,0.4);">A</div>
+              <div id="avatarBig" style="width:56px;height:56px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:var(--edu-ink);flex-shrink:0;box-shadow:0 8px 20px rgba(124,58,237,0.4);">A</div>
               <div>
-                <h1 style="font-size:1.4rem;font-weight:900;color:#fff;margin:0;" id="welcomeName">Welcome back, Learner!</h1>
-                <p style="color:rgba(255,255,255,0.5);margin:0;font-size:0.85rem;" id="topicLine">Keep exploring your curiosity ?</p>
+                <h1 style="font-size:1.4rem;font-weight:900;color:var(--edu-ink);margin:0;" id="welcomeName">Welcome back, Learner!</h1>
+                <p style="color:rgba(15,23,42,0.6);margin:0;font-size:0.85rem;" id="topicLine">Keep exploring your curiosity </p>
               </div>
             </div>
             <div class="d-flex gap-2 flex-wrap" id="badgeRow">
@@ -99,15 +99,15 @@
       <div class="row g-3 mb-4 animate-fade-in-up delay-2">
         <div class="col-lg-5">
           <div class="card-edu card-glow-violet h-100">
-            <h6 style="font-weight:800;color:#fff;margin-bottom:0.25rem;"><i class="fa-solid fa-chart-radar me-2" style="color:var(--edu-violet);"></i>Curiosity Radar</h6>
-            <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:1rem;">Your cognitive profile at a glance</p>
+            <h6 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.25rem;"><i class="fa-solid fa-chart-radar me-2" style="color:var(--edu-violet);"></i>Curiosity Radar</h6>
+            <p style="font-size:0.78rem;color:rgba(15,23,42,0.5);margin-bottom:1rem;">Your cognitive profile at a glance</p>
             <div class="radar-wrapper"><canvas id="radarChart"></canvas></div>
           </div>
         </div>
         <div class="col-lg-7">
           <div class="card-edu h-100">
-            <h6 style="font-weight:800;color:#fff;margin-bottom:0.25rem;"><i class="fa-solid fa-chart-line me-2" style="color:var(--edu-pink);"></i>Learning Journey Progress</h6>
-            <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:1rem;">Module completion and skill acquisition</p>
+            <h6 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.25rem;"><i class="fa-solid fa-chart-line me-2" style="color:var(--edu-pink);"></i>Learning Journey Progress</h6>
+            <p style="font-size:0.78rem;color:rgba(15,23,42,0.5);margin-bottom:1rem;">Module completion and skill acquisition</p>
             <div id="moduleProgressList" class="d-flex flex-column gap-3"></div>
           </div>
         </div>
@@ -117,13 +117,13 @@
       <div class="row g-3 mb-4 animate-fade-in-up delay-3">
         <div class="col-lg-6">
           <div class="card-edu card-glow-amber">
-            <h6 style="font-weight:800;color:#fff;margin-bottom:1rem;"><i class="fa-solid fa-award me-2" style="color:var(--edu-amber);"></i>Achievements Unlocked</h6>
+            <h6 style="font-weight:800;color:var(--edu-ink);margin-bottom:1rem;"><i class="fa-solid fa-award me-2" style="color:var(--edu-amber);"></i>Achievements Unlocked</h6>
             <div id="achievementsList" class="d-flex flex-wrap gap-2"></div>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="card-edu card-glow-emerald">
-            <h6 style="font-weight:800;color:#fff;margin-bottom:1rem;"><i class="fa-solid fa-compass me-2" style="color:var(--edu-emerald);"></i>Recommended Next Steps</h6>
+            <h6 style="font-weight:800;color:var(--edu-ink);margin-bottom:1rem;"><i class="fa-solid fa-compass me-2" style="color:var(--edu-emerald);"></i>Recommended Next Steps</h6>
             <div id="nextStepsList" class="d-flex flex-column gap-2"></div>
           </div>
         </div>
@@ -132,10 +132,10 @@
       <!-- Offline Mode Resilience Banner -->
       <div class="card-edu animate-fade-in-up delay-3" id="lowBandwidthBanner" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.05);">
         <div class="d-flex align-items-center gap-3">
-          <div style="font-size:2rem;">??</div>
+          <div style="font-size:2rem;"></div>
           <div style="flex:1;">
             <h6 style="font-weight:800;color:#FCD34D;margin:0;font-size:0.9rem;">Module 5: Resilient Low-Bandwidth Mode</h6>
-            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin:0.25rem 0 0;">All features work offline. Data syncs automatically when connected. Text-only mode is 98% smaller than media-rich mode.</p>
+            <p style="font-size:0.8rem;color:rgba(15,23,42,0.6);margin:0.25rem 0 0;">All features work offline. Data syncs automatically when connected. Text-only mode is 98% smaller than media-rich mode.</p>
           </div>
           <div class="d-flex flex-column gap-1 text-end flex-shrink-0">
             <span class="badge-edu amber"><i class="fa-solid fa-wifi-slash me-1"></i>Offline Ready</span>
@@ -158,20 +158,20 @@
 
   <script>
     const ACHIEVEMENTS = [
-      { icon:'?', label:'First Vibe Check', desc:'Completed first diagnostic', color:'violet' },
-      { icon:'??', label:'Knowledge Seeker', desc:'Uploaded first PDF', color:'amber' },
-      { icon:'??', label:'Socratic Thinker', desc:'Had 5+ mentor conversations', color:'pink' },
-      { icon:'??', label:'Streak Master', desc:'3-day learning streak', color:'emerald' },
-      { icon:'??', label:'Quiz Champion', desc:'Scored 80%+ on a quiz', color:'cyan' },
-      { icon:'??', label:'Curiosity Ignited', desc:'Curiosity score > 70', color:'violet' },
+      { icon:'', label:'First Vibe Check', desc:'Completed first diagnostic', color:'violet' },
+      { icon:'', label:'Knowledge Seeker', desc:'Uploaded first PDF', color:'amber' },
+      { icon:'', label:'Socratic Thinker', desc:'Had 5+ mentor conversations', color:'pink' },
+      { icon:'', label:'Streak Master', desc:'3-day learning streak', color:'emerald' },
+      { icon:'', label:'Quiz Champion', desc:'Scored 80%+ on a quiz', color:'cyan' },
+      { icon:'', label:'Curiosity Ignited', desc:'Curiosity score > 70', color:'violet' },
     ];
 
     const MODULES = [
-      { name:'Vibe Check — Curiosity Diagnostic', icon:'?', color:'violet', href:'vibe-check.html' },
-      { name:'Curriculum Adapter — PDF to 3 Modes', icon:'??', color:'amber', href:'curriculum-adapter.html' },
-      { name:'Socratic Mentor — AI Voice Coach', icon:'??', color:'pink', href:'socratic-mentor.html' },
-      { name:'Classroom Analytics — Heatmap', icon:'??', color:'cyan', href:'vibe-analytics.html' },
-      { name:'Low-Bandwidth Resilience Mode', icon:'??', color:'emerald', href:'dashboard.html' },
+      { name:'Vibe Check  Curiosity Diagnostic', icon:'', color:'violet', href:'vibe-check.html' },
+      { name:'Curriculum Adapter  PDF to 3 Modes', icon:'', color:'amber', href:'curriculum-adapter.html' },
+      { name:'Socratic Mentor  AI Voice Coach', icon:'', color:'pink', href:'socratic-mentor.html' },
+      { name:'Classroom Analytics  Heatmap', icon:'', color:'cyan', href:'vibe-analytics.html' },
+      { name:'Low-Bandwidth Resilience Mode', icon:'', color:'emerald', href:'dashboard.html' },
     ];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -182,7 +182,7 @@
       const quizScore = parseInt(localStorage.getItem('pe_quizScore') || '0');
       const engagement = parseInt(localStorage.getItem('pe_engagement') || '0');
 
-      document.getElementById('welcomeName').textContent = 'Welcome back, ' + name + '! ??';
+      document.getElementById('welcomeName').textContent = 'Welcome back, ' + name + '! ';
       document.getElementById('topicLine').textContent = 'Exploring: ' + topic;
       document.getElementById('avatarBig').textContent = name[0].toUpperCase();
       document.getElementById('roleBadge').innerHTML = '<i class="fa-solid fa-graduation-cap me-1"></i>' + (role === 'teacher' ? 'Teacher' : 'Student');
@@ -211,12 +211,12 @@
               <span style="font-size:1.1rem;flex-shrink:0;">${m.icon}</span>
               <div style="flex:1;">
                 <div class="d-flex justify-content-between mb-1">
-                  <small style="color:rgba(255,255,255,0.7);font-weight:600;">${m.name}</small>
-                  <small style="color:rgba(255,255,255,0.5);">${pct}%</small>
+                  <small style="color:rgba(15,23,42,0.8);font-weight:600;">${m.name}</small>
+                  <small style="color:rgba(15,23,42,0.6);">${pct}%</small>
                 </div>
                 <div class="progress-edu" style="height:6px;"><div class="progress-edu-fill ${m.color}" style="width:${pct}%;"></div></div>
               </div>
-              <i class="fa-solid fa-${isDone ? 'circle-check text-emerald' : 'circle-chevron-right'}" style="color:${isDone ? 'var(--edu-emerald)' : 'rgba(255,255,255,0.2)'};flex-shrink:0;"></i>
+              <i class="fa-solid fa-${isDone ? 'circle-check text-emerald' : 'circle-chevron-right'}" style="color:${isDone ? 'var(--edu-emerald)' : 'rgba(15,23,42,0.3)'};flex-shrink:0;"></i>
             </div>
           </a>
         `;
@@ -227,7 +227,7 @@
       document.getElementById('achievementsList').innerHTML = ACHIEVEMENTS.map(a => `
         <div class="achievement-badge" title="${a.desc}">
           <span style="font-size:1.25rem;">${a.icon}</span>
-          <span style="font-size:0.72rem;color:rgba(255,255,255,0.6);text-align:center;line-height:1.2;">${a.label}</span>
+          <span style="font-size:0.72rem;color:rgba(15,23,42,0.7);text-align:center;line-height:1.2;">${a.label}</span>
         </div>
       `).join('');
     }
@@ -241,10 +241,10 @@
       ];
       document.getElementById('nextStepsList').innerHTML = steps.map(s => `
         <a href="${s.href}" style="text-decoration:none;">
-          <div class="d-flex align-items-center gap-3 p-2 rounded" style="border:1px solid rgba(255,255,255,0.06);transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">
+          <div class="d-flex align-items-center gap-3 p-2 rounded" style="border:1px solid rgba(15,23,42,0.7);transition:all 0.2s;" onmouseover="this.style.background='rgba(15,23,42,0.5)'" onmouseout="this.style.background='transparent'">
             <i class="fa-solid ${s.icon}" style="color:var(--edu-${s.color});font-size:0.9rem;width:16px;text-align:center;flex-shrink:0;"></i>
-            <span style="font-size:0.83rem;color:rgba(255,255,255,0.7);flex:1;">${s.text}</span>
-            <i class="fa-solid fa-arrow-right" style="color:rgba(255,255,255,0.25);font-size:0.75rem;flex-shrink:0;"></i>
+            <span style="font-size:0.83rem;color:rgba(15,23,42,0.8);flex:1;">${s.text}</span>
+            <i class="fa-solid fa-arrow-right" style="color:rgba(15,23,42,0.26);font-size:0.75rem;flex-shrink:0;"></i>
           </div>
         </a>
       `).join('');
@@ -278,10 +278,10 @@
           scales: {
             r: {
               min: 0, max: 100,
-              grid: { color: 'rgba(255,255,255,0.06)' },
-              angleLines: { color: 'rgba(255,255,255,0.06)' },
-              ticks: { color: 'rgba(255,255,255,0.3)', backdropColor: 'transparent', stepSize: 25 },
-              pointLabels: { color: 'rgba(255,255,255,0.6)', font: { size: 10, weight: '600' } }
+              grid: { color: 'rgba(15,23,42,0.7)' },
+              angleLines: { color: 'rgba(15,23,42,0.7)' },
+              ticks: { color: 'rgba(15,23,42,0.4)', backdropColor: 'transparent', stepSize: 25 },
+              pointLabels: { color: 'rgba(15,23,42,0.7)', font: { size: 10, weight: '600' } }
             }
           }
         }
@@ -295,7 +295,7 @@
       function update() {
         const online = navigator.onLine;
         banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
-        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected — Syncing progress to cloud' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — All data saved locally';
+        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected  Syncing progress to cloud' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  All data saved locally';
         pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
         pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
         sConn.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';

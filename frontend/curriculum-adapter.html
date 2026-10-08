@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="networkBanner" class="network-banner offline">
-    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode Active — Local PDF Parser Running
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode Active  Local PDF Parser Running
   </div>
 
   <div class="app-container">
@@ -54,22 +54,22 @@
       <!-- Upload Section -->
       <div id="uploadSection" class="animate-fade-in-up">
         <div class="text-center mb-4" style="padding-top:0.5rem;">
-          <div style="font-size:3rem;margin-bottom:0.5rem;" class="animate-float">??</div>
+          <div style="font-size:3rem;margin-bottom:0.5rem;" class="animate-float"></div>
           <h1 class="section-title gradient-text">Boredom-Busting Curriculum Adapter</h1>
-          <p class="section-subtitle">Upload your chapter PDF ? Get 3 engagement modes instantly</p>
+          <p class="section-subtitle">Upload your chapter PDF  Get 3 engagement modes instantly</p>
         </div>
 
         <div class="card-edu card-glow-amber mb-4">
           <div class="dropzone-edu" id="dropZone" onclick="document.getElementById('pdfUpload').click()">
             <div id="dropZoneContent">
               <i class="fa-solid fa-cloud-arrow-up" style="font-size:2.5rem;color:var(--edu-violet);margin-bottom:1rem;"></i>
-              <h5 style="color:#fff;font-weight:700;">Drag & Drop your PDF Chapter here</h5>
-              <p style="color:rgba(255,255,255,0.5);">or click to browse your files</p>
+              <h5 style="color:var(--edu-ink);font-weight:700;">Drag & Drop your PDF Chapter here</h5>
+              <p style="color:rgba(15,23,42,0.6);">or click to browse your files</p>
               <div class="badge-edu violet mt-2">PDF up to 20MB</div>
             </div>
             <div id="fileSelectedInfo" style="display:none;">
               <i class="fa-solid fa-file-pdf" style="font-size:2rem;color:var(--edu-amber);margin-bottom:0.5rem;"></i>
-              <h6 id="fileNameShow" style="color:#fff;font-weight:700;"></h6>
+              <h6 id="fileNameShow" style="color:var(--edu-ink);font-weight:700;"></h6>
               <div class="badge-edu emerald"><i class="fa-solid fa-check me-1"></i>Ready to Adapt</div>
             </div>
           </div>
@@ -84,11 +84,11 @@
 
         <!-- Manual Topic Entry -->
         <div class="card-edu">
-          <h6 style="color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:700;margin-bottom:0.75rem;">
+          <h6 style="color:rgba(15,23,42,0.8);font-size:0.85rem;font-weight:700;margin-bottom:0.75rem;">
             <i class="fa-solid fa-keyboard me-2" style="color:var(--edu-violet);"></i>Or type your topic manually (no PDF needed)
           </h6>
           <div class="d-flex gap-2">
-            <input id="manualTopic" class="input-edu" placeholder="e.g. Newton's Laws of Motion, Chapter 3 — Force and Mass..." style="flex:1;">
+            <input id="manualTopic" class="input-edu" placeholder="e.g. Newton's Laws of Motion, Chapter 3  Force and Mass..." style="flex:1;">
             <button class="btn-edu-primary" onclick="processManual()" style="white-space:nowrap;flex-shrink:0;">
               <i class="fa-solid fa-wand-magic-sparkles"></i> Adapt
             </button>
@@ -99,8 +99,8 @@
       <!-- Processing State -->
       <div id="processingState" style="display:none;" class="text-center py-5 animate-fade-in">
         <div class="spinner-edu mx-auto mb-4"></div>
-        <h5 style="color:#fff;font-weight:700;" id="processingMsg">Extracting your document...</h5>
-        <p style="color:rgba(255,255,255,0.5);" id="processingSubmsg">Analyzing content structure</p>
+        <h5 style="color:var(--edu-ink);font-weight:700;" id="processingMsg">Extracting your document...</h5>
+        <p style="color:rgba(15,23,42,0.6);" id="processingSubmsg">Analyzing content structure</p>
         <div class="progress-edu mt-3" style="max-width:300px;margin:0 auto;height:4px;">
           <div class="progress-edu-fill" id="procProgress" style="width:0%;transition:width 0.5s ease;"></div>
         </div>
@@ -120,25 +120,25 @@
         <div class="row g-3 mb-4">
           <div class="col-md-4">
             <div class="mode-card eli5" id="modeELI5" onclick="selectMode('eli5')">
-              <div class="mode-icon" style="background:rgba(245,158,11,0.15);color:var(--edu-amber);">??</div>
-              <h5 style="font-weight:800;color:#fff;margin-bottom:0.5rem;">ELI5 Story Mode</h5>
-              <p style="font-size:0.82rem;color:rgba(255,255,255,0.55);">Dense theory transformed into a gamified story / mystery narrative. Perfect for low-motivation days.</p>
+              <div class="mode-icon" style="background:rgba(245,158,11,0.15);color:var(--edu-amber);"></div>
+              <h5 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.5rem;">ELI5 Story Mode</h5>
+              <p style="font-size:0.82rem;color:rgba(15,23,42,0.56);">Dense theory transformed into a gamified story / mystery narrative. Perfect for low-motivation days.</p>
               <div class="badge-edu amber mt-2"><i class="fa-solid fa-star me-1"></i>Recommended for you</div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="mode-card micro" id="modeMicro" onclick="selectMode('micro')">
-              <div class="mode-icon" style="background:rgba(16,185,129,0.15);color:var(--edu-emerald);">?</div>
-              <h5 style="font-weight:800;color:#fff;margin-bottom:0.5rem;">60-Second Micro-Bites</h5>
-              <p style="font-size:0.82rem;color:rgba(255,255,255,0.55);">Rapid flashcard key takeaways for low-attention spans. Swipe through in under a minute.</p>
+              <div class="mode-icon" style="background:rgba(16,185,129,0.15);color:var(--edu-emerald);"></div>
+              <h5 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.5rem;">60-Second Micro-Bites</h5>
+              <p style="font-size:0.82rem;color:rgba(15,23,42,0.56);">Rapid flashcard key takeaways for low-attention spans. Swipe through in under a minute.</p>
               <div class="badge-edu emerald mt-2"><i class="fa-solid fa-bolt me-1"></i>Quick & Effective</div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="mode-card quiz" id="modeQuiz" onclick="selectMode('quiz')">
-              <div class="mode-icon" style="background:rgba(79,70,229,0.15);color:var(--edu-indigo);">??</div>
-              <h5 style="font-weight:800;color:#fff;margin-bottom:0.5rem;">Gamified Dynamic Quiz</h5>
-              <p style="font-size:0.82rem;color:rgba(255,255,255,0.55);">10-question MCQ with instant color-coded feedback and conceptual breakdowns.</p>
+              <div class="mode-icon" style="background:rgba(79,70,229,0.15);color:var(--edu-indigo);"></div>
+              <h5 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.5rem;">Gamified Dynamic Quiz</h5>
+              <p style="font-size:0.82rem;color:rgba(15,23,42,0.56);">10-question MCQ with instant color-coded feedback and conceptual breakdowns.</p>
               <div class="badge-edu violet mt-2"><i class="fa-solid fa-trophy me-1"></i>Test Your Knowledge</div>
             </div>
           </div>
@@ -150,10 +150,10 @@
           <div id="contentELI5" class="tabs-content">
             <div class="card-edu card-glow-amber">
               <div class="d-flex align-items-center gap-2 mb-3">
-                <span style="font-size:1.5rem;">??</span>
-                <h5 style="font-weight:800;color:#fff;margin:0;">The Story of <span id="eli5TopicTitle" class="gradient-text">Your Topic</span></h5>
+                <span style="font-size:1.5rem;"></span>
+                <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">The Story of <span id="eli5TopicTitle" class="gradient-text">Your Topic</span></h5>
               </div>
-              <div id="eli5Content" style="line-height:1.9;color:#E2E8F0;font-size:0.95rem;"></div>
+              <div id="eli5Content" style="line-height:1.9;color:var(--edu-ink);font-size:0.95rem;"></div>
               <div class="mt-3 d-flex gap-2">
                 <button class="btn-edu-ghost" onclick="window.location.href='socratic-mentor.html'"><i class="fa-solid fa-microphone-lines me-1"></i>Discuss with Socratic Mentor</button>
               </div>
@@ -165,14 +165,14 @@
             <div class="card-edu card-glow-emerald">
               <div class="d-flex align-items-center justify-content-between mb-3">
                 <div class="d-flex align-items-center gap-2">
-                  <span style="font-size:1.5rem;">?</span>
-                  <h5 style="font-weight:800;color:#fff;margin:0;">60-Second Micro-Bites</h5>
+                  <span style="font-size:1.5rem;"></span>
+                  <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">60-Second Micro-Bites</h5>
                 </div>
                 <div class="badge-edu emerald" id="flashcardCounter">1 / 6</div>
               </div>
               <div id="flashcardArea">
                 <div class="flashcard" id="currentFlashcard" onclick="flipCard()">
-                  <div id="flashcardInner" style="font-size:1.05rem;font-weight:600;color:#fff;"></div>
+                  <div id="flashcardInner" style="font-size:1.05rem;font-weight:600;color:var(--edu-ink);"></div>
                 </div>
               </div>
               <div class="d-flex gap-2 mt-3 justify-content-center">
@@ -187,8 +187,8 @@
             <div class="card-edu card-glow-violet">
               <div class="d-flex align-items-center justify-content-between mb-3">
                 <div class="d-flex align-items-center gap-2">
-                  <span style="font-size:1.5rem;">??</span>
-                  <h5 style="font-weight:800;color:#fff;margin:0;">Gamified Quiz</h5>
+                  <span style="font-size:1.5rem;"></span>
+                  <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">Gamified Quiz</h5>
                 </div>
                 <div id="quizScoreBadge" class="badge-edu amber" style="display:none;"></div>
               </div>
@@ -226,7 +226,7 @@
       const dz = document.getElementById('dropZone');
       ['dragenter','dragover'].forEach(e => dz.addEventListener(e, ev => { ev.preventDefault(); dz.classList.add('dragover'); }));
       ['dragleave','drop'].forEach(e => dz.addEventListener(e, ev => { ev.preventDefault(); dz.classList.remove('dragover'); }));
-      dz.addEventListener('drop', ev => { const file = ev.dataTransfer.files[0]; if (file?.type === 'application/pdf') handleFileSelect(file); });
+      dz.addEventListener('drop', ev => { const file = ev.dataTransfer.files[0]; if (file.type === 'application/pdf') handleFileSelect(file); });
     }
 
     function handleFileSelect(file) {
@@ -287,39 +287,39 @@
 
       const eli5 = `<p style="font-size:1.05rem;margin-bottom:1rem;padding:1rem;background:rgba(245,158,11,0.08);border-left:3px solid var(--edu-amber);border-radius:8px;color:#FCD34D;font-style:italic;">"${contextNarrative} you encounter the concept of <strong>${topic}</strong>..."</p>
 
-<p>Let's break this down like a story! Think of <strong>${topic}</strong> as the main character of our adventure. Every great story has a beginning, a challenge, and a resolution — and so does every concept you'll ever learn.</p>
+<p>Let's break this down like a story! Think of <strong>${topic}</strong> as the main character of our adventure. Every great story has a beginning, a challenge, and a resolution  and so does every concept you'll ever learn.</p>
 
-<h6 style="color:var(--edu-violet);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;">?? Chapter 1: The Setup (What Is It?)</h6>
+<h6 style="color:var(--edu-violet);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;"> Chapter 1: The Setup (What Is It)</h6>
 <p><strong>${topic}</strong> is essentially about understanding how things relate to each other in a system. Just like in a game where every player has a role, every element in this concept has a specific function.</p>
 
-<h6 style="color:var(--edu-pink);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;">?? Chapter 2: The Challenge (Why Does It Matter?)</h6>
-<p>Here's where it gets interesting — the real world is full of problems that <strong>${topic}</strong> helps solve. Without this understanding, we'd be fumbling in the dark. With it, we become masters of our domain.</p>
+<h6 style="color:var(--edu-pink);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;"> Chapter 2: The Challenge (Why Does It Matter)</h6>
+<p>Here's where it gets interesting  the real world is full of problems that <strong>${topic}</strong> helps solve. Without this understanding, we'd be fumbling in the dark. With it, we become masters of our domain.</p>
 
-<h6 style="color:var(--edu-emerald);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;">?? Chapter 3: The Victory (How Do You Apply It?)</h6>
-<p>The magic happens when you take this concept and apply it to real situations. Start small — identify one thing in your daily life where <strong>${topic}</strong> shows up. That's your first win!</p>
+<h6 style="color:var(--edu-emerald);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;"> Chapter 3: The Victory (How Do You Apply It)</h6>
+<p>The magic happens when you take this concept and apply it to real situations. Start small  identify one thing in your daily life where <strong>${topic}</strong> shows up. That's your first win!</p>
 
 <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:1rem;margin-top:1.5rem;">
-  <strong style="color:var(--edu-emerald);">?? Remember the Core Idea:</strong>
-  <p style="margin:0.5rem 0 0;color:rgba(255,255,255,0.8);">${topic} = understanding relationships + applying patterns + solving problems. Master these three pillars and you've conquered the concept!</p>
+  <strong style="color:var(--edu-emerald);"> Remember the Core Idea:</strong>
+  <p style="margin:0.5rem 0 0;color:rgba(15,23,42,0.9);">${topic} = understanding relationships + applying patterns + solving problems. Master these three pillars and you've conquered the concept!</p>
 </div>`;
 
       // Flashcards
       flashcards = [
-        { front: '?? What is ' + topic + '?', back: 'The fundamental concept that explains relationships and patterns in this domain.' },
+        { front: ' What is ' + topic + '', back: 'The fundamental concept that explains relationships and patterns in this domain.' },
         { front: '? Key Formula / Rule', back: 'Input ? Process ? Output. Every instance of ' + topic + ' follows this flow.' },
-        { front: '?? Real-World Example', back: topic + ' appears when you observe cause-and-effect relationships in daily life.' },
-        { front: '? Common Misconception', back: 'Many students confuse ' + topic + ' with its surface features — focus on the underlying pattern.' },
-        { front: '?? Connection to Other Concepts', back: topic + ' builds upon foundational principles and connects to advanced topics in the domain.' },
-        { front: '?? The One-Line Summary', back: '"' + topic + ' is the art of seeing hidden patterns and using them to predict and create."' }
+        { front: ' Real-World Example', back: topic + ' appears when you observe cause-and-effect relationships in daily life.' },
+        { front: ' Common Misconception', back: 'Many students confuse ' + topic + ' with its surface features  focus on the underlying pattern.' },
+        { front: ' Connection to Other Concepts', back: topic + ' builds upon foundational principles and connects to advanced topics in the domain.' },
+        { front: ' The One-Line Summary', back: '"' + topic + ' is the art of seeing hidden patterns and using them to predict and create."' }
       ];
 
       // Quiz
       quizQuestions = [
-        { q: 'Which best describes the core principle of ' + topic + '?', opts: ['A: Pattern recognition and application', 'B: Random trial and error', 'C: Memorization without understanding', 'D: Surface-level observation only'], ans: 0, exp: topic + ' fundamentally involves recognizing patterns and applying them systematically.' },
-        { q: 'What is the first step when approaching ' + topic + '?', opts: ['A: Jump straight to complex examples', 'B: Identify the fundamental relationships', 'C: Memorize all formulas', 'D: Skip to the applications'], ans: 1, exp: 'Always identify core relationships before moving to applications.' },
-        { q: 'How does ' + topic + ' connect to real-world problems?', opts: ['A: It has no real-world relevance', 'B: Only in theoretical scenarios', 'C: Through pattern recognition and systematic thinking', 'D: Only in laboratory settings'], ans: 2, exp: topic + ' provides a framework for solving real problems systematically.' },
-        { q: 'What distinguishes a beginner from an expert in ' + topic + '?', opts: ['A: Amount of memorization', 'B: Speed of calculation', 'C: Depth of conceptual understanding', 'D: Number of formulas known'], ans: 2, exp: 'Experts understand WHY, not just HOW.' },
-        { q: 'Which learning approach works best for ' + topic + '?', opts: ['A: Passive reading only', 'B: Active problem-solving with feedback', 'C: Watching videos without practice', 'D: Cramming before exams'], ans: 1, exp: 'Active learning with immediate feedback accelerates mastery significantly.' }
+        { q: 'Which best describes the core principle of ' + topic + '', opts: ['A: Pattern recognition and application', 'B: Random trial and error', 'C: Memorization without understanding', 'D: Surface-level observation only'], ans: 0, exp: topic + ' fundamentally involves recognizing patterns and applying them systematically.' },
+        { q: 'What is the first step when approaching ' + topic + '', opts: ['A: Jump straight to complex examples', 'B: Identify the fundamental relationships', 'C: Memorize all formulas', 'D: Skip to the applications'], ans: 1, exp: 'Always identify core relationships before moving to applications.' },
+        { q: 'How does ' + topic + ' connect to real-world problems', opts: ['A: It has no real-world relevance', 'B: Only in theoretical scenarios', 'C: Through pattern recognition and systematic thinking', 'D: Only in laboratory settings'], ans: 2, exp: topic + ' provides a framework for solving real problems systematically.' },
+        { q: 'What distinguishes a beginner from an expert in ' + topic + '', opts: ['A: Amount of memorization', 'B: Speed of calculation', 'C: Depth of conceptual understanding', 'D: Number of formulas known'], ans: 2, exp: 'Experts understand WHY, not just HOW.' },
+        { q: 'Which learning approach works best for ' + topic + '', opts: ['A: Passive reading only', 'B: Active problem-solving with feedback', 'C: Watching videos without practice', 'D: Cramming before exams'], ans: 1, exp: 'Active learning with immediate feedback accelerates mastery significantly.' }
       ];
 
       docContent = topic;
@@ -329,7 +329,7 @@
     function showOutput(topic) {
       document.getElementById('processingState').style.display = 'none';
       document.getElementById('outputSection').style.display = 'block';
-      document.getElementById('docTitle').textContent = 'Topic: ' + topic + ' — 3 modes ready!';
+      document.getElementById('docTitle').textContent = 'Topic: ' + topic + '  3 modes ready!';
       document.getElementById('eli5TopicTitle').textContent = topic;
 
       document.getElementById('eli5Content').innerHTML = generateELI5(topic);
@@ -350,7 +350,7 @@
         gaming:    'In a magical RPG world, you encounter the concept of ' + topic + '...',
         scifi:     'Aboard the starship Curiosity in 2347, you must master ' + topic + '...',
         sports:    'In the championship game of your life, understanding ' + topic + ' is the key...',
-        realworld: 'Imagine building your own startup — you need to understand ' + topic + '...',
+        realworld: 'Imagine building your own startup  you need to understand ' + topic + '...',
         stories:   'Once upon a time, a student discovered the mysteries of ' + topic + '...'
       }[context] || 'Let\'s explore ' + topic + ' through a story...';
 
@@ -358,32 +358,32 @@
 
 <p>Let's break this down like a story! Think of <strong>${topic}</strong> as the main character of our adventure.</p>
 
-<h6 style="color:var(--edu-violet);font-weight:800;margin:1.5rem 0 0.5rem;">?? Chapter 1: What Is It?</h6>
+<h6 style="color:var(--edu-violet);font-weight:800;margin:1.5rem 0 0.5rem;"> Chapter 1: What Is It</h6>
 <p><strong>${topic}</strong> is essentially about understanding how things relate to each other. Just like in a story where every character has a role, every element in this concept serves a specific function.</p>
 
-<h6 style="color:var(--edu-pink);font-weight:800;margin:1.5rem 0 0.5rem;">?? Chapter 2: Why Does It Matter?</h6>
+<h6 style="color:var(--edu-pink);font-weight:800;margin:1.5rem 0 0.5rem;"> Chapter 2: Why Does It Matter</h6>
 <p>The real world is full of problems that <strong>${topic}</strong> helps solve. Without this understanding, we'd be fumbling in the dark.</p>
 
-<h6 style="color:var(--edu-emerald);font-weight:800;margin:1.5rem 0 0.5rem;">?? Chapter 3: How Do You Apply It?</h6>
+<h6 style="color:var(--edu-emerald);font-weight:800;margin:1.5rem 0 0.5rem;"> Chapter 3: How Do You Apply It</h6>
 <p>Take this concept and apply it to real situations. Identify one thing in your daily life where <strong>${topic}</strong> shows up. That's your first win!</p>
 
 <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:1rem;margin-top:1rem;">
-  <strong style="color:var(--edu-emerald);">?? Core Idea:</strong>
-  <p style="margin:0.5rem 0 0;color:rgba(255,255,255,0.8);">${topic} = understanding relationships + applying patterns + solving problems.</p>
+  <strong style="color:var(--edu-emerald);"> Core Idea:</strong>
+  <p style="margin:0.5rem 0 0;color:rgba(15,23,42,0.9);">${topic} = understanding relationships + applying patterns + solving problems.</p>
 </div>`;
     }
 
     function selectMode(mode) {
       currentMode = mode;
       ['eli5','micro','quiz'].forEach(m => {
-        document.getElementById('mode' + m.charAt(0).toUpperCase() + m.slice(1))?.classList.remove('active');
-        document.getElementById('content' + m.charAt(0).toUpperCase() + m.slice(1))?.classList.remove('active');
+        document.getElementById('mode' + m.charAt(0).toUpperCase() + m.slice(1)).classList.remove('active');
+        document.getElementById('content' + m.charAt(0).toUpperCase() + m.slice(1)).classList.remove('active');
       });
-      document.getElementById('modeELI5')?.classList.toggle('active', mode === 'eli5');
-      document.getElementById('modeMicro')?.classList.toggle('active', mode === 'micro');
-      document.getElementById('modeQuiz')?.classList.toggle('active', mode === 'quiz');
+      document.getElementById('modeELI5').classList.toggle('active', mode === 'eli5');
+      document.getElementById('modeMicro').classList.toggle('active', mode === 'micro');
+      document.getElementById('modeQuiz').classList.toggle('active', mode === 'quiz');
       const mapContent = { eli5: 'contentELI5', micro: 'contentMicro', quiz: 'contentQuiz' };
-      document.getElementById(mapContent[mode])?.classList.add('active');
+      document.getElementById(mapContent[mode]).classList.add('active');
     }
 
     function renderFlashcard() {
@@ -415,16 +415,16 @@
       quizAnswers = {};
       area.innerHTML = quizQuestions.map((q, qi) => `
         <div class="mb-4" id="quizQ${qi}">
-          <div style="font-weight:700;color:#fff;margin-bottom:0.75rem;font-size:0.95rem;">
+          <div style="font-weight:700;color:var(--edu-ink);margin-bottom:0.75rem;font-size:0.95rem;">
             <span class="badge-edu violet me-2">Q${qi+1}</span>${q.q}
           </div>
           ${q.opts.map((opt, oi) => `
             <div class="mcq-option" id="quizOpt_${qi}_${oi}" onclick="selectQuizOpt(${qi},${oi},this)">
               <div class="mcq-radio" id="quizRadio_${qi}_${oi}"></div>
-              <span style="color:#E2E8F0;">${opt}</span>
+              <span style="color:var(--edu-ink);">${opt}</span>
             </div>
           `).join('')}
-          <div id="quizExp_${qi}" style="display:none;margin-top:0.5rem;padding:0.75rem;background:rgba(79,70,229,0.1);border-left:3px solid var(--edu-indigo);border-radius:8px;font-size:0.85rem;color:rgba(255,255,255,0.8);"></div>
+          <div id="quizExp_${qi}" style="display:none;margin-top:0.5rem;padding:0.75rem;background:rgba(79,70,229,0.1);border-left:3px solid var(--edu-indigo);border-radius:8px;font-size:0.85rem;color:rgba(15,23,42,0.9);"></div>
         </div>
       `).join('');
       document.getElementById('quizSubmitArea').style.display = 'none';
@@ -432,7 +432,7 @@
 
     function selectQuizOpt(qi, oi, el) {
       quizQuestions[qi].opts.forEach((_, idx) => {
-        document.getElementById('quizOpt_' + qi + '_' + idx)?.classList.remove('selected');
+        document.getElementById('quizOpt_' + qi + '_' + idx).classList.remove('selected');
       });
       el.classList.add('selected');
       quizAnswers[qi] = oi;
@@ -448,8 +448,8 @@
         const correct = q.ans;
         q.opts.forEach((_, oi) => {
           const el = document.getElementById('quizOpt_' + qi + '_' + oi);
-          if (oi === correct) el?.classList.add('correct');
-          else if (oi === selected && selected !== correct) el?.classList.add('incorrect');
+          if (oi === correct) el.classList.add('correct');
+          else if (oi === selected && selected !== correct) el.classList.add('incorrect');
         });
         if (selected === correct) score++;
         const expEl = document.getElementById('quizExp_' + qi);
@@ -476,7 +476,7 @@
       function update() {
         const online = navigator.onLine;
         banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
-        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected — Cloud AI Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local PDF Parser Running';
+        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected  Cloud AI Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  Local PDF Parser Running';
         pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
         pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
         sConn.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';

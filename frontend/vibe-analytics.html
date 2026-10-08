@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="networkBanner" class="network-banner offline">
-    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Analytics Engine Active
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  Local Analytics Engine Active
   </div>
 
   <div class="app-container">
@@ -92,26 +92,26 @@
           <div class="col-lg-8">
             <div class="card-edu card-glow-violet">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 style="font-weight:800;color:#fff;margin:0;"><i class="fa-solid fa-fire me-2" style="color:var(--edu-rose);"></i>Classroom Disengagement Heatmap</h5>
+                <h5 style="font-weight:800;color:var(--edu-ink);margin:0;"><i class="fa-solid fa-fire me-2" style="color:var(--edu-rose);"></i>Classroom Disengagement Heatmap</h5>
                 <div class="badge-edu amber"><i class="fa-solid fa-clock me-1"></i>Live</div>
               </div>
-              <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:1rem;">Click any student cell to view their engagement profile</p>
+              <p style="font-size:0.82rem;color:rgba(15,23,42,0.46);margin-bottom:1rem;">Click any student cell to view their engagement profile</p>
               <div class="heatmap-grid" id="heatmapGrid"></div>
               <div class="d-flex gap-3 mt-3 flex-wrap">
-                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(244,63,94,0.4);display:inline-block;"></span><small style="color:rgba(255,255,255,0.5);">Burnout/At-Risk</small></div>
-                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(245,158,11,0.4);display:inline-block;"></span><small style="color:rgba(255,255,255,0.5);">Warning</small></div>
-                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(16,185,129,0.25);display:inline-block;"></span><small style="color:rgba(255,255,255,0.5);">Engaged</small></div>
-                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(6,182,212,0.25);display:inline-block;"></span><small style="color:rgba(255,255,255,0.5);">High Energy</small></div>
+                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(244,63,94,0.4);display:inline-block;"></span><small style="color:rgba(15,23,42,0.6);">Burnout/At-Risk</small></div>
+                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(245,158,11,0.4);display:inline-block;"></span><small style="color:rgba(15,23,42,0.6);">Warning</small></div>
+                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(16,185,129,0.25);display:inline-block;"></span><small style="color:rgba(15,23,42,0.6);">Engaged</small></div>
+                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(6,182,212,0.25);display:inline-block;"></span><small style="color:rgba(15,23,42,0.6);">High Energy</small></div>
               </div>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="card-edu card-glow-pink mb-3">
-              <h6 style="font-weight:800;color:#fff;margin-bottom:1rem;"><i class="fa-solid fa-chart-bar me-2" style="color:var(--edu-pink);"></i>Engagement Distribution</h6>
+              <h6 style="font-weight:800;color:var(--edu-ink);margin-bottom:1rem;"><i class="fa-solid fa-chart-bar me-2" style="color:var(--edu-pink);"></i>Engagement Distribution</h6>
               <div style="height:200px;"><canvas id="distChart"></canvas></div>
             </div>
             <div class="card-edu" id="studentDetailCard" style="display:none;">
-              <h6 style="font-weight:800;color:#fff;margin-bottom:0.75rem;" id="detailName">Student Profile</h6>
+              <h6 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.75rem;" id="detailName">Student Profile</h6>
               <div id="detailContent"></div>
             </div>
           </div>
@@ -122,10 +122,10 @@
       <div id="viewPeer" style="display:none;" class="animate-fade-in-up">
         <div class="card-edu card-glow-emerald mb-3">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <span style="font-size:1.5rem;">??</span>
+            <span style="font-size:1.5rem;"></span>
             <div>
-              <h5 style="font-weight:800;color:#fff;margin:0;">Suggested Peer Pairings</h5>
-              <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;">Complementary engagement profiles matched for collaborative learning</p>
+              <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">Suggested Peer Pairings</h5>
+              <p style="font-size:0.82rem;color:rgba(15,23,42,0.46);margin:0;">Complementary engagement profiles matched for collaborative learning</p>
             </div>
           </div>
           <div id="peerPairsGrid" class="row g-3"></div>
@@ -136,10 +136,10 @@
       <div id="viewAtRisk" style="display:none;" class="animate-fade-in-up">
         <div class="card-edu card-glow-amber mb-3">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <span style="font-size:1.5rem;">??</span>
+            <span style="font-size:1.5rem;"></span>
             <div>
-              <h5 style="font-weight:800;color:#fff;margin:0;">Silent Burnout Detection</h5>
-              <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;">Students showing signs of disengagement or isolation</p>
+              <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">Silent Burnout Detection</h5>
+              <p style="font-size:0.82rem;color:rgba(15,23,42,0.46);margin:0;">Students showing signs of disengagement or isolation</p>
             </div>
           </div>
           <div id="atRiskList" class="d-flex flex-column gap-3"></div>
@@ -152,7 +152,7 @@
   <div id="studentModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);" onclick="closeModal(event)">
     <div id="modalBox" class="card-edu animate-fade-in-up" style="max-width:400px;width:90%;max-height:80vh;overflow-y:auto;" onclick="event.stopPropagation()">
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 id="modalName" style="font-weight:800;color:#fff;margin:0;"></h5>
+        <h5 id="modalName" style="font-weight:800;color:var(--edu-ink);margin:0;"></h5>
         <button class="btn-edu-ghost" onclick="document.getElementById('studentModal').style.display='none'"><i class="fa-solid fa-times"></i></button>
       </div>
       <div id="modalContent"></div>
@@ -232,7 +232,7 @@
         <div class="heatmap-cell ${s.status}" onclick="showStudentDetail(${i})" title="${s.name}: ${s.quiz}% quiz score">
           <div style="font-size:0.75rem;margin-bottom:2px;">${s.name}</div>
           <div style="font-size:0.7rem;opacity:0.75;">${s.quiz}%</div>
-          ${s.risk === 'Critical' ? '<div style="font-size:0.65rem;">??</div>' : ''}
+          ${s.risk === 'Critical' ? '<div style="font-size:0.65rem;"></div>' : ''}
         </div>
       `).join('');
     }
@@ -256,7 +256,7 @@
         },
         options: {
           responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { color: 'rgba(255,255,255,0.6)', font: { family: 'Outfit', size: 10 }, padding: 10 } } },
+          plugins: { legend: { position: 'bottom', labels: { color: 'rgba(15,23,42,0.7)', font: { family: 'Outfit', size: 10 }, padding: 10 } } },
           cutout: '65%'
         }
       });
@@ -271,18 +271,18 @@
             <div class="card-edu" style="border-color:rgba(16,185,129,0.2);">
               <div class="d-flex align-items-center justify-content-between mb-2">
                 <div class="peer-chip">
-                  <div class="peer-avatar" style="background:var(--grad-cool);color:#fff;">${sa.name[0]}</div>
-                  <span style="font-size:0.85rem;font-weight:700;color:#fff;">${sa.name}</span>
+                  <div class="peer-avatar" style="background:var(--grad-cool);color:var(--edu-ink);">${sa.name[0]}</div>
+                  <span style="font-size:0.85rem;font-weight:700;color:var(--edu-ink);">${sa.name}</span>
                   <span class="badge-edu ${sa.status === 'high' ? 'cyan' : 'emerald'}" style="margin-left:4px;font-size:0.65rem;">${sa.energy}</span>
                 </div>
-                <span style="color:rgba(255,255,255,0.4);font-size:1.2rem;">??</span>
+                <span style="color:rgba(15,23,42,0.5);font-size:1.2rem;"></span>
                 <div class="peer-chip">
-                  <div class="peer-avatar" style="background:var(--grad-hot);color:#fff;">${sb.name[0]}</div>
-                  <span style="font-size:0.85rem;font-weight:700;color:#fff;">${sb.name}</span>
+                  <div class="peer-avatar" style="background:var(--grad-hot);color:var(--edu-ink);">${sb.name[0]}</div>
+                  <span style="font-size:0.85rem;font-weight:700;color:var(--edu-ink);">${sb.name}</span>
                   <span class="badge-edu ${sb.status === 'burnout' ? 'danger' : 'amber'}" style="margin-left:4px;font-size:0.65rem;">${sb.energy}</span>
                 </div>
               </div>
-              <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin:0;font-style:italic;">${pair.reason}</p>
+              <p style="font-size:0.78rem;color:rgba(15,23,42,0.6);margin:0;font-style:italic;">${pair.reason}</p>
             </div>
           </div>
         `;
@@ -297,17 +297,17 @@
             <div class="peer-avatar" style="background:${s.risk === 'Critical' ? 'rgba(244,63,94,0.3)' : 'rgba(245,158,11,0.25)'};color:${s.risk === 'Critical' ? '#FDA4AF' : '#FCD34D'};font-size:1rem;width:44px;height:44px;">${s.name[0]}</div>
             <div style="flex:1;">
               <div class="d-flex align-items-center gap-2">
-                <strong style="color:#fff;">${s.name}</strong>
+                <strong style="color:var(--edu-ink);">${s.name}</strong>
                 <span class="badge-edu ${s.risk === 'Critical' ? 'danger' : 'amber'}">${s.risk} Risk</span>
               </div>
-              <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Quiz: ${s.quiz}% | Sessions: ${s.sessions} | Vibe: ${s.energy}</div>
+              <div style="font-size:0.8rem;color:rgba(15,23,42,0.6);">Quiz: ${s.quiz}% | Sessions: ${s.sessions} | Vibe: ${s.energy}</div>
               <div class="progress-edu mt-1"><div class="progress-edu-fill ${s.risk === 'Critical' ? 'pink' : 'amber'}" style="width:${s.quiz}%;"></div></div>
             </div>
             <button class="btn-edu-ghost" onclick="showStudentDetail(${STUDENTS.findIndex(st => st.name === s.name)})" style="flex-shrink:0;"><i class="fa-solid fa-eye"></i></button>
           </div>
           <div style="margin-top:0.75rem;padding:0.6rem 0.75rem;background:rgba(245,158,11,0.05);border-radius:8px;border-left:3px solid ${s.risk === 'Critical' ? 'var(--edu-rose)' : 'var(--edu-amber)'};">
             <strong style="font-size:0.78rem;color:${s.risk === 'Critical' ? '#FDA4AF' : '#FCD34D'};">Recommended Action:</strong>
-            <span style="font-size:0.78rem;color:rgba(255,255,255,0.6);"> ${s.risk === 'Critical' ? '1-on-1 check-in needed. Switch to ELI5 story mode and micro-bites. Pair with high-energy mentor student.' : 'Monitor closely. Offer simplified content and extra encouragement. Suggest peer study group.'}</span>
+            <span style="font-size:0.78rem;color:rgba(15,23,42,0.7);"> ${s.risk === 'Critical' ? '1-on-1 check-in needed. Switch to ELI5 story mode and micro-bites. Pair with high-energy mentor student.' : 'Monitor closely. Offer simplified content and extra encouragement. Suggest peer study group.'}</span>
           </div>
         </div>
       `).join('');
@@ -329,19 +329,19 @@
           ].map(m => `
             <div>
               <div class="d-flex justify-content-between mb-1">
-                <small style="color:rgba(255,255,255,0.6);font-weight:600;">${m.label}</small>
-                <small style="font-weight:800;color:#fff;">${m.val}${m.label.includes('Score') ? '%' : ' / ' + m.max}</small>
+                <small style="color:rgba(15,23,42,0.7);font-weight:600;">${m.label}</small>
+                <small style="font-weight:800;color:var(--edu-ink);">${m.val}${m.label.includes('Score') ? '%' : ' / ' + m.max}</small>
               </div>
               <div class="progress-edu"><div class="progress-edu-fill ${m.val >= 70 ? 'emerald' : m.val >= 40 ? 'amber' : 'pink'}" style="width:${(m.val/m.max)*100}%;"></div></div>
             </div>
           `).join('')}
           <div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:0.75rem;">
             <strong style="font-size:0.82rem;color:var(--edu-violet);">AI Recommendation:</strong>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.7);margin:0.4rem 0 0;">${
+            <p style="font-size:0.82rem;color:rgba(15,23,42,0.8);margin:0.4rem 0 0;">${
               s.risk === 'Critical'
-                ? 'Immediate intervention needed. Schedule a 1-on-1 session, switch to Micro-Bites mode, and pair with a high-energy peer.'
+                 'Immediate intervention needed. Schedule a 1-on-1 session, switch to Micro-Bites mode, and pair with a high-energy peer.'
                 : s.risk === 'Moderate'
-                  ? 'Gentle nudge recommended. Try ELI5 Story mode and encourage the Socratic Mentor sessions.'
+                   'Gentle nudge recommended. Try ELI5 Story mode and encourage the Socratic Mentor sessions.'
                   : 'On track! Keep engaging with challenging content and consider peer mentoring role.'
             }</p>
           </div>
@@ -362,7 +362,7 @@
       function update() {
         const online = navigator.onLine;
         banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
-        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected — Real-time Analytics Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Analytics Engine Active';
+        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected  Real-time Analytics Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  Local Analytics Engine Active';
         pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
         pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
         sConn.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';
