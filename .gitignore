@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 *.py[cod]
+backend/venv/
 *$py.class
 *.so
 .Python
@@ -14,7 +15,9 @@ backend/env/
 
 # Environments
 .env
-.env.local
+.env.*
+backend/.env
+backend/.env.*
 .venv
 
 # IDE / OS

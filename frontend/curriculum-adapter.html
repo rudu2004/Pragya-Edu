@@ -3,489 +3,1205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pragya-Edu | Curriculum Adapter</title>
-  <meta name="description" content="Module 2: Boredom-Busting Curriculum Adapter - Upload syllabus PDF and get 3 engagement modes">
+  <title>Pragya-Edu | Adaptive Curriculum Studio</title>
+  <meta name="description" content="Pragya-Edu: Personalized Curiosity & Engagement Engine — 3-Step Adaptive Pipeline with Embedded Socratic Coach">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link href="./css/style.css" rel="stylesheet">
+  <style>
+    /* High-polish streamlined pipeline styles */
+    .pipeline-wrapper {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+    .step-badge {
+      font-family: var(--font-pixel, monospace);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border: 2px solid var(--edu-ink);
+      box-shadow: 2px 2px 0px var(--edu-ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--edu-yellow, #FBBF24);
+      color: var(--edu-ink);
+    }
+    .step-card {
+      background: #FFFFFF;
+      border: var(--border-thick);
+      box-shadow: var(--shadow-pixel);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+    .emotion-card {
+      border: 3px solid var(--edu-ink);
+      box-shadow: 3px 3px 0px var(--edu-ink);
+      padding: 1.25rem 1rem;
+      background: #FFFFFF;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      height: 100%;
+      user-select: none;
+    }
+    .emotion-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 6px 6px 0px var(--edu-ink);
+      background: var(--edu-soft-yellow, #FEF3C7);
+    }
+    .emotion-card.active {
+      background: #FEF08A;
+      border-color: var(--edu-ink);
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.15), 4px 4px 0px var(--edu-ink);
+      transform: translate(-2px, -2px);
+    }
+    .emotion-emoji {
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+    .topic-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.45rem 0.9rem;
+      border: 2px solid var(--edu-ink);
+      box-shadow: 2px 2px 0px var(--edu-ink);
+      background: var(--edu-warm-white, #FFFFFF);
+      color: var(--edu-ink);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+    .topic-chip:hover {
+      background: var(--edu-soft-lavender, #EDE9FE);
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0px var(--edu-ink);
+    }
+    .studio-tab-btn {
+      font-family: var(--font-pixel, monospace);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.65rem 1.2rem;
+      border: 3px solid var(--edu-ink);
+      box-shadow: 3px 3px 0px var(--edu-ink);
+      background: #FFFFFF;
+      color: var(--edu-ink);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .studio-tab-btn:hover {
+      background: var(--edu-soft-blue, #E0F2FE);
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--edu-ink);
+    }
+    .studio-tab-btn.active {
+      background: var(--edu-dark-purple, #2E1B4E);
+      color: #FFFFFF;
+      box-shadow: 2px 2px 0px var(--edu-ink);
+      transform: translate(1px, 1px);
+    }
+    .flashcard-interactive {
+      background: #FFFFFF;
+      border: 3px solid var(--edu-ink);
+      box-shadow: 6px 6px 0px var(--edu-ink);
+      min-height: 220px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .flashcard-interactive:hover {
+      background: #FFFBEB;
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0px var(--edu-ink);
+    }
+    .socratic-thread-box {
+      background: #F8FAFC;
+      border: 2px solid var(--edu-ink);
+      box-shadow: inset 2px 2px 0px rgba(0,0,0,0.05);
+      max-height: 280px;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .socratic-msg {
+      max-width: 82%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--edu-ink);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .socratic-msg.coach {
+      align-self: flex-start;
+      background: #EDE9FE;
+      box-shadow: 3px 3px 0px var(--edu-ink);
+      color: var(--edu-ink);
+    }
+    .socratic-msg.student {
+      align-self: flex-end;
+      background: #DCFCE7;
+      box-shadow: 3px 3px 0px var(--edu-ink);
+      color: var(--edu-ink);
+    }
+    /* Exhausted Mode High-Readability Boost */
+    body.mode-exhausted .story-text {
+      font-size: 1.15rem !important;
+      line-height: 2.0 !important;
+      background: #FEF9C3 !important;
+      border: 3px solid var(--edu-ink);
+      padding: 1.5rem;
+    }
+  </style>
 </head>
 <body>
-  <div id="networkBanner" class="network-banner offline">
-    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode Active  Local PDF Parser Running
+  <!-- Network Status Banner -->
+  <div id="networkBanner" class="network-banner offline" style="display:none;">
+    <i class="fa-solid fa-wifi-slash me-2"></i>Edge Mode Active · Running on 6-Tier Offline Resilience
   </div>
 
   <div class="app-container">
-    <nav class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <div class="d-flex align-items-center gap-2">
-          <div class="logo-mark" style="width:40px;height:40px;font-size:1.1rem;"><i class="fa-solid fa-brain"></i></div>
+    <!-- Main Full Canvas -->
+    <div class="main-content" style="margin-left: 0; width: 100%;">
+      <!-- Topbar Header -->
+      <header class="topbar d-flex justify-content-between align-items-center flex-wrap gap-2 px-3 px-md-4 py-3 border-bottom">
+        <div class="d-flex align-items-center gap-3">
+          <div class="logo-mark" style="width:42px;height:42px;font-size:1.15rem;display:flex;align-items:center;justify-content:center;background:#2E1B4E;color:#FFF;border:2px solid #0F172A;box-shadow:2px 2px 0px #0F172A;">
+            <i class="fa-solid fa-brain"></i>
+          </div>
           <div>
-            <div class="sidebar-brand">Pragya-Edu</div>
-            <div class="sidebar-tagline">Curiosity Engine</div>
+            <div style="font-family:'Pixelify Sans', monospace; font-weight:700; font-size:1.15rem; color:#0F172A; text-transform:uppercase; line-height:1.1;">Pragya-Edu</div>
+            <div style="font-size:0.75rem; color:#64748B; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Curiosity &amp; Engagement Studio</div>
           </div>
         </div>
-      </div>
-      <div class="sidebar-nav">
-        <div class="sidebar-section-label">Student Flow</div>
-        <a href="vibe-check.html" class="sidebar-link"><i class="fa-solid fa-bolt"></i> Vibe Check</a>
-        <a href="curriculum-adapter.html" class="sidebar-link active"><i class="fa-solid fa-book-open"></i> Curriculum Adapter</a>
-        <a href="socratic-mentor.html" class="sidebar-link"><i class="fa-solid fa-microphone-lines"></i> Socratic Mentor</a>
-        <a href="vibe-analytics.html" class="sidebar-link"><i class="fa-solid fa-chart-scatter"></i> Class Analytics</a>
-        <div class="sidebar-section-label mt-3">Profile</div>
-        <a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> My Dashboard</a>
-      </div>
-      <div class="sidebar-footer">
-        <div id="sidebarConn" class="connectivity-pill offline mb-2">
-          <span class="connectivity-dot"></span><span>Local Mode</span>
-        </div>
-        <a href="login.html" class="sidebar-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Exit</a>
-      </div>
-    </nav>
 
-    <div class="main-content">
-      <div class="topbar">
-        <div class="d-flex align-items-center gap-2">
-          <button class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
-          <span style="font-weight:700;font-size:0.9rem;">Module 2 <span class="badge-edu amber ms-1"><i class="fa-solid fa-book-open me-1"></i>Curriculum Adapter</span></span>
+        <!-- Navigation Buttons (Clean non-refreshing) -->
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <a href="dashboard.html" class="btn-edu-ghost" style="padding:0.4rem 0.8rem; font-size:0.85rem; text-decoration:none;">
+            <i class="fa-solid fa-chart-pie me-1"></i> Dashboard
+          </a>
+          <a href="vibe-analytics.html" class="btn-edu-ghost" style="padding:0.4rem 0.8rem; font-size:0.85rem; text-decoration:none;">
+            <i class="fa-solid fa-chart-scatter me-1"></i> Class Heatmap
+          </a>
+          <!-- Status Badges -->
+          <span id="tierPill" class="badge-edu violet" style="font-size:0.8rem;">
+            <i class="fa-solid fa-microchip me-1"></i><span id="tierLabel">Edge Engine</span>
+          </span>
+          <div id="topConnPill" class="connectivity-pill online">
+            <span class="connectivity-dot"></span><span id="connLabel">Online</span>
+          </div>
         </div>
-        <div id="topConnPill" class="connectivity-pill offline"><span class="connectivity-dot"></span><span>Offline</span></div>
-      </div>
+      </header>
 
-      <!-- Upload Section -->
-      <div id="uploadSection" class="animate-fade-in-up">
-        <div class="text-center mb-4" style="padding-top:0.5rem;">
-          <div style="font-size:3rem;margin-bottom:0.5rem;" class="animate-float"></div>
-          <h1 class="section-title gradient-text">Boredom-Busting Curriculum Adapter</h1>
-          <p class="section-subtitle">Upload your chapter PDF  Get 3 engagement modes instantly</p>
+      <!-- Unified 3-Step Interactive Canvas -->
+      <main class="pipeline-wrapper">
+        <!-- Hero Title Banner -->
+        <div class="text-center mb-4">
+          <h1 class="hero-title mb-2" style="font-size: clamp(1.8rem, 4vw, 2.8rem); color:#0F172A; text-shadow:none;">
+            <span class="gradient-text">Adaptive Curriculum Pipeline</span>
+          </h1>
+          <p class="section-subtitle mb-1" style="color:#334155; font-size:1rem; font-weight:600;">
+            1 Canvas · 3 Intuitive Steps · Instant Cognitive Calibration
+          </p>
         </div>
 
-        <div class="card-edu card-glow-amber mb-4">
-          <div class="dropzone-edu" id="dropZone" onclick="document.getElementById('pdfUpload').click()">
-            <div id="dropZoneContent">
-              <i class="fa-solid fa-cloud-arrow-up" style="font-size:2.5rem;color:var(--edu-violet);margin-bottom:1rem;"></i>
-              <h5 style="color:var(--edu-ink);font-weight:700;">Drag & Drop your PDF Chapter here</h5>
-              <p style="color:rgba(15,23,42,0.6);">or click to browse your files</p>
-              <div class="badge-edu violet mt-2">PDF up to 20MB</div>
+        <!-- =============================================================== -->
+        <!-- STEP 1: VIBE & ENERGY CHECK -->
+        <!-- =============================================================== -->
+        <section class="step-card animate-fade-in-up" id="step1Container">
+          <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <span class="step-badge"><i class="fa-solid fa-bolt"></i> Step 1</span>
+              <h3 style="font-family:'Pixelify Sans', monospace; font-size:1.25rem; font-weight:700; color:var(--edu-ink); margin:0;">
+                Calibrate Your Vibe &amp; Mental Energy
+              </h3>
             </div>
-            <div id="fileSelectedInfo" style="display:none;">
-              <i class="fa-solid fa-file-pdf" style="font-size:2rem;color:var(--edu-amber);margin-bottom:0.5rem;"></i>
-              <h6 id="fileNameShow" style="color:var(--edu-ink);font-weight:700;"></h6>
-              <div class="badge-edu emerald"><i class="fa-solid fa-check me-1"></i>Ready to Adapt</div>
+            <span class="badge-edu amber" id="activeVibeBadge">
+              <i class="fa-solid fa-fingerprint me-1"></i>Status: <strong id="vibeStatusText" class="ms-1">Awaiting Pick</strong>
+            </span>
+          </div>
+
+          <p style="font-size:0.9rem; color:#475569; margin-bottom:1.25rem;">
+            How is your battery right now? Pragya-Edu immediately changes font sizes, pacing, and learning format to match your brain state.
+          </p>
+
+          <div class="row g-3">
+            <!-- Emotion Card 1: Exhausted -->
+            <div class="col-md-4">
+              <div class="emotion-card" id="cardExhausted" onclick="selectVibe('exhausted')">
+                <span class="emotion-emoji">😴</span>
+                <h5 style="font-family:'Pixelify Sans', monospace; font-weight:700; color:var(--edu-ink); margin-bottom:0.4rem;">
+                  Exhausted / Bored
+                </h5>
+                <p style="font-size:0.82rem; color:#64748B; margin-bottom:0.75rem; line-height:1.4;">
+                  Low energy · High cognitive load fatigue · Brain needs a relaxed story.
+                </p>
+                <div class="badge-edu amber" style="font-size:0.75rem;">
+                  <i class="fa-solid fa-book me-1"></i>Defaults to Story Mode
+                </div>
+              </div>
+            </div>
+
+            <!-- Emotion Card 2: Energized -->
+            <div class="col-md-4">
+              <div class="emotion-card" id="cardEnergized" onclick="selectVibe('energized')">
+                <span class="emotion-emoji">⚡</span>
+                <h5 style="font-family:'Pixelify Sans', monospace; font-weight:700; color:var(--edu-ink); margin-bottom:0.4rem;">
+                  Energized &amp; Focused
+                </h5>
+                <p style="font-size:0.82rem; color:#64748B; margin-bottom:0.75rem; line-height:1.4;">
+                  High battery · Craving challenge · Ready for deep Socratic probing.
+                </p>
+                <div class="badge-edu emerald" style="font-size:0.75rem;">
+                  <i class="fa-solid fa-trophy me-1"></i>Defaults to Socratic &amp; Quiz
+                </div>
+              </div>
+            </div>
+
+            <!-- Emotion Card 3: Confused -->
+            <div class="col-md-4">
+              <div class="emotion-card" id="cardConfused" onclick="selectVibe('confused')">
+                <span class="emotion-emoji">🤯</span>
+                <h5 style="font-family:'Pixelify Sans', monospace; font-weight:700; color:var(--edu-ink); margin-bottom:0.4rem;">
+                  Confused / Overwhelmed
+                </h5>
+                <p style="font-size:0.82rem; color:#64748B; margin-bottom:0.75rem; line-height:1.4;">
+                  Stuck on a concept · Need 60-second micro-bites from first principles.
+                </p>
+                <div class="badge-edu violet" style="font-size:0.75rem;">
+                  <i class="fa-solid fa-layer-group me-1"></i>Defaults to Micro Flashcards
+                </div>
+              </div>
             </div>
           </div>
-          <input type="file" id="pdfUpload" accept="application/pdf" style="display:none;" onchange="handleFileSelect(this.files[0])">
+        </section>
 
-          <div class="text-center mt-3" id="uploadActions" style="display:none;">
-            <button class="btn-edu-brand" onclick="processDocument()" id="processBtn">
-              <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Transform into 3 Engagement Modes
+        <!-- =============================================================== -->
+        <!-- STEP 2: UPLOAD OR SELECT TOPIC -->
+        <!-- =============================================================== -->
+        <section class="step-card animate-fade-in-up" id="step2Container">
+          <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <span class="step-badge" style="background:var(--edu-pixel-green);"><i class="fa-solid fa-file-pdf"></i> Step 2</span>
+              <h3 style="font-family:'Pixelify Sans', monospace; font-size:1.25rem; font-weight:700; color:var(--edu-ink); margin:0;">
+                Select Topic or Upload Syllabus Chapter
+              </h3>
+            </div>
+            <span class="badge-edu violet">
+              <i class="fa-solid fa-shield-halved me-1"></i>PDF / TXT up to 10MB
+            </span>
+          </div>
+
+          <!-- Quick Topic Preset Chips -->
+          <div class="mb-3">
+            <label style="font-size:0.82rem; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:0.4rem; display:block;">
+              ⚡ Quick Sample Topics (Click to Pre-fill):
+            </label>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="topic-chip" onclick="applyPresetTopic('Physics - Waves & Optics')">
+                🔭 Physics: Waves &amp; Optics
+              </button>
+              <button type="button" class="topic-chip" onclick="applyPresetTopic('Computer Science - Binary Search Trees')">
+                🌳 CS: Binary Search Trees
+              </button>
+              <button type="button" class="topic-chip" onclick="applyPresetTopic('Biology - Photosynthesis & ATP')">
+                🍃 Biology: Photosynthesis
+              </button>
+              <button type="button" class="topic-chip" onclick="applyPresetTopic('Economics - Supply, Demand & Inflation')">
+                📈 Economics: Supply &amp; Demand
+              </button>
+              <button type="button" class="topic-chip" onclick="applyPresetTopic('Chemistry - Covalent Bonding')">
+                ⚛️ Chemistry: Covalent Bonding
+              </button>
+            </div>
+          </div>
+
+          <!-- Drag & Drop Zone -->
+          <div class="dropzone-edu mb-3 p-4 text-center" id="dropZone" style="border:3px dashed var(--edu-ink); background:#F8FAFC; cursor:pointer;" onclick="document.getElementById('pdfUpload').click()">
+            <div id="dropZonePrompt">
+              <i class="fa-solid fa-cloud-arrow-up mb-2" style="font-size:2.2rem; color:var(--edu-dark-purple);"></i>
+              <h5 style="font-weight:700; color:var(--edu-ink); font-size:1.05rem; margin-bottom:0.25rem;">
+                Drag &amp; Drop Chapter PDF Here
+              </h5>
+              <p style="font-size:0.82rem; color:#64748B; margin:0;">
+                Or click here to browse files on your device
+              </p>
+            </div>
+            <div id="fileSelectedDisplay" style="display:none;">
+              <i class="fa-solid fa-file-circle-check text-success mb-2" style="font-size:2.2rem;"></i>
+              <h6 id="selectedFileName" style="font-weight:700; color:var(--edu-ink); margin:0;">chapter.pdf</h6>
+              <span class="badge-edu emerald mt-2"><i class="fa-solid fa-check me-1"></i>File Attached</span>
+            </div>
+          </div>
+          <!-- Hidden Native File Input -->
+          <input type="file" id="pdfUpload" accept=".pdf,.txt,.docx" style="display:none;" onchange="handleFilePicked(event)">
+
+          <!-- Manual Topic Input & Action Button -->
+          <div class="d-flex flex-column flex-md-row gap-2 align-items-stretch">
+            <div class="input-group" style="flex:1;">
+              <span class="input-group-text" style="background:#FFFFFF; border:3px solid var(--edu-ink); border-right:none; font-weight:700;">
+                <i class="fa-solid fa-book-open" style="color:var(--edu-dark-purple);"></i>
+              </span>
+              <input type="text" id="manualTopic" class="form-control" placeholder="e.g. Newton's Laws of Motion, Quantum Physics, Data Structures..." style="border:3px solid var(--edu-ink); font-size:0.95rem; font-weight:600; padding:0.65rem 0.9rem;" value="Physics - Waves & Optics">
+            </div>
+
+            <button type="button" id="adapt-btn" class="btn-edu-brand" style="white-space:nowrap; padding:0.65rem 1.75rem; font-size:0.95rem;" onclick="executeAdaptation(event)">
+              <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Adapt Content Now
             </button>
           </div>
-        </div>
+        </section>
 
-        <!-- Manual Topic Entry -->
-        <div class="card-edu">
-          <h6 style="color:rgba(15,23,42,0.8);font-size:0.85rem;font-weight:700;margin-bottom:0.75rem;">
-            <i class="fa-solid fa-keyboard me-2" style="color:var(--edu-violet);"></i>Or type your topic manually (no PDF needed)
-          </h6>
-          <div class="d-flex gap-2">
-            <input id="manualTopic" class="input-edu" placeholder="e.g. Newton's Laws of Motion, Chapter 3  Force and Mass..." style="flex:1;">
-            <button class="btn-edu-primary" onclick="processManual()" style="white-space:nowrap;flex-shrink:0;">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> Adapt
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Processing State -->
-      <div id="processingState" style="display:none;" class="text-center py-5 animate-fade-in">
-        <div class="spinner-edu mx-auto mb-4"></div>
-        <h5 style="color:var(--edu-ink);font-weight:700;" id="processingMsg">Extracting your document...</h5>
-        <p style="color:rgba(15,23,42,0.6);" id="processingSubmsg">Analyzing content structure</p>
-        <div class="progress-edu mt-3" style="max-width:300px;margin:0 auto;height:4px;">
-          <div class="progress-edu-fill" id="procProgress" style="width:0%;transition:width 0.5s ease;"></div>
-        </div>
-      </div>
-
-      <!-- Mode Selection & Output -->
-      <div id="outputSection" style="display:none;" class="animate-fade-in-up">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-          <div>
-            <h2 class="section-title">Choose Your Learning Mode</h2>
-            <p class="section-subtitle" id="docTitle">Document processed successfully</p>
-          </div>
-          <button class="btn-edu-ghost" onclick="resetUpload()"><i class="fa-solid fa-rotate-right me-1"></i>New Document</button>
-        </div>
-
-        <!-- 3 Mode Cards -->
-        <div class="row g-3 mb-4">
-          <div class="col-md-4">
-            <div class="mode-card eli5" id="modeELI5" onclick="selectMode('eli5')">
-              <div class="mode-icon" style="background:rgba(245,158,11,0.15);color:var(--edu-amber);"></div>
-              <h5 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.5rem;">ELI5 Story Mode</h5>
-              <p style="font-size:0.82rem;color:rgba(15,23,42,0.56);">Dense theory transformed into a gamified story / mystery narrative. Perfect for low-motivation days.</p>
-              <div class="badge-edu amber mt-2"><i class="fa-solid fa-star me-1"></i>Recommended for you</div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="mode-card micro" id="modeMicro" onclick="selectMode('micro')">
-              <div class="mode-icon" style="background:rgba(16,185,129,0.15);color:var(--edu-emerald);"></div>
-              <h5 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.5rem;">60-Second Micro-Bites</h5>
-              <p style="font-size:0.82rem;color:rgba(15,23,42,0.56);">Rapid flashcard key takeaways for low-attention spans. Swipe through in under a minute.</p>
-              <div class="badge-edu emerald mt-2"><i class="fa-solid fa-bolt me-1"></i>Quick & Effective</div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="mode-card quiz" id="modeQuiz" onclick="selectMode('quiz')">
-              <div class="mode-icon" style="background:rgba(79,70,229,0.15);color:var(--edu-indigo);"></div>
-              <h5 style="font-weight:800;color:var(--edu-ink);margin-bottom:0.5rem;">Gamified Dynamic Quiz</h5>
-              <p style="font-size:0.82rem;color:rgba(15,23,42,0.56);">10-question MCQ with instant color-coded feedback and conceptual breakdowns.</p>
-              <div class="badge-edu violet mt-2"><i class="fa-solid fa-trophy me-1"></i>Test Your Knowledge</div>
-            </div>
+        <!-- =============================================================== -->
+        <!-- PROCESSING STATE (Non-blocking, Dynamic DOM update) -->
+        <!-- =============================================================== -->
+        <div id="processingSection" style="display:none;" class="step-card text-center py-4 animate-fade-in">
+          <div class="spinner-edu mx-auto mb-3" style="width:48px;height:48px;border-width:5px;"></div>
+          <h4 id="procStepTitle" style="font-family:'Pixelify Sans', monospace; font-weight:700; color:var(--edu-ink); margin-bottom:0.25rem;">
+            Analyzing Concept Structure...
+          </h4>
+          <p id="procStepSub" style="font-size:0.85rem; color:#64748B; margin-bottom:1rem;">
+            Aligning cognitive load to your selected vibe state
+          </p>
+          <div class="progress-edu mx-auto" style="max-width:340px; height:6px;">
+            <div class="progress-edu-fill" id="procBar" style="width:15%; transition:width 0.4s ease;"></div>
           </div>
         </div>
 
-        <!-- Content Output Area -->
-        <div id="contentArea">
-          <!-- ELI5 Content -->
-          <div id="contentELI5" class="tabs-content">
-            <div class="card-edu card-glow-amber">
-              <div class="d-flex align-items-center gap-2 mb-3">
-                <span style="font-size:1.5rem;"></span>
-                <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">The Story of <span id="eli5TopicTitle" class="gradient-text">Your Topic</span></h5>
+        <!-- =============================================================== -->
+        <!-- STEP 3: ADAPTED OUTPUT STUDIO -->
+        <!-- =============================================================== -->
+        <section class="step-card animate-fade-in-up" id="step3Studio" style="display:none;">
+          <!-- Studio Header & Mode Tabs -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 pb-3 mb-3 border-bottom">
+            <div>
+              <div class="d-flex align-items-center gap-2">
+                <span class="step-badge" style="background:var(--edu-sky);"><i class="fa-solid fa-sparkles"></i> Step 3</span>
+                <h3 style="font-family:'Pixelify Sans', monospace; font-size:1.35rem; font-weight:700; color:var(--edu-ink); margin:0;">
+                  Adapted Learning Studio
+                </h3>
               </div>
-              <div id="eli5Content" style="line-height:1.9;color:var(--edu-ink);font-size:0.95rem;"></div>
-              <div class="mt-3 d-flex gap-2">
-                <button class="btn-edu-ghost" onclick="window.location.href='socratic-mentor.html'"><i class="fa-solid fa-microphone-lines me-1"></i>Discuss with Socratic Mentor</button>
-              </div>
+              <p style="font-size:0.85rem; color:#64748B; margin:0.25rem 0 0;" id="studioTopicSubtitle">
+                Active Topic: <strong>Physics - Waves &amp; Optics</strong> · Calibrated Mode: <strong>Story Mode</strong>
+              </p>
+            </div>
+
+            <!-- Mode Switcher Tabs (Buttons with type="button" preventing any reload) -->
+            <div class="d-flex gap-2 flex-wrap" role="tablist">
+              <button type="button" id="story-mode-btn" class="studio-tab-btn active" onclick="switchOutputTab('story', event)">
+                <i class="fa-solid fa-book-sparkles"></i> 📖 Story Mode
+              </button>
+              <button type="button" id="flashcards-mode-btn" class="studio-tab-btn" onclick="switchOutputTab('flashcards', event)">
+                <i class="fa-solid fa-layer-group"></i> ⚡ Micro Flashcards
+              </button>
+              <button type="button" id="quiz-mode-btn" class="studio-tab-btn" onclick="switchOutputTab('quiz', event)">
+                <i class="fa-solid fa-gamepad"></i> 🎯 Gamified Quiz
+              </button>
             </div>
           </div>
 
-          <!-- Micro-Bites Content -->
-          <div id="contentMicro" class="tabs-content">
-            <div class="card-edu card-glow-emerald">
-              <div class="d-flex align-items-center justify-content-between mb-3">
+          <!-- TAB 1: STORY MODE (ELI5) -->
+          <div id="tabContentStory" class="studio-tab-pane">
+            <div class="p-3 mb-3" style="background:#FFFBEB; border:2px solid var(--edu-ink); box-shadow:3px 3px 0px var(--edu-ink);">
+              <div class="d-flex align-items-center justify-content-between mb-2">
                 <div class="d-flex align-items-center gap-2">
-                  <span style="font-size:1.5rem;"></span>
-                  <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">60-Second Micro-Bites</h5>
+                  <span style="font-size:1.3rem;">🎮</span>
+                  <h5 style="font-family:'Pixelify Sans', monospace; font-weight:700; color:var(--edu-ink); margin:0;">
+                    Gamified Concept Narrative: <span id="storyTitleSpan" style="color:var(--edu-dark-purple);">Topic</span>
+                  </h5>
                 </div>
-                <div class="badge-edu emerald" id="flashcardCounter">1 / 6</div>
+                <span class="badge-edu amber"><i class="fa-solid fa-brain me-1"></i>Low Cognitive Friction</span>
               </div>
-              <div id="flashcardArea">
-                <div class="flashcard" id="currentFlashcard" onclick="flipCard()">
-                  <div id="flashcardInner" style="font-size:1.05rem;font-weight:600;color:var(--edu-ink);"></div>
-                </div>
-              </div>
-              <div class="d-flex gap-2 mt-3 justify-content-center">
-                <button class="btn-edu-outline" onclick="prevCard()"><i class="fa-solid fa-chevron-left me-1"></i>Prev</button>
-                <button class="btn-edu-primary" onclick="nextCard()">Next <i class="fa-solid fa-chevron-right ms-1"></i></button>
+              <div class="story-text" id="storyBodyContent" style="font-size:0.98rem; line-height:1.75; color:#1E293B;">
+                <!-- Dynamically injected story -->
               </div>
             </div>
           </div>
 
-          <!-- Quiz Content -->
-          <div id="contentQuiz" class="tabs-content">
-            <div class="card-edu card-glow-violet">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <div class="d-flex align-items-center gap-2">
-                  <span style="font-size:1.5rem;"></span>
-                  <h5 style="font-weight:800;color:var(--edu-ink);margin:0;">Gamified Quiz</h5>
-                </div>
-                <div id="quizScoreBadge" class="badge-edu amber" style="display:none;"></div>
+          <!-- TAB 2: MICRO FLASHCARDS -->
+          <div id="tabContentFlashcards" class="studio-tab-pane" style="display:none;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <h5 style="font-family:'Pixelify Sans', monospace; font-weight:700; color:var(--edu-ink); margin:0;">
+                <i class="fa-solid fa-bolt text-warning me-2"></i>60-Second Concept Micro-Bites
+              </h5>
+              <span class="badge-edu emerald" id="cardCounterBadge">1 / 6</span>
+            </div>
+
+            <!-- Interactive Flip Card -->
+            <div class="flashcard-interactive mb-3" id="mainFlashcard" onclick="flipActiveCard(event)" title="Click to flip card">
+              <span id="flipHint" style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:#94A3B8; font-weight:700; margin-bottom:0.75rem;">
+                <i class="fa-solid fa-arrows-rotate me-1"></i>Click card to flip
+              </span>
+              <div id="cardContentText" style="font-size:1.15rem; font-weight:700; color:var(--edu-ink); max-width:85%;">
+                Front of card loading...
               </div>
-              <div id="quizArea"></div>
-              <div id="quizSubmitArea" class="mt-3 text-center" style="display:none;">
-                <button class="btn-edu-brand" onclick="submitQuiz()" id="quizSubmitBtn">
-                  <i class="fa-solid fa-paper-plane me-2"></i>Submit & See Results
+            </div>
+
+            <!-- Card Controls (type="button") -->
+            <div class="d-flex justify-content-center gap-3">
+              <button type="button" class="btn-edu-outline" onclick="prevFlashcard(event)" style="padding:0.45rem 1.25rem;">
+                <i class="fa-solid fa-arrow-left me-1"></i> Prev
+              </button>
+              <button type="button" class="btn-edu-ghost" onclick="flipActiveCard(event)" style="padding:0.45rem 1.25rem;">
+                <i class="fa-solid fa-repeat me-1"></i> Flip
+              </button>
+              <button type="button" class="btn-edu-primary" onclick="nextFlashcard(event)" style="padding:0.45rem 1.25rem;">
+                Next <i class="fa-solid fa-arrow-right ms-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 3: GAMIFIED QUIZ -->
+          <div id="tabContentQuiz" class="studio-tab-pane" style="display:none;">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h5 style="font-family:'Pixelify Sans', monospace; font-weight:700; color:var(--edu-ink); margin:0;">
+                <i class="fa-solid fa-trophy text-primary me-2"></i>Adaptive Diagnostic Quiz
+              </h5>
+              <div id="quizResultBadge" class="badge-edu amber" style="display:none;">Score: 0/5</div>
+            </div>
+            <div id="quizContainerArea">
+              <!-- Dynamically populated MCQs -->
+            </div>
+            <div class="text-center mt-3" id="quizSubmitWrapper">
+              <button type="button" class="btn-edu-brand" onclick="gradeActiveQuiz(event)">
+                <i class="fa-solid fa-check-double me-2"></i>Submit Answers &amp; Check Vibe
+              </button>
+            </div>
+          </div>
+
+          <!-- ============================================================= -->
+          <!-- EMBEDDED SOCRATIC COACH (DIRECTLY UNDER OUTPUT) -->
+          <!-- ============================================================= -->
+          <div class="mt-4 pt-3 border-top" id="embeddedSocraticArea">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+              <div class="d-flex align-items-center gap-2">
+                <div style="width:36px;height:36px;border-radius:50%;background:#2E1B4E;color:#FFF;display:flex;align-items:center;justify-content:center;font-size:1rem;border:2px solid var(--edu-ink);">
+                  <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <div>
+                  <h5 style="font-family:'Pixelify Sans', monospace; font-weight:700; color:var(--edu-ink); margin:0;">
+                    Socrates AI Coach (Embedded)
+                  </h5>
+                  <small style="color:#64748B;">Probe your understanding directly without changing pages</small>
+                </div>
+              </div>
+
+              <!-- Voice & Depth Toggles -->
+              <div class="d-flex gap-2 align-items-center">
+                <button type="button" id="ttsAudioBtn" class="btn-edu-ghost" style="padding:0.35rem 0.75rem; font-size:0.8rem;" onclick="speakSocratesLastPrompt(event)">
+                  <i class="fa-solid fa-volume-high me-1"></i><span id="ttsBtnText">Listen to Socrates</span>
                 </button>
+                <select id="socraticDepthSelect" class="form-select form-select-sm" style="width:auto; border:2px solid var(--edu-ink); font-weight:600; font-size:0.8rem;" onchange="changeSocraticDepth(event)">
+                  <option value="surface">🌱 Surface (Foundational)</option>
+                  <option value="medium" selected>🌿 Medium (Application)</option>
+                  <option value="deep">🌳 Deep (Philosophical)</option>
+                </select>
               </div>
             </div>
+
+            <!-- Dialogue History Box -->
+            <div class="socratic-thread-box mb-2" id="socraticThread">
+              <div class="socratic-msg coach" id="socraticOpeningMsg">
+                <strong>🏛️ Socrates:</strong><br>
+                <span id="socraticQuestionText">
+                  Before we delve into technical formulas — what is the fundamental purpose of this concept in everyday reality?
+                </span>
+              </div>
+            </div>
+
+            <!-- Quick Probes Pills -->
+            <div class="d-flex gap-2 flex-wrap mb-2">
+              <button type="button" class="btn-edu-ghost" style="padding:0.25rem 0.65rem; font-size:0.78rem;" onclick="sendQuickSocratic('Can you give me a real-world example of where this applies?', event)">
+                💡 Real-world example
+              </button>
+              <button type="button" class="btn-edu-ghost" style="padding:0.25rem 0.65rem; font-size:0.78rem;" onclick="sendQuickSocratic('Where does this concept completely break down?', event)">
+                ⚡ Where does it fail?
+              </button>
+              <button type="button" class="btn-edu-ghost" style="padding:0.25rem 0.65rem; font-size:0.78rem;" onclick="sendQuickSocratic('ELI5: Explain it to me in 2 sentences.', event)">
+                🐣 Simplify ELI5
+              </button>
+            </div>
+
+            <!-- Socratic Reply Input Form (with explicit type="button" and e.preventDefault) -->
+            <div class="d-flex gap-2 align-items-center">
+              <input type="text" id="socraticUserReply" class="form-control" placeholder="Share your perspective or answer Socrates' probe..." style="border:3px solid var(--edu-ink); font-size:0.9rem; font-weight:600; padding:0.6rem 0.85rem;" onkeydown="handleSocraticKey(event)">
+              <button type="button" id="socratic-voice-btn" class="btn-edu-ghost" style="height:46px; width:46px; padding:0; display:flex; align-items:center; justify-content:center; border:3px solid var(--edu-ink);" onclick="toggleVoiceDictation(event)" title="Speech Dictation">
+                <i class="fa-solid fa-microphone" id="micIcon"></i>
+              </button>
+              <button type="button" id="socratic-send-btn" class="btn-edu-primary" style="height:46px; padding:0 1.25rem; white-space:nowrap;" onclick="submitSocraticAnswer(event)">
+                <i class="fa-solid fa-paper-plane me-1"></i> Send
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   </div>
 
+  <!-- API and Business Logic -->
   <script src="./js/api.js"></script>
-
   <script>
-    let currentFlashcardIndex = 0;
-    let flashcards = [];
-    let quizQuestions = [];
-    let quizAnswers = {};
-    let currentMode = null;
-    let docContent = '';
+    /* =====================================================================
+       PRAGYA-EDU ADAPTIVE PIPELINE CONTROLLER
+       All handlers strictly use e.preventDefault() & type="button"
+       ===================================================================== */
+    'use strict';
 
+    // Application state
+    const State = {
+      vibe: 'exhausted',          // exhausted / energized / confused
+      topic: 'Physics - Waves & Optics',
+      fileAttached: null,
+      activeTab: 'story',
+      flashcards: [],
+      cardIndex: 0,
+      cardFlipped: false,
+      quizData: [],
+      userAnswers: {},
+      socraticHistory: [],
+      isRecognizing: false,
+      recognition: null,
+      synth: window.speechSynthesis || null,
+      lastSocraticPrompt: ''
+    };
+
+    // ── INITIALIZATION ────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
-      setupNetworkMonitor();
-      setupDropzone();
-      const topic = localStorage.getItem('pe_topic') || 'your selected topic';
-      document.getElementById('manualTopic').placeholder = 'e.g. ' + topic + '...';
+      initNetworkMonitoring();
+      restoreSavedProfile();
+      setupDragDrop();
+      setupSpeechRecognition();
+      // Select default vibe to seed active state
+      selectVibe(State.vibe, false);
     });
 
-    function setupDropzone() {
-      const dz = document.getElementById('dropZone');
-      ['dragenter','dragover'].forEach(e => dz.addEventListener(e, ev => { ev.preventDefault(); dz.classList.add('dragover'); }));
-      ['dragleave','drop'].forEach(e => dz.addEventListener(e, ev => { ev.preventDefault(); dz.classList.remove('dragover'); }));
-      dz.addEventListener('drop', ev => { const file = ev.dataTransfer.files[0]; if (file.type === 'application/pdf') handleFileSelect(file); });
+    // ── RESTORE PROFILE ───────────────────────────────────────────────
+    function restoreSavedProfile() {
+      try {
+        const savedTopic = localStorage.getItem('pe_topic');
+        if (savedTopic) {
+          State.topic = savedTopic;
+          const input = document.getElementById('manualTopic');
+          if (input) input.value = savedTopic;
+        }
+      } catch (e) {}
     }
 
-    function handleFileSelect(file) {
-      if (!file) return;
-      document.getElementById('dropZoneContent').style.display = 'none';
-      document.getElementById('fileSelectedInfo').style.display = 'block';
-      document.getElementById('fileNameShow').textContent = file.name + ' (' + (file.size/1024).toFixed(0) + ' KB)';
-      document.getElementById('uploadActions').style.display = 'block';
-
-      const reader = new FileReader();
-      reader.onload = function(e) { docContent = 'PDF Content: ' + file.name; };
-      reader.readAsDataURL(file);
-    }
-
-    function processDocument() {
-      const topic = localStorage.getItem('pe_topic') || 'Physics';
-      showProcessing();
-      setTimeout(() => { generateContent(topic); }, 2500);
-    }
-
-    function processManual() {
-      const topic = document.getElementById('manualTopic').value.trim() || localStorage.getItem('pe_topic') || 'Newton\'s Laws';
-      showProcessing();
-      setTimeout(() => { generateContent(topic); }, 2000);
-    }
-
-    function showProcessing() {
-      document.getElementById('uploadSection').style.display = 'none';
-      document.getElementById('processingState').style.display = 'block';
-      const msgs = [
-        ['Extracting your document...', 'Analyzing content structure'],
-        ['Identifying key concepts...', 'Mapping knowledge graph'],
-        ['Generating engagement modes...', 'Crafting personalized content'],
-        ['Almost ready!', 'Finalizing your learning experience']
-      ];
-      let step = 0;
-      const iv = setInterval(() => {
-        if (step >= msgs.length) { clearInterval(iv); return; }
-        document.getElementById('processingMsg').textContent = msgs[step][0];
-        document.getElementById('processingSubmsg').textContent = msgs[step][1];
-        document.getElementById('procProgress').style.width = ((step+1)/msgs.length*100) + '%';
-        step++;
-      }, 600);
-    }
-
-    function generateContent(topic) {
-      const profile = JSON.parse(localStorage.getItem('pe_profile') || '{}');
-      const context = profile.context || 'realworld';
-
-      // ELI5 story
-      const contextNarrative = {
-        gaming:    'In a magical RPG world called ' + topic.split(' ')[0] + '-Realm,',
-        scifi:     'In the year 2347, aboard the starship Curiosity,',
-        sports:    'Picture the championship game of your life:',
-        realworld: 'Imagine you\'re running your own startup:',
-        stories:   'Once upon a time, in a mysterious village,'
-      }[context] || 'Imagine you\'re on an adventure:';
-
-      const eli5 = `<p style="font-size:1.05rem;margin-bottom:1rem;padding:1rem;background:rgba(245,158,11,0.08);border-left:3px solid var(--edu-amber);border-radius:8px;color:#FCD34D;font-style:italic;">"${contextNarrative} you encounter the concept of <strong>${topic}</strong>..."</p>
-
-<p>Let's break this down like a story! Think of <strong>${topic}</strong> as the main character of our adventure. Every great story has a beginning, a challenge, and a resolution  and so does every concept you'll ever learn.</p>
-
-<h6 style="color:var(--edu-violet);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;"> Chapter 1: The Setup (What Is It)</h6>
-<p><strong>${topic}</strong> is essentially about understanding how things relate to each other in a system. Just like in a game where every player has a role, every element in this concept has a specific function.</p>
-
-<h6 style="color:var(--edu-pink);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;"> Chapter 2: The Challenge (Why Does It Matter)</h6>
-<p>Here's where it gets interesting  the real world is full of problems that <strong>${topic}</strong> helps solve. Without this understanding, we'd be fumbling in the dark. With it, we become masters of our domain.</p>
-
-<h6 style="color:var(--edu-emerald);font-weight:800;margin:1.5rem 0 0.5rem;font-size:1rem;"> Chapter 3: The Victory (How Do You Apply It)</h6>
-<p>The magic happens when you take this concept and apply it to real situations. Start small  identify one thing in your daily life where <strong>${topic}</strong> shows up. That's your first win!</p>
-
-<div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:1rem;margin-top:1.5rem;">
-  <strong style="color:var(--edu-emerald);"> Remember the Core Idea:</strong>
-  <p style="margin:0.5rem 0 0;color:rgba(15,23,42,0.9);">${topic} = understanding relationships + applying patterns + solving problems. Master these three pillars and you've conquered the concept!</p>
-</div>`;
-
-      // Flashcards
-      flashcards = [
-        { front: ' What is ' + topic + '', back: 'The fundamental concept that explains relationships and patterns in this domain.' },
-        { front: '? Key Formula / Rule', back: 'Input ? Process ? Output. Every instance of ' + topic + ' follows this flow.' },
-        { front: ' Real-World Example', back: topic + ' appears when you observe cause-and-effect relationships in daily life.' },
-        { front: ' Common Misconception', back: 'Many students confuse ' + topic + ' with its surface features  focus on the underlying pattern.' },
-        { front: ' Connection to Other Concepts', back: topic + ' builds upon foundational principles and connects to advanced topics in the domain.' },
-        { front: ' The One-Line Summary', back: '"' + topic + ' is the art of seeing hidden patterns and using them to predict and create."' }
-      ];
-
-      // Quiz
-      quizQuestions = [
-        { q: 'Which best describes the core principle of ' + topic + '', opts: ['A: Pattern recognition and application', 'B: Random trial and error', 'C: Memorization without understanding', 'D: Surface-level observation only'], ans: 0, exp: topic + ' fundamentally involves recognizing patterns and applying them systematically.' },
-        { q: 'What is the first step when approaching ' + topic + '', opts: ['A: Jump straight to complex examples', 'B: Identify the fundamental relationships', 'C: Memorize all formulas', 'D: Skip to the applications'], ans: 1, exp: 'Always identify core relationships before moving to applications.' },
-        { q: 'How does ' + topic + ' connect to real-world problems', opts: ['A: It has no real-world relevance', 'B: Only in theoretical scenarios', 'C: Through pattern recognition and systematic thinking', 'D: Only in laboratory settings'], ans: 2, exp: topic + ' provides a framework for solving real problems systematically.' },
-        { q: 'What distinguishes a beginner from an expert in ' + topic + '', opts: ['A: Amount of memorization', 'B: Speed of calculation', 'C: Depth of conceptual understanding', 'D: Number of formulas known'], ans: 2, exp: 'Experts understand WHY, not just HOW.' },
-        { q: 'Which learning approach works best for ' + topic + '', opts: ['A: Passive reading only', 'B: Active problem-solving with feedback', 'C: Watching videos without practice', 'D: Cramming before exams'], ans: 1, exp: 'Active learning with immediate feedback accelerates mastery significantly.' }
-      ];
-
-      docContent = topic;
-      showOutput(topic);
-    }
-
-    function showOutput(topic) {
-      document.getElementById('processingState').style.display = 'none';
-      document.getElementById('outputSection').style.display = 'block';
-      document.getElementById('docTitle').textContent = 'Topic: ' + topic + '  3 modes ready!';
-      document.getElementById('eli5TopicTitle').textContent = topic;
-
-      document.getElementById('eli5Content').innerHTML = generateELI5(topic);
-
-      currentFlashcardIndex = 0;
-      renderFlashcard();
-
-      renderQuiz();
-
-      selectMode('eli5');
-    }
-
-    function generateELI5(topic) {
-      const profile = JSON.parse(localStorage.getItem('pe_profile') || '{}');
-      const context = profile.context || 'realworld';
-
-      const contextNarrative = {
-        gaming:    'In a magical RPG world, you encounter the concept of ' + topic + '...',
-        scifi:     'Aboard the starship Curiosity in 2347, you must master ' + topic + '...',
-        sports:    'In the championship game of your life, understanding ' + topic + ' is the key...',
-        realworld: 'Imagine building your own startup  you need to understand ' + topic + '...',
-        stories:   'Once upon a time, a student discovered the mysteries of ' + topic + '...'
-      }[context] || 'Let\'s explore ' + topic + ' through a story...';
-
-      return `<p style="font-size:1.05rem;margin-bottom:1rem;padding:1rem;background:rgba(245,158,11,0.08);border-left:3px solid var(--edu-amber);border-radius:8px;color:#FCD34D;font-style:italic;">"${contextNarrative}"</p>
-
-<p>Let's break this down like a story! Think of <strong>${topic}</strong> as the main character of our adventure.</p>
-
-<h6 style="color:var(--edu-violet);font-weight:800;margin:1.5rem 0 0.5rem;"> Chapter 1: What Is It</h6>
-<p><strong>${topic}</strong> is essentially about understanding how things relate to each other. Just like in a story where every character has a role, every element in this concept serves a specific function.</p>
-
-<h6 style="color:var(--edu-pink);font-weight:800;margin:1.5rem 0 0.5rem;"> Chapter 2: Why Does It Matter</h6>
-<p>The real world is full of problems that <strong>${topic}</strong> helps solve. Without this understanding, we'd be fumbling in the dark.</p>
-
-<h6 style="color:var(--edu-emerald);font-weight:800;margin:1.5rem 0 0.5rem;"> Chapter 3: How Do You Apply It</h6>
-<p>Take this concept and apply it to real situations. Identify one thing in your daily life where <strong>${topic}</strong> shows up. That's your first win!</p>
-
-<div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:1rem;margin-top:1rem;">
-  <strong style="color:var(--edu-emerald);"> Core Idea:</strong>
-  <p style="margin:0.5rem 0 0;color:rgba(15,23,42,0.9);">${topic} = understanding relationships + applying patterns + solving problems.</p>
-</div>`;
-    }
-
-    function selectMode(mode) {
-      currentMode = mode;
-      ['eli5','micro','quiz'].forEach(m => {
-        document.getElementById('mode' + m.charAt(0).toUpperCase() + m.slice(1)).classList.remove('active');
-        document.getElementById('content' + m.charAt(0).toUpperCase() + m.slice(1)).classList.remove('active');
-      });
-      document.getElementById('modeELI5').classList.toggle('active', mode === 'eli5');
-      document.getElementById('modeMicro').classList.toggle('active', mode === 'micro');
-      document.getElementById('modeQuiz').classList.toggle('active', mode === 'quiz');
-      const mapContent = { eli5: 'contentELI5', micro: 'contentMicro', quiz: 'contentQuiz' };
-      document.getElementById(mapContent[mode]).classList.add('active');
-    }
-
-    function renderFlashcard() {
-      if (flashcards.length === 0) return;
-      const card = flashcards[currentFlashcardIndex];
-      document.getElementById('flashcardInner').innerHTML = card.front;
-      document.getElementById('flashcardCounter').textContent = (currentFlashcardIndex + 1) + ' / ' + flashcards.length;
-      document.getElementById('currentFlashcard').dataset.showingBack = 'false';
-    }
-
-    function flipCard() {
-      const card = flashcards[currentFlashcardIndex];
-      const fc = document.getElementById('currentFlashcard');
-      const showing = fc.dataset.showingBack === 'true';
-      document.getElementById('flashcardInner').innerHTML = showing ? card.front : '<span style="color:var(--edu-emerald);">' + card.back + '</span>';
-      fc.dataset.showingBack = showing ? 'false' : 'true';
-    }
-
-    function nextCard() {
-      if (currentFlashcardIndex < flashcards.length - 1) { currentFlashcardIndex++; renderFlashcard(); }
-    }
-
-    function prevCard() {
-      if (currentFlashcardIndex > 0) { currentFlashcardIndex--; renderFlashcard(); }
-    }
-
-    function renderQuiz() {
-      const area = document.getElementById('quizArea');
-      quizAnswers = {};
-      area.innerHTML = quizQuestions.map((q, qi) => `
-        <div class="mb-4" id="quizQ${qi}">
-          <div style="font-weight:700;color:var(--edu-ink);margin-bottom:0.75rem;font-size:0.95rem;">
-            <span class="badge-edu violet me-2">Q${qi+1}</span>${q.q}
-          </div>
-          ${q.opts.map((opt, oi) => `
-            <div class="mcq-option" id="quizOpt_${qi}_${oi}" onclick="selectQuizOpt(${qi},${oi},this)">
-              <div class="mcq-radio" id="quizRadio_${qi}_${oi}"></div>
-              <span style="color:var(--edu-ink);">${opt}</span>
-            </div>
-          `).join('')}
-          <div id="quizExp_${qi}" style="display:none;margin-top:0.5rem;padding:0.75rem;background:rgba(79,70,229,0.1);border-left:3px solid var(--edu-indigo);border-radius:8px;font-size:0.85rem;color:rgba(15,23,42,0.9);"></div>
-        </div>
-      `).join('');
-      document.getElementById('quizSubmitArea').style.display = 'none';
-    }
-
-    function selectQuizOpt(qi, oi, el) {
-      quizQuestions[qi].opts.forEach((_, idx) => {
-        document.getElementById('quizOpt_' + qi + '_' + idx).classList.remove('selected');
-      });
-      el.classList.add('selected');
-      quizAnswers[qi] = oi;
-      if (Object.keys(quizAnswers).length === quizQuestions.length) {
-        document.getElementById('quizSubmitArea').style.display = 'block';
-      }
-    }
-
-    function submitQuiz() {
-      let score = 0;
-      quizQuestions.forEach((q, qi) => {
-        const selected = quizAnswers[qi];
-        const correct = q.ans;
-        q.opts.forEach((_, oi) => {
-          const el = document.getElementById('quizOpt_' + qi + '_' + oi);
-          if (oi === correct) el.classList.add('correct');
-          else if (oi === selected && selected !== correct) el.classList.add('incorrect');
-        });
-        if (selected === correct) score++;
-        const expEl = document.getElementById('quizExp_' + qi);
-        if (expEl) { expEl.innerHTML = '<i class="fa-solid fa-lightbulb me-1" style="color:var(--edu-amber);"></i>' + q.exp; expEl.style.display = 'block'; }
-      });
-      const pct = Math.round((score / quizQuestions.length) * 100);
-      const badge = document.getElementById('quizScoreBadge');
-      badge.textContent = score + '/' + quizQuestions.length + ' (' + pct + '%)';
-      badge.style.display = 'inline-flex';
-      badge.className = 'badge-edu ' + (pct >= 70 ? 'emerald' : pct >= 40 ? 'amber' : 'danger');
-      document.getElementById('quizSubmitBtn').style.display = 'none';
-      localStorage.setItem('pe_quizScore', pct.toString());
-    }
-
-    function resetUpload() {
-      document.getElementById('outputSection').style.display = 'none';
-      document.getElementById('uploadSection').style.display = 'block';
-    }
-
-    function setupNetworkMonitor() {
+    // ── NETWORK STATUS & ACTIVE TIER MONITOR ─────────────────────────
+    async function initNetworkMonitoring() {
+      const connPill = document.getElementById('topConnPill');
+      const connLabel = document.getElementById('connLabel');
+      const tierLabel = document.getElementById('tierLabel');
       const banner = document.getElementById('networkBanner');
-      const pill = document.getElementById('topConnPill');
-      const sConn = document.getElementById('sidebarConn');
-      function update() {
+
+      async function refreshState() {
         const online = navigator.onLine;
-        banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
-        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected  Cloud AI Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode  Local PDF Parser Running';
-        pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
-        pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
-        sConn.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';
-        sConn.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Cloud AI' : 'Local Mode') + '</span>';
-        setTimeout(() => { if (online) banner.classList.remove('show'); }, 3000);
+        if (connPill) connPill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
+        if (connLabel) connLabel.textContent = online ? 'Online' : 'Edge Mode';
+
+        if (online) {
+          try {
+            const status = await PragyaAPI.checkBackendStatus();
+            if (tierLabel) tierLabel.textContent = status.tier_label || 'Cloud AI';
+            if (banner) banner.style.display = 'none';
+          } catch (e) {
+            if (tierLabel) tierLabel.textContent = 'Edge Engine';
+          }
+        } else {
+          if (tierLabel) tierLabel.textContent = 'Edge Heuristic';
+          if (banner) banner.style.display = 'block';
+        }
       }
-      update();
-      window.addEventListener('online', update);
-      window.addEventListener('offline', update);
+
+      window.addEventListener('online', refreshState);
+      window.addEventListener('offline', refreshState);
+      await refreshState();
+    }
+
+    // ── STEP 1: VIBE SELECTION ────────────────────────────────────────
+    function selectVibe(vibe, showFeedback = true) {
+      State.vibe = vibe;
+
+      // Update card UI classes
+      const cards = {
+        exhausted: document.getElementById('cardExhausted'),
+        energized: document.getElementById('cardEnergized'),
+        confused: document.getElementById('cardConfused')
+      };
+
+      Object.keys(cards).forEach(k => {
+        if (cards[k]) cards[k].classList.toggle('active', k === vibe);
+      });
+
+      const vibeNames = {
+        exhausted: 'Exhausted (Chill Story Pacing)',
+        energized: 'Energized (Active Challenge)',
+        confused: 'Confused (60s Micro-Bites)'
+      };
+
+      const statusEl = document.getElementById('vibeStatusText');
+      if (statusEl) statusEl.textContent = vibeNames[vibe] || vibe;
+
+      // Adapt body styling for visual accessibility
+      document.body.classList.toggle('mode-exhausted', vibe === 'exhausted');
+
+      // Auto-adapt target output tab
+      if (vibe === 'exhausted') {
+        State.activeTab = 'story';
+      } else if (vibe === 'energized') {
+        State.activeTab = 'quiz';
+      } else if (vibe === 'confused') {
+        State.activeTab = 'flashcards';
+      }
+
+      // If Studio is already showing, swap tab smoothly
+      const studio = document.getElementById('step3Studio');
+      if (studio && studio.style.display !== 'none') {
+        switchOutputTab(State.activeTab);
+      }
+
+      // Persist profile
+      try {
+        localStorage.setItem('pe_energy', vibe);
+      } catch (e) {}
+    }
+
+    // ── STEP 2: TOPIC PRESETS & FILE HANDLING ────────────────────────
+    function applyPresetTopic(topicStr) {
+      State.topic = topicStr;
+      const input = document.getElementById('manualTopic');
+      if (input) input.value = topicStr;
+      try { localStorage.setItem('pe_topic', topicStr); } catch (e) {}
+    }
+
+    function setupDragDrop() {
+      const dz = document.getElementById('dropZone');
+      if (!dz) return;
+
+      ['dragenter', 'dragover'].forEach(name => {
+        dz.addEventListener(name, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dz.style.background = '#EDE9FE';
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(name => {
+        dz.addEventListener(name, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dz.style.background = '#F8FAFC';
+        });
+      });
+
+      dz.addEventListener('drop', (e) => {
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          handleFile(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    function handleFilePicked(e) {
+      if (e.target && e.target.files && e.target.files.length > 0) {
+        handleFile(e.target.files[0]);
+      }
+    }
+
+    function handleFile(file) {
+      if (!file) return;
+      State.fileAttached = file;
+      const promptEl = document.getElementById('dropZonePrompt');
+      const displayEl = document.getElementById('fileSelectedDisplay');
+      const nameEl = document.getElementById('selectedFileName');
+
+      if (promptEl) promptEl.style.display = 'none';
+      if (displayEl) displayEl.style.display = 'block';
+      if (nameEl) nameEl.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+
+      // Derive topic from filename if empty
+      const derived = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+      const input = document.getElementById('manualTopic');
+      if (input && !input.value.trim()) {
+        input.value = derived;
+        State.topic = derived;
+      }
+    }
+
+    // ── EXECUTE ADAPTATION PIPELINE ──────────────────────────────────
+    async function executeAdaptation(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      const input = document.getElementById('manualTopic');
+      const topic = (input && input.value.trim()) ? input.value.trim() : State.topic || 'General Science';
+      State.topic = topic;
+
+      // Show processing bar
+      const procSection = document.getElementById('processingSection');
+      const procTitle = document.getElementById('procStepTitle');
+      const procBar = document.getElementById('procBar');
+      const studio = document.getElementById('step3Studio');
+
+      if (procSection) procSection.style.display = 'block';
+      if (studio) studio.style.display = 'none';
+
+      // Animated steps
+      const steps = [
+        { pct: 30, text: 'Extracting key concepts & semantic links...' },
+        { pct: 65, text: `Adapting load for: [${State.vibe.toUpperCase()}] state...` },
+        { pct: 95, text: 'Generating Socratic coach & gamified modes...' }
+      ];
+
+      for (let i = 0; i < steps.length; i++) {
+        if (procBar) procBar.style.width = steps[i].pct + '%';
+        if (procTitle) procTitle.textContent = steps[i].text;
+        await new Promise(r => setTimeout(r, 260));
+      }
+
+      // Fetch / Generate content via resilient PragyaAPI
+      try {
+        let eli5Res = null;
+        let flashRes = null;
+        let quizRes = null;
+
+        if (State.fileAttached) {
+          const uploadRes = await PragyaAPI.uploadDocument(State.fileAttached, 'all', 'gaming');
+          eli5Res = uploadRes.eli5;
+          flashRes = uploadRes.flashcards;
+          quizRes = uploadRes.quiz;
+        } else {
+          // Parallel resilient fetch with offline fallbacks
+          [eli5Res, flashRes, quizRes] = await Promise.all([
+            PragyaAPI.getELI5(State.topic, 'gaming'),
+            PragyaAPI.getFlashcards(State.topic),
+            PragyaAPI.getDiagnosticQuiz(State.topic)
+          ]);
+        }
+
+        renderStory(eli5Res);
+        renderFlashcards(flashRes);
+        renderQuiz(quizRes);
+        seedSocraticCoach();
+
+        // Update studio subtitle
+        const subtitle = document.getElementById('studioTopicSubtitle');
+        if (subtitle) {
+          subtitle.innerHTML = `Active Topic: <strong>${escapeHtml(State.topic)}</strong> · Mode: <strong>${State.vibe.toUpperCase()}</strong>`;
+        }
+
+        // Show Studio and hide progress
+        if (procSection) procSection.style.display = 'none';
+        if (studio) {
+          studio.style.display = 'block';
+          studio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Switch to the vibe's favored tab
+        switchOutputTab(State.activeTab);
+
+      } catch (err) {
+        console.error('Adaptation failed, using offline fallback:', err);
+        // Fallback safety
+        renderStory(PragyaAPI.getMockELI5(State.topic, 'gaming'));
+        renderFlashcards(PragyaAPI.getMockFlashcards(State.topic));
+        renderQuiz(PragyaAPI.getMockDiagnosticQuiz(State.topic));
+        seedSocraticCoach();
+        if (procSection) procSection.style.display = 'none';
+        if (studio) studio.style.display = 'block';
+      }
+    }
+
+    // ── RENDER STORY (TAB 1) ──────────────────────────────────────────
+    function renderStory(storyData) {
+      const titleSpan = document.getElementById('storyTitleSpan');
+      const bodyDiv = document.getElementById('storyBodyContent');
+      if (titleSpan) titleSpan.textContent = State.topic;
+
+      let storyHtml = '';
+      if (storyData && storyData.story) {
+        // Convert double newlines into clean paragraphs
+        const paragraphs = storyData.story.split('\n\n').filter(p => p.trim());
+        storyHtml = paragraphs.map((p, idx) => {
+          if (idx === 0) {
+            return `<p style="font-size:1.05rem; font-weight:700; color:var(--edu-dark-purple);">${escapeHtml(p)}</p>`;
+          }
+          return `<p style="margin-bottom:1rem;">${escapeHtml(p)}</p>`;
+        }).join('');
+      } else {
+        storyHtml = `<p>Imagine entering a digital realm where <strong>${escapeHtml(State.topic)}</strong> is the primary rule of gravity and logic. Once you grasp its core relationships, you can bend the system to your will!</p>`;
+      }
+
+      // Add Core Takeaway Box
+      storyHtml += `
+        <div class="mt-3 p-3" style="background:#DCFCE7; border:2px solid var(--edu-ink); box-shadow:2px 2px 0px var(--edu-ink);">
+          <strong style="color:#15803D;"><i class="fa-solid fa-gem me-1"></i> Core Takeaway:</strong>
+          <p class="mb-0 mt-1" style="font-size:0.9rem; color:#166534;">
+            ${escapeHtml(State.topic)} connects foundational rules directly into observable daily patterns. Focus on the mechanism, not rote formula memorization!
+          </p>
+        </div>
+      `;
+
+      if (bodyDiv) bodyDiv.innerHTML = storyHtml;
+    }
+
+    // ── RENDER FLASHCARDS (TAB 2) ─────────────────────────────────────
+    function renderFlashcards(cards) {
+      State.flashcards = Array.isArray(cards) ? cards : PragyaAPI.getMockFlashcards(State.topic);
+      State.cardIndex = 0;
+      State.cardFlipped = false;
+      displayCurrentCard();
+    }
+
+    function displayCurrentCard() {
+      if (!State.flashcards || State.flashcards.length === 0) return;
+      const card = State.flashcards[State.cardIndex];
+      const textEl = document.getElementById('cardContentText');
+      const badgeEl = document.getElementById('cardCounterBadge');
+      const hintEl = document.getElementById('flipHint');
+
+      if (badgeEl) badgeEl.textContent = `${State.cardIndex + 1} / ${State.flashcards.length}`;
+
+      if (textEl) {
+        if (State.cardFlipped) {
+          textEl.innerHTML = `<span style="color:#059669;"><i class="fa-solid fa-lightbulb me-1 text-warning"></i> ${escapeHtml(card.back || card.answer || 'Answer')}</span>`;
+          if (hintEl) hintEl.innerHTML = '<i class="fa-solid fa-check text-success me-1"></i>Showing: Answer Side';
+        } else {
+          textEl.innerHTML = `<span style="color:var(--edu-ink);">${escapeHtml(card.front || card.question || 'Concept')}</span>`;
+          if (hintEl) hintEl.innerHTML = '<i class="fa-solid fa-arrows-rotate me-1"></i>Click card to flip for answer';
+        }
+      }
+    }
+
+    function flipActiveCard(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      State.cardFlipped = !State.cardFlipped;
+      displayCurrentCard();
+    }
+
+    function nextFlashcard(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (State.cardIndex < State.flashcards.length - 1) {
+        State.cardIndex++;
+        State.cardFlipped = false;
+        displayCurrentCard();
+      }
+    }
+
+    function prevFlashcard(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (State.cardIndex > 0) {
+        State.cardIndex--;
+        State.cardFlipped = false;
+        displayCurrentCard();
+      }
+    }
+
+    // ── RENDER QUIZ (TAB 3) ───────────────────────────────────────────
+    function renderQuiz(quizData) {
+      const questions = (quizData && Array.isArray(quizData.questions)) ? quizData.questions :
+                        (quizData && Array.isArray(quizData)) ? quizData :
+                        PragyaAPI.getMockDiagnosticQuiz(State.topic).questions;
+      State.quizData = questions;
+      State.userAnswers = {};
+
+      const area = document.getElementById('quizContainerArea');
+      const badge = document.getElementById('quizResultBadge');
+      if (badge) badge.style.display = 'none';
+
+      if (!area) return;
+      area.innerHTML = questions.map((q, qIndex) => {
+        const questionText = q.question || q.q || `Question ${qIndex + 1}`;
+        const options = q.options || q.opts || [];
+        return `
+          <div class="mb-4 p-3" id="quizItem_${qIndex}" style="background:#F8FAFC; border:2px solid var(--edu-ink); box-shadow:2px 2px 0px var(--edu-ink);">
+            <div style="font-weight:700; color:var(--edu-ink); font-size:0.95rem; margin-bottom:0.75rem;">
+              <span class="badge-edu violet me-2">Q${qIndex + 1}</span>${escapeHtml(questionText)}
+            </div>
+            <div class="d-flex flex-column gap-2">
+              ${options.map((opt, optIndex) => `
+                <button type="button" class="mcq-btn text-start p-2" id="mcqOpt_${qIndex}_${optIndex}" onclick="pickQuizOption(${qIndex}, ${optIndex}, event)" style="background:#FFFFFF; border:2px solid var(--edu-ink); box-shadow:2px 2px 0px var(--edu-ink); font-size:0.88rem; font-weight:600; cursor:pointer;">
+                  <span class="me-2 fw-bold">${['A', 'B', 'C', 'D'][optIndex] || optIndex + 1}:</span> ${escapeHtml(opt)}
+                </button>
+              `).join('')}
+            </div>
+            <div id="quizExp_${qIndex}" class="mt-2 p-2" style="display:none; font-size:0.85rem; background:#EDE9FE; border-left:3px solid var(--edu-dark-purple); color:var(--edu-ink);">
+              <i class="fa-solid fa-lightbulb text-warning me-1"></i> ${escapeHtml(q.explanation || q.exp || 'Fundamental concept feedback')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function pickQuizOption(qIndex, optIndex, e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      State.userAnswers[qIndex] = optIndex;
+
+      // Update button highlights
+      const parent = document.getElementById(`quizItem_${qIndex}`);
+      if (parent) {
+        parent.querySelectorAll('.mcq-btn').forEach((btn, idx) => {
+          if (idx === optIndex) {
+            btn.style.background = '#FEF08A';
+            btn.style.boxShadow = 'inset 2px 2px 0px rgba(0,0,0,0.1)';
+          } else {
+            btn.style.background = '#FFFFFF';
+            btn.style.boxShadow = '2px 2px 0px var(--edu-ink)';
+          }
+        });
+      }
+    }
+
+    function gradeActiveQuiz(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      let score = 0;
+      const questions = State.quizData;
+
+      questions.forEach((q, qIndex) => {
+        const picked = State.userAnswers[qIndex];
+        const correct = (typeof q.correct === 'number') ? q.correct :
+                        (typeof q.ans === 'number') ? q.ans : 0;
+
+        const expEl = document.getElementById(`quizExp_${qIndex}`);
+        if (expEl) expEl.style.display = 'block';
+
+        const parent = document.getElementById(`quizItem_${qIndex}`);
+        if (parent) {
+          parent.querySelectorAll('.mcq-btn').forEach((btn, idx) => {
+            if (idx === correct) {
+              btn.style.background = '#DCFCE7';
+              btn.style.borderColor = '#15803D';
+            } else if (idx === picked && picked !== correct) {
+              btn.style.background = '#FFE4E6';
+              btn.style.borderColor = '#E11D48';
+            }
+          });
+        }
+
+        if (picked === correct) score++;
+      });
+
+      const total = questions.length || 1;
+      const pct = Math.round((score / total) * 100);
+      const badge = document.getElementById('quizResultBadge');
+      if (badge) {
+        badge.style.display = 'inline-flex';
+        badge.innerHTML = `<i class="fa-solid fa-award me-1"></i>Score: ${score}/${total} (${pct}%)`;
+        badge.className = `badge-edu ${pct >= 70 ? 'emerald' : pct >= 40 ? 'amber' : 'danger'}`;
+      }
+    }
+
+    // ── STUDIO TAB SWITCHER ───────────────────────────────────────────
+    function switchOutputTab(tabName, e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      State.activeTab = tabName;
+
+      const tabs = {
+        story: { btn: document.getElementById('story-mode-btn'), pane: document.getElementById('tabContentStory') },
+        flashcards: { btn: document.getElementById('flashcards-mode-btn'), pane: document.getElementById('tabContentFlashcards') },
+        quiz: { btn: document.getElementById('quiz-mode-btn'), pane: document.getElementById('tabContentQuiz') }
+      };
+
+      Object.keys(tabs).forEach(k => {
+        if (tabs[k].btn) tabs[k].btn.classList.toggle('active', k === tabName);
+        if (tabs[k].pane) tabs[k].pane.style.display = (k === tabName) ? 'block' : 'none';
+      });
+    }
+
+    // ── EMBEDDED SOCRATIC COACH ───────────────────────────────────────
+    async function seedSocraticCoach() {
+      const qText = document.getElementById('socraticQuestionText');
+      const depth = document.getElementById('socraticDepthSelect')?.value || 'medium';
+
+      try {
+        const question = await PragyaAPI.getSocraticQuestion(State.topic, depth);
+        State.lastSocraticPrompt = question;
+        if (qText) qText.textContent = question;
+      } catch (err) {
+        const fallback = `In the context of ${State.topic}, what fundamental paradox occurs if you push the principles to their extreme?`;
+        State.lastSocraticPrompt = fallback;
+        if (qText) qText.textContent = fallback;
+      }
+    }
+
+    async function submitSocraticAnswer(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const input = document.getElementById('socraticUserReply');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendSocraticMsg(text, 'student');
+      input.value = '';
+
+      // Ask AI for the next probe turn
+      const thread = document.getElementById('socraticThread');
+      const depth = document.getElementById('socraticDepthSelect')?.value || 'medium';
+
+      const thinkingId = 'socraticThinking_' + Date.now();
+      const thinkingEl = document.createElement('div');
+      thinkingEl.className = 'socratic-msg coach';
+      thinkingEl.id = thinkingId;
+      thinkingEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Socrates is contemplating your answer...';
+      thread.appendChild(thinkingEl);
+      thread.scrollTop = thread.scrollHeight;
+
+      try {
+        const turnRes = await PragyaAPI.askSocraticTurn(State.topic, depth, text);
+        const nextQ = turnRes.question || PragyaAPI.getMockSocraticQuestion(State.topic, depth);
+        State.lastSocraticPrompt = nextQ;
+
+        const thinkingNode = document.getElementById(thinkingId);
+        if (thinkingNode) {
+          thinkingNode.innerHTML = `<strong>🏛️ Socrates:</strong><br>${escapeHtml(nextQ)}`;
+        }
+      } catch (err) {
+        const nextQ = PragyaAPI.getMockSocraticQuestion(State.topic, depth);
+        State.lastSocraticPrompt = nextQ;
+        const thinkingNode = document.getElementById(thinkingId);
+        if (thinkingNode) {
+          thinkingNode.innerHTML = `<strong>🏛️ Socrates:</strong><br>${escapeHtml(nextQ)}`;
+        }
+      }
+      thread.scrollTop = thread.scrollHeight;
+    }
+
+    function appendSocraticMsg(msg, sender) {
+      const thread = document.getElementById('socraticThread');
+      if (!thread) return;
+      const el = document.createElement('div');
+      el.className = `socratic-msg ${sender}`;
+      el.innerHTML = sender === 'coach' ? `<strong>🏛️ Socrates:</strong><br>${escapeHtml(msg)}` : `<strong>You:</strong><br>${escapeHtml(msg)}`;
+      thread.appendChild(el);
+      thread.scrollTop = thread.scrollHeight;
+    }
+
+    function sendQuickSocratic(presetMsg, e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const input = document.getElementById('socraticUserReply');
+      if (input) {
+        input.value = presetMsg;
+        submitSocraticAnswer(e);
+      }
+    }
+
+    function handleSocraticKey(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        submitSocraticAnswer(e);
+      }
+    }
+
+    function changeSocraticDepth(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      seedSocraticCoach();
+    }
+
+    // ── TEXT-TO-SPEECH (TTS) FOR SOCRATES ─────────────────────────────
+    function speakSocratesLastPrompt(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const synth = window.speechSynthesis;
+      if (!synth) {
+        alert('Web Speech Synthesis is not supported in this browser.');
+        return;
+      }
+
+      if (synth.speaking) {
+        synth.cancel();
+        updateTtsBtn(false);
+        return;
+      }
+
+      const text = State.lastSocraticPrompt || document.getElementById('socraticQuestionText')?.textContent || '';
+      if (!text) return;
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.95;
+      utterance.pitch = 0.9;
+
+      utterance.onstart = () => updateTtsBtn(true);
+      utterance.onend = () => updateTtsBtn(false);
+      utterance.onerror = () => updateTtsBtn(false);
+
+      synth.speak(utterance);
+    }
+
+    function updateTtsBtn(isPlaying) {
+      const btnText = document.getElementById('ttsBtnText');
+      const btn = document.getElementById('ttsAudioBtn');
+      if (btnText) btnText.textContent = isPlaying ? 'Stop Voice' : 'Listen to Socrates';
+      if (btn) btn.classList.toggle('active', isPlaying);
+    }
+
+    // ── SPEECH-TO-TEXT (STT) RECOGNITION ──────────────────────────────
+    function setupSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return;
+
+      State.recognition = new SpeechRecognition();
+      State.recognition.continuous = false;
+      State.recognition.interimResults = false;
+      State.recognition.lang = 'en-US';
+
+      State.recognition.onstart = () => {
+        State.isRecognizing = true;
+        const mic = document.getElementById('micIcon');
+        if (mic) mic.className = 'fa-solid fa-microphone-lines fa-fade text-danger';
+      };
+
+      State.recognition.onresult = (e) => {
+        const transcript = e.results[0][0].transcript;
+        const input = document.getElementById('socraticUserReply');
+        if (input) input.value = transcript;
+      };
+
+      State.recognition.onend = () => {
+        State.isRecognizing = false;
+        const mic = document.getElementById('micIcon');
+        if (mic) mic.className = 'fa-solid fa-microphone';
+      };
+    }
+
+    function toggleVoiceDictation(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (!State.recognition) {
+        alert('Speech recognition is supported in Google Chrome & Edge.');
+        return;
+      }
+
+      if (State.isRecognizing) {
+        State.recognition.stop();
+      } else {
+        State.recognition.start();
+      }
+    }
+
+    // ── UTILITIES ─────────────────────────────────────────────────────
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
   </script>
 </body>

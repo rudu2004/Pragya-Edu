@@ -45,16 +45,16 @@
     <div class="main-content">
       <div class="topbar">
         <div class="d-flex align-items-center gap-2">
-          <button class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+          <button type="button" class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
           <span style="font-weight:700;font-size:0.9rem;">Module 3 <span class="badge-edu pink ms-1"><i class="fa-solid fa-microphone-lines me-1"></i>Socratic Mentor</span></span>
         </div>
         <div class="d-flex align-items-center gap-2">
           <!-- Audio Speed Control -->
           <div class="pill-toggle" style="width:auto;">
-            <button onclick="setSpeed(0.75,this)">0.75x</button>
-            <button class="active" onclick="setSpeed(1,this)">1x</button>
-            <button onclick="setSpeed(1.25,this)">1.25x</button>
-            <button onclick="setSpeed(1.5,this)">1.5x</button>
+            <button type="button" onclick="setSpeed(0.75,this)">0.75x</button>
+            <button type="button" class="active" onclick="setSpeed(1,this)">1x</button>
+            <button type="button" onclick="setSpeed(1.25,this)">1.25x</button>
+            <button type="button" onclick="setSpeed(1.5,this)">1.5x</button>
           </div>
           <div id="topConnPill" class="connectivity-pill offline"><span class="connectivity-dot"></span><span>Offline</span></div>
         </div>
@@ -121,29 +121,29 @@
         <div class="mb-2">
           <div class="label-edu mb-2"><i class="fa-solid fa-bolt me-1"></i>Quick Responses</div>
           <div class="d-flex flex-wrap gap-2" id="quickResponses">
-            <button class="btn-edu-ghost" onclick="sendQuick('I think I understand this...')">I think I understand...</button>
-            <button class="btn-edu-ghost" onclick="sendQuick('I\'m not sure, can you rephrase')">Not sure, rephrase</button>
-            <button class="btn-edu-ghost" onclick="sendQuick('Can you give me a real-world example')">Real-world example</button>
-            <button class="btn-edu-ghost" onclick="sendQuick('What happens if I challenge this assumption')">Challenge assumption</button>
+            <button type="button" class="btn-edu-ghost" onclick="sendQuick('I think I understand this...', event)">I think I understand...</button>
+            <button type="button" class="btn-edu-ghost" onclick="sendQuick('I\'m not sure, can you rephrase', event)">Not sure, rephrase</button>
+            <button type="button" class="btn-edu-ghost" onclick="sendQuick('Can you give me a real-world example', event)">Real-world example</button>
+            <button type="button" class="btn-edu-ghost" onclick="sendQuick('What happens if I challenge this assumption', event)">Challenge assumption</button>
           </div>
         </div>
         <div class="divider-edu"></div>
         <div class="d-flex gap-2">
           <textarea id="userInput" class="input-edu" rows="2" placeholder="Type your answer or thoughts... Socrates is listening!" style="resize:none;flex:1;"></textarea>
           <div class="d-flex flex-column gap-2">
-            <button class="btn-edu-primary" onclick="sendMessage()" id="sendBtn" style="height:48px;">
+            <button type="button" class="btn-edu-primary" onclick="sendMessage(event)" id="sendBtn" style="height:48px;">
               <i class="fa-solid fa-paper-plane"></i>
             </button>
-            <button class="btn-edu-ghost" onclick="toggleVoice()" id="voiceBtn" title="Voice Input" style="height:48px;width:48px;justify-content:center;">
+            <button type="button" class="btn-edu-ghost" onclick="toggleVoice(event)" id="voiceBtn" title="Voice Input" style="height:48px;width:48px;justify-content:center;">
               <i class="fa-solid fa-microphone"></i>
             </button>
           </div>
         </div>
         <div class="d-flex gap-2 mt-2">
-          <button class="btn-edu-ghost" onclick="nextQuestion()"><i class="fa-solid fa-forward me-1"></i>New Question</button>
-          <button class="btn-edu-ghost" onclick="deeperDive()"><i class="fa-solid fa-arrow-trend-down me-1"></i>Go Deeper</button>
-          <button class="btn-edu-ghost" onclick="simplify()"><i class="fa-solid fa-compress me-1"></i>Simplify</button>
-          <button class="btn-edu-ghost ms-auto" onclick="window.location.href='vibe-analytics.html'"><i class="fa-solid fa-chart-scatter me-1"></i>View Analytics</button>
+          <button type="button" class="btn-edu-ghost" onclick="nextQuestion(event)"><i class="fa-solid fa-forward me-1"></i>New Question</button>
+          <button type="button" class="btn-edu-ghost" onclick="deeperDive(event)"><i class="fa-solid fa-arrow-trend-down me-1"></i>Go Deeper</button>
+          <button type="button" class="btn-edu-ghost" onclick="simplify(event)"><i class="fa-solid fa-compress me-1"></i>Simplify</button>
+          <a href="vibe-analytics.html" class="btn-edu-ghost ms-auto" style="text-decoration:none;"><i class="fa-solid fa-chart-scatter me-1"></i>View Analytics</a>
         </div>
       </div>
     </div>
@@ -221,7 +221,8 @@
       container.scrollTop = container.scrollHeight;
     }
 
-    function sendMessage() {
+    function sendMessage(e) {
+      if (e) e.preventDefault();
       const input = document.getElementById('userInput');
       const text = input.value.trim();
       if (!text) return;
@@ -233,19 +234,22 @@
       addMentorMessage(response, 500);
     }
 
-    function sendQuick(text) {
+    function sendQuick(text, e) {
+      if (e) e.preventDefault();
       document.getElementById('userInput').value = text;
-      sendMessage();
+      sendMessage(e);
     }
 
-    function nextQuestion() {
+    function nextQuestion(e) {
+      if (e) e.preventDefault();
       const topic = localStorage.getItem('pe_topic') || 'this topic';
       const all = [...SOCRATIC_QUESTIONS.followup, ...SOCRATIC_QUESTIONS.deeper];
       const q = all[Math.floor(Math.random() * all.length)].replace(/\{topic\}/g, topic);
       addMentorMessage(q);
     }
 
-    function deeperDive() {
+    function deeperDive(e) {
+      if (e) e.preventDefault();
       const topic = localStorage.getItem('pe_topic') || 'this topic';
       const qs = SOCRATIC_QUESTIONS.deeper;
       const q = qs[Math.floor(Math.random() * qs.length)].replace(/\{topic\}/g, topic);
@@ -253,7 +257,8 @@
       document.getElementById('depthLabel').textContent = 'Depth: Deep Dive';
     }
 
-    function simplify() {
+    function simplify(e) {
+      if (e) e.preventDefault();
       const topic = localStorage.getItem('pe_topic') || 'this topic';
       const qs = SOCRATIC_QUESTIONS.simpler;
       const q = qs[Math.floor(Math.random() * qs.length)].replace(/\{topic\}/g, topic);

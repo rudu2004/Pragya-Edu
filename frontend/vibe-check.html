@@ -46,7 +46,7 @@
     <div class="main-content">
       <div class="topbar">
         <div class="d-flex align-items-center gap-2">
-          <button class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+          <button type="button" class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
           <span style="font-weight:700;font-size:0.9rem;">Module 1 <span class="badge-edu violet ms-1"><i class="fa-solid fa-bolt me-1"></i>Vibe Check</span></span>
         </div>
         <div class="d-flex align-items-center gap-2">
@@ -79,7 +79,7 @@
 
       <!-- Submit Button -->
       <div id="submitSection" style="display:none;" class="text-center mt-4 animate-fade-in-up">
-        <button class="btn-edu-brand" onclick="submitVibeCheck()" id="submitBtn">
+        <button type="button" class="btn-edu-brand" onclick="submitVibeCheck(event)" id="submitBtn">
           <i class="fa-solid fa-chart-radar me-2"></i>Generate My Curiosity Radar
         </button>
         <p style="font-size:0.8rem;color:rgba(15,23,42,0.5);margin-top:0.5rem;">Instant personalized learning profile</p>
@@ -107,9 +107,9 @@
               <p style="font-size:0.82rem;color:rgba(15,23,42,0.6);" id="contextDesc">Your lessons will use Sci-Fi metaphors.</p>
             </div>
             <div class="d-flex flex-column gap-2" id="statsGrid"></div>
-            <button class="btn-edu-primary" onclick="window.location.href='curriculum-adapter.html'">
+            <a href="curriculum-adapter.html" class="btn-edu-primary" style="text-decoration:none; text-align:center;">
               <i class="fa-solid fa-arrow-right me-1"></i>Next: Curriculum Adapter
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -261,7 +261,8 @@
       }
     }
 
-    function submitVibeCheck() {
+    function submitVibeCheck(e) {
+      if (e) e.preventDefault();
       localStorage.setItem('pe_vibeAnswers', JSON.stringify(answers));
 
       // Derive profile

@@ -27,8 +27,8 @@
     <div class="divider-edu"></div>
 
     <div id="roleToggle" class="pill-toggle mb-4" style="width:100%;">
-      <button class="active" onclick="setRole('student',this)" id="btnStudent"><i class="fa-solid fa-graduation-cap me-1"></i>Student</button>
-      <button onclick="setRole('teacher',this)" id="btnTeacher"><i class="fa-solid fa-chalkboard-user me-1"></i>Teacher</button>
+      <button type="button" class="active" onclick="setRole('student',this)" id="btnStudent"><i class="fa-solid fa-graduation-cap me-1"></i>Student</button>
+      <button type="button" onclick="setRole('teacher',this)" id="btnTeacher"><i class="fa-solid fa-chalkboard-user me-1"></i>Teacher</button>
     </div>
 
     <div class="mb-3">
@@ -59,7 +59,7 @@
       </select>
     </div>
 
-    <button class="btn-edu-brand w-100" onclick="startSession()" id="startBtn">
+    <button type="button" class="btn-edu-brand w-100" onclick="startSession(event)" id="startBtn">
       <i class="fa-solid fa-rocket me-2"></i>Launch My Learning Experience
     </button>
 
@@ -76,7 +76,8 @@
       btn.classList.add('active');
     }
 
-    function startSession() {
+    function startSession(e) {
+      if (e) e.preventDefault();
       const name = document.getElementById('userName').value.trim();
       const topic = document.getElementById('userTopic').value.trim();
       const lang = document.getElementById('userLang').value;

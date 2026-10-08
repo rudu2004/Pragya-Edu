@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Pragya-Edu | api.js
  * 6-Tier Fallback API Wrapper
  * Tier 1: Live Cloud API
@@ -229,6 +229,93 @@ const PragyaAPI = (() => {
   }
 
   /**
+   * Check backend live status & active AI tier
+   */
+  async function checkBackendStatus() {
+    try {
+      const res = await fetchWithTimeout(`${BASE_URL}/status`, {}, 2000);
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (e) { /* server offline */ }
+    return {
+      status: 'offline',
+      active_tier: 6,
+      tier_label: 'Local Edge Engine',
+      tier_status: '🟡 OFFLINE / EDGE MODE'
+    };
+  }
+
+  /**
+   * Upload Document (PDF/TXT) with 6-tier fallback
+   */
+  async function uploadDocument(file, mode = 'all', style = 'gaming') {
+    if (isOnline()) {
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('mode', mode);
+        formData.append('style', style);
+        formData.append('session_id', localStorage.getItem('pe_name') || 'anon');
+
+        const res = await fetchWithTimeout(`${BASE_URL}/curriculum-adapter/upload`, {
+          method: 'POST',
+          body: formData
+        }, 12000);
+
+        if (res.ok) {
+          const data = await res.json();
+          return { ...data, source: 'cloud' };
+        }
+      } catch (e) {
+        console.warn('Upload fallback to local processor:', e);
+      }
+    }
+
+    // Local edge mock fallback based on file name
+    const topic = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+    return {
+      topic: topic,
+      filename: file.name,
+      eli5: getMockELI5(topic, style),
+      flashcards: getMockFlashcards(topic),
+      quiz: getMockDiagnosticQuiz(topic),
+      source: 'local_edge'
+    };
+  }
+
+  /**
+   * Multi-turn Socratic conversation turn
+   */
+  async function askSocraticTurn(topic, depth = 'surface', userAnswer = '', sessionId = 'anon') {
+    if (isOnline() && userAnswer) {
+      try {
+        const res = await fetchWithTimeout(`${BASE_URL}/socratic-mentor/continue`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            topic,
+            depth,
+            user_answer: userAnswer,
+            session_id: sessionId
+          })
+        }, 6000);
+        if (res.ok) {
+          return await res.json();
+        }
+      } catch (e) { /* fallback */ }
+    }
+
+    const nextQ = getMockSocraticQuestion(topic, depth);
+    return {
+      question: nextQ,
+      depth: depth,
+      probe_type: 'heuristic_probe',
+      source: 'local_edge'
+    };
+  }
+
+  /**
    * Compute engagement profile
    */
   function computeProfile(answers) {
@@ -264,13 +351,18 @@ const PragyaAPI = (() => {
 
   // ── Public API ───────────────────────────────────────────
   return {
+    BASE_URL,
     getDiagnosticQuiz,
     getELI5,
     getFlashcards,
     getSocraticQuestion,
+    askSocraticTurn,
+    uploadDocument,
+    checkBackendStatus,
     computeProfile,
     saveTelemetry,
     getMockDiagnosticQuiz,
+    getMockELI5,
     getMockFlashcards,
     getMockSocraticQuestion,
     isOnline
