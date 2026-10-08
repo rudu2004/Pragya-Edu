@@ -49,10 +49,10 @@
   --font-main: "Inter", sans-serif;
   --font-pixel: "Pixelify Sans", "VT323", monospace;
   
-  /* Borders & Shadows for Pseudo-3D Pixel effect */
-  --border-thick: 3px solid var(--edu-ink);
-  --shadow-pixel: 4px 4px 0px var(--edu-ink);
-  --shadow-hover: 6px 6px 0px var(--edu-ink);
+  /* Comic Style Borders & Shadows */
+  --border-thick: 4px solid var(--edu-ink); /* Thicker comic borders */
+  --shadow-pixel: 6px 6px 0px var(--edu-ink); /* Deeper comic shadow */
+  --shadow-hover: 8px 8px 0px var(--edu-ink);
   --shadow-inset: inset 0 -4px 0 rgba(0,0,0,0.15);
   
   --transition-smooth: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -69,15 +69,14 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-main);
-  background-color: var(--edu-cream);
+  background-color: #FFF2CC; /* Light comic page color */
+  /* Comic Book Halftone Dots */
+  background-image: radial-gradient(rgba(0,0,0,0.06) 2.5px, transparent 3px);
+  background-size: 16px 16px;
   color: var(--edu-ink);
   line-height: 1.6;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  /* Very subtle animated grid for the game world feel */
-  background-image: linear-gradient(var(--edu-soft-blue) 1px, transparent 1px), linear-gradient(90deg, var(--edu-soft-blue) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: bgScroll 60s linear infinite;
 }
 
 ::-webkit-scrollbar { width: 14px; }
@@ -129,26 +128,34 @@ body {
   padding: 0.8rem 1rem; 
   color: var(--edu-warm-white); 
   text-decoration: none;
-  font-size: 1rem; font-weight: 700; font-family: var(--font-pixel);
-  border: 3px solid transparent;
-  transition: var(--transition-smooth);
+  font-size: 1.05rem; font-weight: 700; font-family: var(--font-pixel);
+  background: rgba(255,255,255,0.05);
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 4px;
+  margin-bottom: 8px;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.sidebar-link i { width: 24px; text-align: center; font-size: 1.2rem; }
+.sidebar-link i { width: 24px; text-align: center; font-size: 1.2rem; transition: transform 0.2s ease; }
 
 .sidebar-link:hover { 
   background: var(--edu-lavender); 
   color: var(--edu-ink);
-  border: 3px solid var(--edu-ink);
-  transform: translateX(4px);
-  box-shadow: 3px 3px 0px var(--edu-ink);
+  border: 2px solid var(--edu-ink);
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 4px 4px 0px var(--edu-ink);
+}
+
+.sidebar-link:hover i {
+  transform: scale(1.2) rotate(5deg);
 }
 
 .sidebar-link.active {
   background: var(--edu-yellow);
   color: var(--edu-ink);
-  border: 3px solid var(--edu-ink);
+  border: 2px solid var(--edu-ink);
   box-shadow: 4px 4px 0px var(--edu-ink);
+  transform: translateX(4px);
 }
 
 .sidebar-section-label {
@@ -494,4 +501,81 @@ select.input-edu option { background: var(--edu-warm-white); color: var(--edu-in
   .topbar { flex-wrap: wrap; gap: 1rem; }
   .heatmap-grid { grid-template-columns: repeat(2, 1fr); }
   .stat-value { font-size: 2rem; }
+}
+
+/* --- EXTRA COMIC BOOK ANIMATIONS & STYLING --- */
+
+@keyframes comicShake {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-2deg) scale(1.02); }
+  50% { transform: rotate(2deg) scale(1.02); }
+  75% { transform: rotate(-1deg) scale(1.02); }
+  100% { transform: rotate(0deg) scale(1.02); }
+}
+
+@keyframes comicPulse {
+  0% { transform: scale(1); box-shadow: var(--shadow-pixel); }
+  50% { transform: scale(1.05); box-shadow: 12px 12px 0px var(--edu-ink); }
+  100% { transform: scale(1); box-shadow: var(--shadow-pixel); }
+}
+
+.card-edu {
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-edu:hover, .feature-card:hover, .stat-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 8px 8px 0px var(--edu-coral) !important;
+  border-color: var(--edu-coral);
+}
+
+.btn-edu-primary, .btn-edu-ghost {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-edu-primary::after {
+  content: 'POW!';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0) rotate(-15deg);
+  font-family: var(--font-pixel);
+  font-size: 2rem;
+  color: #FFF;
+  text-shadow: 3px 3px 0 #000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: -1;
+}
+
+.btn-edu-primary:active::after {
+  transform: translate(-50%, -50%) scale(1.5) rotate(-15deg);
+  opacity: 1;
+}
+
+/* Make some panels deliberately tilted for comic book action feel */
+.stat-card:nth-child(even) {
+  transform: rotate(1deg);
+}
+.stat-card:nth-child(odd) {
+  transform: rotate(-1deg);
+}
+
+.stat-card:nth-child(even):hover, .stat-card:nth-child(odd):hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.badge-edu {
+  border-radius: 0;
+  border: 2px solid var(--edu-ink);
+  box-shadow: 2px 2px 0px var(--edu-ink);
+  transform: rotate(-2deg);
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.badge-edu:hover {
+  transform: rotate(2deg) scale(1.1);
+  box-shadow: 4px 4px 0px var(--edu-yellow);
 }
