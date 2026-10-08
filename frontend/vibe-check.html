@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pragya-Edu | Curiosity & Vibe Check</title>
+  <meta name="description" content="Module 1: State-Aware Curiosity Diagnostic - Check your vibe and energy level">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="networkBanner" class="network-banner offline">
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode Active — Local Intelligence Engine Running
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="d-flex align-items-center gap-2">
+          <div class="logo-mark" style="width:40px;height:40px;font-size:1.1rem;"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <div class="sidebar-brand">Pragya-Edu</div>
+            <div class="sidebar-tagline">Curiosity Engine</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="sidebar-section-label">Student Flow</div>
+        <a href="vibe-check.html" class="sidebar-link active"><i class="fa-solid fa-bolt"></i> Vibe Check</a>
+        <a href="curriculum-adapter.html" class="sidebar-link"><i class="fa-solid fa-book-open"></i> Curriculum Adapter</a>
+        <a href="socratic-mentor.html" class="sidebar-link"><i class="fa-solid fa-microphone-lines"></i> Socratic Mentor</a>
+        <a href="vibe-analytics.html" class="sidebar-link"><i class="fa-solid fa-chart-scatter"></i> Class Analytics</a>
+        <div class="sidebar-section-label mt-3">Profile</div>
+        <a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> My Dashboard</a>
+      </div>
+      <div class="sidebar-footer">
+        <div id="sidebarConnStatus" class="connectivity-pill offline mb-2">
+          <span class="connectivity-dot"></span><span id="connLabel">Local Mode</span>
+        </div>
+        <a href="login.html" class="sidebar-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Exit</a>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="topbar">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+          <span style="font-weight:700;font-size:0.9rem;">Module 1 <span class="badge-edu violet ms-1"><i class="fa-solid fa-bolt me-1"></i>Vibe Check</span></span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span id="userGreet" style="font-size:0.85rem;color:rgba(255,255,255,0.5);">Hey, Learner!</span>
+          <div id="topConnPill" class="connectivity-pill offline"><span class="connectivity-dot"></span><span>Offline</span></div>
+        </div>
+      </div>
+
+      <!-- Hero Header -->
+      <div class="text-center mb-4 animate-fade-in-up" style="padding:1.5rem 0 0.5rem;">
+        <div style="font-size:3rem;margin-bottom:0.5rem;" class="animate-float">?</div>
+        <h1 class="section-title gradient-text">Curiosity & Vibe Check</h1>
+        <p class="section-subtitle">3-min check-in to calibrate your learning experience. No wrong answers!</p>
+        <div id="timerDisplay" style="display:none;" class="mt-2">
+          <span class="badge-edu amber" id="timerBadge"><i class="fa-solid fa-clock me-1"></i>3:00 remaining</span>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="mb-4 animate-fade-in-up delay-1">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <small style="color:rgba(255,255,255,0.5);">Progress</small>
+          <small style="color:rgba(255,255,255,0.5);" id="progressLabel">0 / 5 answered</small>
+        </div>
+        <div class="progress-edu"><div class="progress-edu-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+
+      <!-- Question Container -->
+      <div id="questionArea"></div>
+
+      <!-- Submit Button -->
+      <div id="submitSection" style="display:none;" class="text-center mt-4 animate-fade-in-up">
+        <button class="btn-edu-brand" onclick="submitVibeCheck()" id="submitBtn">
+          <i class="fa-solid fa-chart-radar me-2"></i>Generate My Curiosity Radar
+        </button>
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:0.5rem;">Instant personalized learning profile</p>
+      </div>
+
+      <!-- Results Panel (hidden initially) -->
+      <div id="resultsPanel" style="display:none;" class="mt-4 animate-fade-in-up">
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <div class="card-edu card-glow-violet">
+              <h5 style="font-weight:800;color:#fff;margin-bottom:0.5rem;"><i class="fa-solid fa-chart-radar me-2 text-violet" style="color:var(--edu-violet);"></i>Your Curiosity Radar</h5>
+              <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);" class="mb-3">Cognitive readiness profile</p>
+              <div class="radar-wrapper"><canvas id="curiosityRadar"></canvas></div>
+            </div>
+          </div>
+          <div class="col-lg-6 d-flex flex-column gap-3">
+            <div class="card-edu card-glow-amber" id="vibeResultCard">
+              <div style="font-size:2rem;margin-bottom:0.5rem;" id="vibeEmoji">??</div>
+              <h5 style="font-weight:800;color:#fff;" id="vibeLevelTitle">High Energy Achiever</h5>
+              <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);" id="vibeLevelDesc">You're ready to absorb complex material!</p>
+            </div>
+            <div class="card-edu" id="contextResultCard">
+              <div class="badge-edu emerald mb-2"><i class="fa-solid fa-puzzle-piece me-1"></i>Preferred Context</div>
+              <h6 style="color:#fff;font-weight:700;" id="contextTitle">Sci-Fi Scenarios</h6>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);" id="contextDesc">Your lessons will use Sci-Fi metaphors.</p>
+            </div>
+            <div class="d-flex flex-column gap-2" id="statsGrid"></div>
+            <button class="btn-edu-primary" onclick="window.location.href='curriculum-adapter.html'">
+              <i class="fa-solid fa-arrow-right me-1"></i>Next: Curriculum Adapter
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/auth.js"></script>
+
+  <script>
+    // --- State -----------------------------------------------
+    const answers = {};
+    let answeredCount = 0;
+    let timerInterval = null;
+    let secondsLeft = 180;
+
+    const QUESTIONS = [
+      {
+        id: 'energy',
+        icon: '?',
+        title: 'How are you feeling RIGHT NOW?',
+        subtitle: 'Be honest — no judgment here',
+        type: 'single',
+        options: [
+          { id: 'burnout', label: 'Totally burned out', icon: '??', color: 'danger', desc: 'Need gentle, short content' },
+          { id: 'low',     label: 'A bit drained',      icon: '??', color: 'amber',  desc: 'Short bursts work best' },
+          { id: 'medium',  label: 'Okay, let\'s do this', icon: '??', color: 'violet', desc: 'Regular pace' },
+          { id: 'high',    label: 'Pumped & ready!',    icon: '??', color: 'emerald',desc: 'Bring on the challenge' },
+          { id: 'lost',    label: 'Completely lost / Need guidance', icon: '??', color: 'pink', desc: 'Start from basics' }
+        ]
+      },
+      {
+        id: 'context',
+        icon: '??',
+        title: 'What kind of examples click for you?',
+        subtitle: 'Your answer shapes how we explain things',
+        type: 'single',
+        options: [
+          { id: 'gaming',    label: 'Gaming & RPGs',         icon: '??', color: 'violet' },
+          { id: 'scifi',     label: 'Sci-Fi & Space',        icon: '??', color: 'cyan' },
+          { id: 'sports',    label: 'Sports & Competition',  icon: '?', color: 'emerald' },
+          { id: 'realworld', label: 'Real-world Problems',   icon: '??', color: 'amber' },
+          { id: 'stories',   label: 'Stories & Mysteries',   icon: '??', color: 'pink' }
+        ]
+      },
+      {
+        id: 'baseline',
+        icon: '??',
+        title: 'How well do you know this topic?',
+        subtitle: 'Honest self-rating helps us calibrate',
+        type: 'single',
+        options: [
+          { id: 'zero',    label: 'Never heard of it', icon: '??', color: 'amber' },
+          { id: 'basic',   label: 'Heard the name',   icon: '??', color: 'cyan' },
+          { id: 'some',    label: 'Know the basics',  icon: '??', color: 'violet' },
+          { id: 'good',    label: 'Solid foundation', icon: '?', color: 'emerald' },
+          { id: 'expert',  label: 'Pretty advanced',  icon: '??', color: 'pink' }
+        ]
+      },
+      {
+        id: 'attention',
+        icon: '??',
+        title: 'How long can you focus in one stretch?',
+        subtitle: 'This shapes content chunk sizes',
+        type: 'single',
+        options: [
+          { id: 'micro',   label: 'Under 5 minutes',       icon: '?', color: 'amber' },
+          { id: 'short',   label: '5-15 minutes',          icon: '??', color: 'violet' },
+          { id: 'medium',  label: '15-30 minutes',         icon: '??', color: 'cyan' },
+          { id: 'long',    label: '30+ minutes, no prob!', icon: '??', color: 'emerald' }
+        ]
+      },
+      {
+        id: 'goal',
+        icon: '??',
+        title: 'What brings you here today?',
+        subtitle: 'Optional but helps us personalize deeply',
+        type: 'single',
+        options: [
+          { id: 'exam',    label: 'Exam / Test prep',        icon: '??', color: 'amber' },
+          { id: 'curious', label: 'Pure curiosity',          icon: '??', color: 'violet' },
+          { id: 'project', label: 'Working on a project',    icon: '???', color: 'cyan' },
+          { id: 'stuck',   label: 'Stuck & need clarity',   icon: '??', color: 'pink' },
+          { id: 'fun',     label: 'Just exploring / fun',   icon: '??', color: 'emerald' }
+        ]
+      }
+    ];
+
+    // --- Init ------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      const name = localStorage.getItem('pe_name') || 'Learner';
+      document.getElementById('userGreet').textContent = 'Hey, ' + name + '!';
+      renderQuestions();
+      setupNetworkMonitor();
+    });
+
+    function renderQuestions() {
+      const area = document.getElementById('questionArea');
+      area.innerHTML = QUESTIONS.map((q, qi) => `
+        <div class="card-edu mb-3 animate-fade-in-up delay-${Math.min(qi+1,5)}" id="qCard_${q.id}">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div style="font-size:1.75rem;">${q.icon}</div>
+            <div>
+              <h5 style="font-weight:800;color:#fff;margin:0;">${q.title}</h5>
+              <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin:0;">${q.subtitle}</p>
+            </div>
+            <div class="ms-auto">
+              <span class="badge-edu violet" id="answered_${q.id}" style="display:none;"><i class="fa-solid fa-check me-1"></i>Answered</span>
+            </div>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            ${q.options.map(opt => `
+              <div class="mcq-option" id="opt_${q.id}_${opt.id}" onclick="selectOption('${q.id}','${opt.id}',this)">
+                <div class="mcq-radio" id="radio_${q.id}_${opt.id}"></div>
+                <span style="font-size:1.2rem;">${opt.icon}</span>
+                <div>
+                  <div style="font-weight:600;color:#E2E8F0;">${opt.label}</div>
+                  ${opt.desc ? `<div style="font-size:0.78rem;color:rgba(255,255,255,0.45);">${opt.desc}</div>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectOption(qId, optId, el) {
+      // Deselect all in same question
+      QUESTIONS.find(q => q.id === qId).options.forEach(o => {
+        document.getElementById('opt_' + qId + '_' + o.id)?.classList.remove('selected');
+      });
+
+      el.classList.add('selected');
+      const wasNew = !answers[qId];
+      answers[qId] = optId;
+
+      if (wasNew) {
+        answeredCount++;
+        const pct = (answeredCount / QUESTIONS.length) * 100;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressLabel').textContent = answeredCount + ' / ' + QUESTIONS.length + ' answered';
+        document.getElementById('answered_' + qId).style.display = 'inline-flex';
+      }
+
+      if (answeredCount === QUESTIONS.length) {
+        document.getElementById('submitSection').style.display = 'block';
+        document.getElementById('submitSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function submitVibeCheck() {
+      localStorage.setItem('pe_vibeAnswers', JSON.stringify(answers));
+
+      // Derive profile
+      const energy = answers.energy || 'medium';
+      const context = answers.context || 'realworld';
+      const baseline = answers.baseline || 'basic';
+      const attention = answers.attention || 'short';
+      const goal = answers.goal || 'curious';
+
+      const profile = { energy, context, baseline, attention, goal };
+      localStorage.setItem('pe_profile', JSON.stringify(profile));
+
+      // Show results
+      document.getElementById('submitSection').style.display = 'none';
+      document.getElementById('questionArea').style.display = 'none';
+      document.getElementById('resultsPanel').style.display = 'block';
+      document.getElementById('resultsPanel').scrollIntoView({ behavior: 'smooth' });
+
+      renderResults(profile);
+    }
+
+    function renderResults(profile) {
+      const energyMap = {
+        burnout: { emoji:'??', title:'Rest & Recover Mode', desc:'We\'ll serve gentle, calming short content.', color:'danger' },
+        low:     { emoji:'??', title:'Low-Power Explorer', desc:'Quick bites and easy wins to rebuild momentum.', color:'amber' },
+        medium:  { emoji:'??', title:'Steady Learner', desc:'Regular paced learning, balanced challenges.', color:'violet' },
+        high:    { emoji:'??', title:'High Energy Achiever', desc:'You\'re ready! We\'ll push your limits.', color:'emerald' },
+        lost:    { emoji:'??', title:'Guided Discovery Mode', desc:'We\'ll start from scratch and build up slowly.', color:'pink' }
+      };
+
+      const contextMap = {
+        gaming:    { title:'Gaming Universe', desc:'Concepts explained via game mechanics.' },
+        scifi:     { title:'Sci-Fi Scenarios', desc:'Learning through space and future lenses.' },
+        sports:    { title:'Sports Playbook', desc:'Strategies and stats to explain ideas.' },
+        realworld: { title:'Real-World Cases', desc:'Practical examples from daily life.' },
+        stories:   { title:'Story & Mystery Mode', desc:'Narrative-driven explanations.' }
+      };
+
+      const ev = energyMap[profile.energy] || energyMap.medium;
+      const cv = contextMap[profile.context] || contextMap.realworld;
+
+      document.getElementById('vibeEmoji').textContent = ev.emoji;
+      document.getElementById('vibeLevelTitle').textContent = ev.title;
+      document.getElementById('vibeLevelDesc').textContent = ev.desc;
+      document.getElementById('contextTitle').textContent = cv.title;
+      document.getElementById('contextDesc').textContent = cv.desc;
+
+      // Stats grid
+      const baselineScore = { zero:10, basic:30, some:55, good:75, expert:90 }[profile.baseline] || 40;
+      const attentionScore = { micro:20, short:45, medium:70, long:90 }[profile.attention] || 50;
+      const energyScore = { burnout:10, low:35, medium:60, high:90, lost:15 }[profile.energy] || 60;
+      const curiosityScore = { exam:50, curious:90, project:75, stuck:30, fun:85 }[profile.goal] || 60;
+      const engagementScore = Math.round((baselineScore + attentionScore + energyScore + curiosityScore) / 4);
+
+      document.getElementById('statsGrid').innerHTML = [
+        { label:'Cognitive Readiness', val: baselineScore, color:'violet' },
+        { label:'Attention Span', val: attentionScore, color:'cyan' },
+        { label:'Energy Level', val: energyScore, color:'amber' },
+        { label:'Curiosity Index', val: curiosityScore, color:'emerald' },
+      ].map(s => `
+        <div class="card-edu p-2">
+          <div class="d-flex justify-content-between mb-1">
+            <small style="color:rgba(255,255,255,0.6);font-weight:600;">${s.label}</small>
+            <small style="font-weight:800;color:#fff;">${s.val}%</small>
+          </div>
+          <div class="progress-edu"><div class="progress-edu-fill ${s.color}" style="width:${s.val}%"></div></div>
+        </div>
+      `).join('');
+
+      localStorage.setItem('pe_engagement', engagementScore.toString());
+
+      // Radar chart
+      setTimeout(() => {
+        const ctx = document.getElementById('curiosityRadar').getContext('2d');
+        new Chart(ctx, {
+          type: 'radar',
+          data: {
+            labels: ['Readiness','Attention','Energy','Curiosity','Engagement'],
+            datasets: [{
+              label: 'Your Profile',
+              data: [baselineScore, attentionScore, energyScore, curiosityScore, engagementScore],
+              backgroundColor: 'rgba(124,58,237,0.2)',
+              borderColor: 'rgba(124,58,237,0.8)',
+              borderWidth: 2,
+              pointBackgroundColor: '#EC4899',
+              pointRadius: 5,
+              pointHoverRadius: 7
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: 'rgba(255,255,255,0.7)', font: { family: 'Outfit', size: 12 } } } },
+            scales: {
+              r: {
+                min: 0, max: 100,
+                grid: { color: 'rgba(255,255,255,0.08)' },
+                angleLines: { color: 'rgba(255,255,255,0.08)' },
+                ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 10 }, backdropColor: 'transparent' },
+                pointLabels: { color: 'rgba(255,255,255,0.7)', font: { size: 11, weight: 'bold' } }
+              }
+            }
+          }
+        });
+      }, 100);
+    }
+
+    function setupNetworkMonitor() {
+      const banner = document.getElementById('networkBanner');
+      const pill = document.getElementById('topConnPill');
+      const sidebar = document.getElementById('sidebarConnStatus');
+
+      function update() {
+        const online = navigator.onLine;
+        banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
+        banner.innerHTML = online
+          ? '<i class="fa-solid fa-wifi me-2"></i>Connected — AI Engine Active'
+          : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Vector Engine Running';
+        pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
+        pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
+        sidebar.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';
+        sidebar.innerHTML = '<span class="connectivity-dot"></span><span id="connLabel">' + (online ? 'Cloud AI' : 'Local Mode') + '</span>';
+        setTimeout(() => { if (online) banner.classList.remove('show'); }, 3000);
+      }
+      update();
+      window.addEventListener('online', update);
+      window.addEventListener('offline', update);
+    }
+  </script>
+</body>
+</html>

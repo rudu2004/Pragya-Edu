@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pragya-Edu | Socratic Curiosity Mentor</title>
+  <meta name="description" content="Module 3: AI Socratic Mentor that asks thought-provoking questions instead of lecturing">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="networkBanner" class="network-banner offline">
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Socratic Engine Active
+  </div>
+
+  <div class="app-container">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="d-flex align-items-center gap-2">
+          <div class="logo-mark" style="width:40px;height:40px;font-size:1.1rem;"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <div class="sidebar-brand">Pragya-Edu</div>
+            <div class="sidebar-tagline">Curiosity Engine</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="sidebar-section-label">Student Flow</div>
+        <a href="vibe-check.html" class="sidebar-link"><i class="fa-solid fa-bolt"></i> Vibe Check</a>
+        <a href="curriculum-adapter.html" class="sidebar-link"><i class="fa-solid fa-book-open"></i> Curriculum Adapter</a>
+        <a href="socratic-mentor.html" class="sidebar-link active"><i class="fa-solid fa-microphone-lines"></i> Socratic Mentor</a>
+        <a href="vibe-analytics.html" class="sidebar-link"><i class="fa-solid fa-chart-scatter"></i> Class Analytics</a>
+        <div class="sidebar-section-label mt-3">Profile</div>
+        <a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> My Dashboard</a>
+      </div>
+      <div class="sidebar-footer">
+        <div id="sidebarConn" class="connectivity-pill offline mb-2">
+          <span class="connectivity-dot"></span><span>Local Mode</span>
+        </div>
+        <a href="login.html" class="sidebar-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Exit</a>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="topbar">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+          <span style="font-weight:700;font-size:0.9rem;">Module 3 <span class="badge-edu pink ms-1"><i class="fa-solid fa-microphone-lines me-1"></i>Socratic Mentor</span></span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <!-- Audio Speed Control -->
+          <div class="pill-toggle" style="width:auto;">
+            <button onclick="setSpeed(0.75,this)">0.75x</button>
+            <button class="active" onclick="setSpeed(1,this)">1x</button>
+            <button onclick="setSpeed(1.25,this)">1.25x</button>
+            <button onclick="setSpeed(1.5,this)">1.5x</button>
+          </div>
+          <div id="topConnPill" class="connectivity-pill offline"><span class="connectivity-dot"></span><span>Offline</span></div>
+        </div>
+      </div>
+
+      <!-- Mentor Header -->
+      <div class="row g-3 mb-4 animate-fade-in-up">
+        <div class="col-lg-8">
+          <div class="card-edu card-glow-violet" style="background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(236,72,153,0.05));">
+            <div class="d-flex align-items-center gap-3">
+              <div style="width:64px;height:64px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:1.75rem;flex-shrink:0;box-shadow:0 8px 24px rgba(124,58,237,0.4);">??</div>
+              <div>
+                <h1 class="section-title" style="font-size:1.4rem;">Socrates — Your Curiosity Mentor</h1>
+                <p class="section-subtitle" style="margin:0;">I don't lecture. I ask questions that make YOU think.</p>
+              </div>
+              <div class="ms-auto text-end" style="flex-shrink:0;">
+                <div id="speakingStatus" class="badge-edu violet">
+                  <span class="soundwave me-2" id="mentorWave">
+                    <span class="soundwave-bar"></span><span class="soundwave-bar"></span>
+                    <span class="soundwave-bar"></span><span class="soundwave-bar"></span>
+                    <span class="soundwave-bar"></span>
+                  </span>Ready
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card-edu h-100">
+            <div class="label-edu mb-2"><i class="fa-solid fa-book me-1"></i>Current Topic</div>
+            <div style="font-size:1rem;font-weight:700;color:#fff;" id="currentTopicDisplay">Loading...</div>
+            <div class="divider-edu"></div>
+            <div class="label-edu mb-2">Session Progress</div>
+            <div class="progress-edu"><div class="progress-edu-fill" id="sessionProgress" style="width:0%"></div></div>
+            <div class="d-flex justify-content-between mt-1">
+              <small style="color:rgba(255,255,255,0.4);" id="qCountLabel">0 questions explored</small>
+              <small style="color:rgba(255,255,255,0.4);" id="depthLabel">Depth: Surface</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Container -->
+      <div class="card-edu card-glow-violet mb-3 animate-fade-in-up delay-1">
+        <div id="chatContainer" class="chat-container" style="height:380px;" id="chatBox">
+          <!-- Messages rendered here -->
+        </div>
+
+        <!-- Typing indicator -->
+        <div id="typingIndicator" style="display:none;padding:0.5rem 1rem;">
+          <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:0.82rem;">
+            <div style="display:flex;gap:4px;align-items:center;">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--edu-violet);animation:pulse 1s infinite;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--edu-violet);animation:pulse 1s infinite 0.2s;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--edu-violet);animation:pulse 1s infinite 0.4s;"></span>
+            </div>
+            Socrates is thinking...
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Responses + Input -->
+      <div class="card-edu animate-fade-in-up delay-2">
+        <div class="mb-2">
+          <div class="label-edu mb-2"><i class="fa-solid fa-bolt me-1"></i>Quick Responses</div>
+          <div class="d-flex flex-wrap gap-2" id="quickResponses">
+            <button class="btn-edu-ghost" onclick="sendQuick('I think I understand this...')">I think I understand...</button>
+            <button class="btn-edu-ghost" onclick="sendQuick('I\'m not sure, can you rephrase?')">Not sure, rephrase?</button>
+            <button class="btn-edu-ghost" onclick="sendQuick('Can you give me a real-world example?')">Real-world example?</button>
+            <button class="btn-edu-ghost" onclick="sendQuick('What happens if I challenge this assumption?')">Challenge assumption?</button>
+          </div>
+        </div>
+        <div class="divider-edu"></div>
+        <div class="d-flex gap-2">
+          <textarea id="userInput" class="input-edu" rows="2" placeholder="Type your answer or thoughts... Socrates is listening!" style="resize:none;flex:1;"></textarea>
+          <div class="d-flex flex-column gap-2">
+            <button class="btn-edu-primary" onclick="sendMessage()" id="sendBtn" style="height:48px;">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+            <button class="btn-edu-ghost" onclick="toggleVoice()" id="voiceBtn" title="Voice Input" style="height:48px;width:48px;justify-content:center;">
+              <i class="fa-solid fa-microphone"></i>
+            </button>
+          </div>
+        </div>
+        <div class="d-flex gap-2 mt-2">
+          <button class="btn-edu-ghost" onclick="nextQuestion()"><i class="fa-solid fa-forward me-1"></i>New Question</button>
+          <button class="btn-edu-ghost" onclick="deeperDive()"><i class="fa-solid fa-arrow-trend-down me-1"></i>Go Deeper</button>
+          <button class="btn-edu-ghost" onclick="simplify()"><i class="fa-solid fa-compress me-1"></i>Simplify</button>
+          <button class="btn-edu-ghost ms-auto" onclick="window.location.href='vibe-analytics.html'"><i class="fa-solid fa-chart-scatter me-1"></i>View Analytics</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let audioSpeed = 1.0;
+    let questionCount = 0;
+    let speechSynthesis = window.speechSynthesis;
+    let currentUtterance = null;
+    let isSpeaking = false;
+
+    const SOCRATIC_QUESTIONS = {
+      opening: [
+        "Before we dive in, let me ask you this: What do you already *think* you know about {topic}? Sometimes our assumptions are our biggest obstacles.",
+        "Interesting challenge ahead! Here's my first question: If you had to explain {topic} to a 10-year-old using only 3 words, what would they be?",
+        "Welcome! Let's start with something provocative: What would happen to the world if {topic} suddenly stopped existing?"
+      ],
+      followup: [
+        "Fascinating! But here's the deeper question — WHY does that happen? What's the underlying mechanism?",
+        "You're on the right track! Now challenge yourself: Can you think of a situation where this would be completely WRONG?",
+        "Excellent thinking! Let me push you further: How would someone who DISAGREES with you argue their point?",
+        "Good observation! Now connect the dots — how does this relate to something you already know really well?",
+        "Interesting perspective! The Socratic challenge: What would change if we DOUBLED the scale of this problem?"
+      ],
+      deeper: [
+        "Let's go to the root cause. Aristotle would ask: What is the FINAL CAUSE here — the ultimate purpose or end goal?",
+        "Consider this paradox: If {topic} is so important, why do so many people misunderstand it?",
+        "The master question: What would you need to UNLEARN to truly understand this at a deeper level?"
+      ],
+      simpler: [
+        "Let's zoom way out. Forget all the details. At its most basic: what is the ONE thing {topic} is really about?",
+        "Imagine explaining this to your grandmother who has no background knowledge. What's the single most important thing to convey?",
+        "Strip away everything complex. The core of {topic} in one sentence — what is it?"
+      ]
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const topic = localStorage.getItem('pe_topic') || 'your topic';
+      document.getElementById('currentTopicDisplay').textContent = topic;
+      setupNetworkMonitor();
+      setTimeout(() => openingQuestion(topic), 800);
+    });
+
+    function openingQuestion(topic) {
+      const qs = SOCRATIC_QUESTIONS.opening;
+      const q = qs[Math.floor(Math.random() * qs.length)].replace(/\{topic\}/g, topic);
+      addMentorMessage(q);
+    }
+
+    function addMentorMessage(text, delay = 0) {
+      setTimeout(() => {
+        document.getElementById('typingIndicator').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('typingIndicator').style.display = 'none';
+          const container = document.getElementById('chatContainer');
+          const bubble = document.createElement('div');
+          bubble.className = 'chat-bubble mentor';
+          bubble.innerHTML = '<div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-bottom:4px;"><span style="font-size:1rem;">??</span> Socrates</div>' + text;
+          container.appendChild(bubble);
+          container.scrollTop = container.scrollHeight;
+          questionCount++;
+          updateProgress();
+          speakText(text);
+        }, 1200);
+      }, delay);
+    }
+
+    function addStudentMessage(text) {
+      const container = document.getElementById('chatContainer');
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble student';
+      bubble.innerHTML = '<div style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-bottom:4px;">You</div>' + text;
+      container.appendChild(bubble);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+      addStudentMessage(text);
+      input.value = '';
+      const topic = localStorage.getItem('pe_topic') || 'this topic';
+      const followups = SOCRATIC_QUESTIONS.followup;
+      const response = followups[Math.floor(Math.random() * followups.length)].replace(/\{topic\}/g, topic);
+      addMentorMessage(response, 500);
+    }
+
+    function sendQuick(text) {
+      document.getElementById('userInput').value = text;
+      sendMessage();
+    }
+
+    function nextQuestion() {
+      const topic = localStorage.getItem('pe_topic') || 'this topic';
+      const all = [...SOCRATIC_QUESTIONS.followup, ...SOCRATIC_QUESTIONS.deeper];
+      const q = all[Math.floor(Math.random() * all.length)].replace(/\{topic\}/g, topic);
+      addMentorMessage(q);
+    }
+
+    function deeperDive() {
+      const topic = localStorage.getItem('pe_topic') || 'this topic';
+      const qs = SOCRATIC_QUESTIONS.deeper;
+      const q = qs[Math.floor(Math.random() * qs.length)].replace(/\{topic\}/g, topic);
+      addMentorMessage(q);
+      document.getElementById('depthLabel').textContent = 'Depth: Deep Dive';
+    }
+
+    function simplify() {
+      const topic = localStorage.getItem('pe_topic') || 'this topic';
+      const qs = SOCRATIC_QUESTIONS.simpler;
+      const q = qs[Math.floor(Math.random() * qs.length)].replace(/\{topic\}/g, topic);
+      addMentorMessage(q);
+      document.getElementById('depthLabel').textContent = 'Depth: Fundamentals';
+    }
+
+    function updateProgress() {
+      const maxQ = 10;
+      const pct = Math.min((questionCount / maxQ) * 100, 100);
+      document.getElementById('sessionProgress').style.width = pct + '%';
+      document.getElementById('qCountLabel').textContent = questionCount + ' questions explored';
+    }
+
+    function speakText(text) {
+      if (!window.speechSynthesis) return;
+      if (currentUtterance) speechSynthesis.cancel();
+      const wave = document.getElementById('mentorWave');
+      const clean = text.replace(/<[^>]*>/g, '').replace(/\*/g, '');
+      currentUtterance = new SpeechSynthesisUtterance(clean);
+      currentUtterance.rate = audioSpeed;
+      currentUtterance.pitch = 0.9;
+      currentUtterance.onstart = () => {
+        isSpeaking = true;
+        wave.classList.add('playing');
+        document.getElementById('speakingStatus').innerHTML = '<span class="soundwave me-2 playing" id="mentorWave"><span class="soundwave-bar"></span><span class="soundwave-bar"></span><span class="soundwave-bar"></span><span class="soundwave-bar"></span><span class="soundwave-bar"></span></span>Speaking...';
+      };
+      currentUtterance.onend = () => {
+        isSpeaking = false;
+        wave.classList.remove('playing');
+        document.getElementById('speakingStatus').innerHTML = '<span class="soundwave me-2" id="mentorWave"><span class="soundwave-bar"></span><span class="soundwave-bar"></span><span class="soundwave-bar"></span><span class="soundwave-bar"></span><span class="soundwave-bar"></span></span>Ready';
+      };
+      speechSynthesis.speak(currentUtterance);
+    }
+
+    function setSpeed(speed, btn) {
+      audioSpeed = speed;
+      document.querySelectorAll('.pill-toggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (currentUtterance) { speechSynthesis.cancel(); }
+    }
+
+    function toggleVoice() {
+      const btn = document.getElementById('voiceBtn');
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        alert('Voice input not supported in your browser. Try Chrome!'); return;
+      }
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRec();
+      recognition.onstart = () => { btn.innerHTML = '<i class="fa-solid fa-microphone-slash" style="color:var(--edu-rose);"></i>'; };
+      recognition.onresult = (e) => {
+        const transcript = e.results[0][0].transcript;
+        document.getElementById('userInput').value = transcript;
+      };
+      recognition.onend = () => { btn.innerHTML = '<i class="fa-solid fa-microphone"></i>'; };
+      recognition.start();
+    }
+
+    document.getElementById('userInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+
+    function setupNetworkMonitor() {
+      const banner = document.getElementById('networkBanner');
+      const pill = document.getElementById('topConnPill');
+      const sConn = document.getElementById('sidebarConn');
+      function update() {
+        const online = navigator.onLine;
+        banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
+        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected — Full AI Mentor Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Socratic Engine Active';
+        pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
+        pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
+        sConn.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';
+        sConn.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Cloud AI' : 'Local Mode') + '</span>';
+        setTimeout(() => { if (online) banner.classList.remove('show'); }, 3000);
+      }
+      update();
+      window.addEventListener('online', update);
+      window.addEventListener('offline', update);
+    }
+  </script>
+</body>
+</html>

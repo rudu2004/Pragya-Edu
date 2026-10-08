@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pragya-Edu | Personalized Engagement & Curiosity Engine</title>
+  <meta name="description" content="Pragya-Edu: An AI-powered personalized curiosity engine for students. Features adaptive curriculum, Socratic mentoring, and classroom vibe analytics.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="./frontend/css/style.css" rel="stylesheet">
+  <style>
+    .hero-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; position: relative; overflow: hidden; }
+    .hero-bg-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 2rem 1.5rem; transition: all 0.3s ease; cursor: pointer; text-decoration: none; display: block; height: 100%; }
+    .feature-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-6px); border-color: rgba(124,58,237,0.35); text-decoration: none; }
+    .feature-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .feature-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    .feature-desc { font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+    .nav-landing { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; background: rgba(15,10,30,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.3); border-radius: 999px; padding: 0.4rem 1rem; font-size: 0.78rem; font-weight: 700; color: #DDD6FE; margin-bottom: 1.5rem; }
+    .hero-title { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 1.25rem; }
+    .hero-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.55); max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .tech-stack { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+    .tech-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 0.3rem 0.75rem; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <!-- Ambient background orbs -->
+  <div class="hero-bg-orb" style="width:700px;height:700px;top:-150px;right:-150px;background:radial-gradient(circle,rgba(124,58,237,0.18),transparent 70%);animation:floating 9s ease-in-out infinite;"></div>
+  <div class="hero-bg-orb" style="width:600px;height:600px;bottom:-100px;left:-100px;background:radial-gradient(circle,rgba(236,72,153,0.14),transparent 70%);animation:floating 11s ease-in-out infinite 2s;"></div>
+  <div class="hero-bg-orb" style="width:400px;height:400px;top:40%;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(79,70,229,0.1),transparent 70%);animation:floating 7s ease-in-out infinite 1s;"></div>
+
+  <!-- Nav -->
+  <nav class="nav-landing">
+    <div class="d-flex align-items-center gap-2">
+      <div class="logo-mark" style="width:38px;height:38px;font-size:1rem;"><i class="fa-solid fa-brain"></i></div>
+      <div>
+        <span style="font-weight:900;font-size:1rem;color:#fff;">Pragya-Edu</span>
+        <span style="font-size:0.65rem;color:rgba(255,255,255,0.35);margin-left:6px;text-transform:uppercase;letter-spacing:0.08em;">Curiosity Engine</span>
+      </div>
+    </div>
+    <div class="d-flex gap-2 align-items-center">
+      <span class="badge-edu violet d-none d-md-inline-flex"><i class="fa-solid fa-wifi-slash me-1"></i>Offline-Ready</span>
+      <a href="./frontend/login.html" class="btn-edu-brand">
+        <i class="fa-solid fa-rocket me-2"></i>Launch App
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-section" style="padding-top:6rem;">
+    <div style="position:relative;z-index:1;max-width:900px;" class="animate-fade-in-up">
+      <div class="hero-badge animate-float">
+        <i class="fa-solid fa-bolt" style="color:var(--edu-amber);"></i>
+        AI-Powered · Edge-First · Curiosity-Driven
+      </div>
+
+      <h1 class="hero-title">
+        <span class="gradient-text">Pragya-Edu</span><br>
+        Personalized Engagement<br>&amp; Curiosity Engine
+      </h1>
+
+      <p class="hero-subtitle">
+        An adaptive learning companion that detects your current vibe, busts boredom with 3 content modes, guides you with Socratic questions, and visualizes classroom engagement — all working offline.
+      </p>
+
+      <div class="d-flex gap-3 justify-content-center flex-wrap mb-3">
+        <a href="./frontend/login.html" class="btn-edu-brand" style="font-size:1rem;padding:0.85rem 2rem;">
+          <i class="fa-solid fa-rocket me-2"></i>Start Learning Now
+        </a>
+        <a href="./frontend/vibe-analytics.html" class="btn-edu-ghost" style="font-size:1rem;padding:0.85rem 2rem;">
+          <i class="fa-solid fa-chart-scatter me-2"></i>View Analytics
+        </a>
+      </div>
+
+      <div class="tech-stack">
+        <span class="tech-pill"><i class="fa-solid fa-check me-1" style="color:var(--edu-emerald);"></i>Works Offline</span>
+        <span class="tech-pill"><i class="fa-solid fa-microphone me-1" style="color:var(--edu-violet);"></i>Voice Mentor</span>
+        <span class="tech-pill"><i class="fa-solid fa-file-pdf me-1" style="color:var(--edu-rose);"></i>PDF Intelligence</span>
+        <span class="tech-pill"><i class="fa-solid fa-layer-group me-1" style="color:var(--edu-cyan);"></i>6-Tier Fallback</span>
+        <span class="tech-pill"><i class="fa-solid fa-fire me-1" style="color:var(--edu-amber);"></i>Boredom Detection</span>
+        <span class="tech-pill"><i class="fa-brands fa-html5 me-1" style="color:var(--edu-amber);"></i>HTML · CSS · JS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section style="padding: 4rem 2rem; position: relative; z-index: 1; max-width: 1100px; margin: 0 auto;">
+    <div class="text-center mb-5 animate-fade-in-up">
+      <h2 class="section-title gradient-text">5 Curiosity Modules</h2>
+      <p class="section-subtitle">A complete adaptive learning system, from diagnosis to mastery</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 animate-fade-in-up delay-1">
+        <a href="./frontend/vibe-check.html" class="feature-card" style="border-color:rgba(124,58,237,0.2);">
+          <div class="feature-icon">⚡</div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="feature-title">Curiosity & Vibe Check</div>
+            <span class="badge-edu violet" style="font-size:0.65rem;">Module 1</span>
+          </div>
+          <p class="feature-desc">3-minute state-aware diagnostic. Detects energy level, attention span, and learning context. Generates your personal Curiosity Radar.</p>
+          <div class="mt-3"><span class="badge-edu violet">Adaptive Diagnostic</span></div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4 animate-fade-in-up delay-2">
+        <a href="./frontend/curriculum-adapter.html" class="feature-card" style="border-color:rgba(245,158,11,0.2);">
+          <div class="feature-icon">📚</div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="feature-title">Curriculum Adapter</div>
+            <span class="badge-edu amber" style="font-size:0.65rem;">Module 2</span>
+          </div>
+          <p class="feature-desc">Upload any PDF chapter and instantly get 3 engagement modes: ELI5 Story, 60-Second Micro-Bites, and a Gamified Dynamic Quiz.</p>
+          <div class="mt-3"><span class="badge-edu amber">PDF Intelligence</span></div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4 animate-fade-in-up delay-3">
+        <a href="./frontend/socratic-mentor.html" class="feature-card" style="border-color:rgba(236,72,153,0.2);">
+          <div class="feature-icon">🦉</div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="feature-title">Socratic Curiosity Mentor</div>
+            <span class="badge-edu pink" style="font-size:0.65rem;">Module 3</span>
+          </div>
+          <p class="feature-desc">AI coach that asks thought-provoking questions instead of lecturing. Adjustable voice speed, speech recognition, and depth levels.</p>
+          <div class="mt-3"><span class="badge-edu pink">Voice AI Tutor</span></div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4 animate-fade-in-up delay-4">
+        <a href="./frontend/vibe-analytics.html" class="feature-card" style="border-color:rgba(6,182,212,0.2);">
+          <div class="feature-icon">🔥</div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="feature-title">Classroom Vibe Heatmap</div>
+            <span class="badge-edu cyan" style="font-size:0.65rem;">Module 4</span>
+          </div>
+          <p class="feature-desc">Real-time engagement heatmap for teachers. Detects silent burnout, recommends peer pairings, and flags at-risk students automatically.</p>
+          <div class="mt-3"><span class="badge-edu cyan">Live Analytics</span></div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4 animate-fade-in-up delay-5">
+        <a href="./frontend/dashboard.html" class="feature-card" style="border-color:rgba(16,185,129,0.2);">
+          <div class="feature-icon">📡</div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="feature-title">Low-Bandwidth Resilience</div>
+            <span class="badge-edu emerald" style="font-size:0.65rem;">Module 5</span>
+          </div>
+          <p class="feature-desc">6-tier fallback system ensures 100% uptime — Cloud AI → Cache → Mock Engine → Rule-Based → Static Pack → Text-Only mode.</p>
+          <div class="mt-3"><span class="badge-edu emerald">Edge-First Architecture</span></div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4 animate-fade-in-up delay-5">
+        <a href="./frontend/dashboard.html" class="feature-card" style="border-color:rgba(124,58,237,0.2);">
+          <div class="feature-icon">🎯</div>
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <div class="feature-title">My Learning Dashboard</div>
+            <span class="badge-edu violet" style="font-size:0.65rem;">Profile</span>
+          </div>
+          <p class="feature-desc">Track your curiosity score, module completions, achievements, and get personalized next-step recommendations based on your profile.</p>
+          <div class="mt-3"><span class="badge-edu violet">Personal Progress</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Footer -->
+  <section style="padding:4rem 2rem 6rem;text-align:center;position:relative;z-index:1;" class="animate-fade-in-up">
+    <div style="max-width:500px;margin:0 auto;">
+      <div style="font-size:3rem;margin-bottom:1rem;" class="animate-float">🚀</div>
+      <h2 class="section-title">Ready to ignite your curiosity?</h2>
+      <p class="section-subtitle">No account. No data collection. Works offline. Open the app and start learning in 30 seconds.</p>
+      <a href="./frontend/login.html" class="btn-edu-brand" style="font-size:1rem;padding:0.9rem 2.5rem;">
+        <i class="fa-solid fa-rocket me-2"></i>Launch Pragya-Edu
+      </a>
+    </div>
+  </section>
+
+  <script>
+    // Smooth scroll reveal via IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

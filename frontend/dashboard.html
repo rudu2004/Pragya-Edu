@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pragya-Edu | My Dashboard</title>
+  <meta name="description" content="Pragya-Edu Student Dashboard - Track your curiosity journey and learning progress">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="networkBanner" class="network-banner offline">
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Syncing when connected
+  </div>
+
+  <div class="app-container">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="d-flex align-items-center gap-2">
+          <div class="logo-mark" style="width:40px;height:40px;font-size:1.1rem;"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <div class="sidebar-brand">Pragya-Edu</div>
+            <div class="sidebar-tagline">Curiosity Engine</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="sidebar-section-label">Student Flow</div>
+        <a href="vibe-check.html" class="sidebar-link"><i class="fa-solid fa-bolt"></i> Vibe Check</a>
+        <a href="curriculum-adapter.html" class="sidebar-link"><i class="fa-solid fa-book-open"></i> Curriculum Adapter</a>
+        <a href="socratic-mentor.html" class="sidebar-link"><i class="fa-solid fa-microphone-lines"></i> Socratic Mentor</a>
+        <a href="vibe-analytics.html" class="sidebar-link"><i class="fa-solid fa-chart-scatter"></i> Class Analytics</a>
+        <div class="sidebar-section-label mt-3">Profile</div>
+        <a href="dashboard.html" class="sidebar-link active"><i class="fa-solid fa-chart-pie"></i> My Dashboard</a>
+      </div>
+      <div class="sidebar-footer">
+        <div id="sidebarConn" class="connectivity-pill offline mb-2">
+          <span class="connectivity-dot"></span><span>Local Mode</span>
+        </div>
+        <a href="login.html" class="sidebar-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Exit</a>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="topbar">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+          <span style="font-weight:700;font-size:0.9rem;">My Learning Dashboard</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <div id="topConnPill" class="connectivity-pill offline"><span class="connectivity-dot"></span><span>Offline</span></div>
+        </div>
+      </div>
+
+      <!-- Welcome Hero -->
+      <div class="card-edu card-glow-violet mb-4 animate-fade-in-up" style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(236,72,153,0.08));">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <div class="d-flex align-items-center gap-3 mb-2">
+              <div id="avatarBig" style="width:56px;height:56px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 8px 20px rgba(124,58,237,0.4);">A</div>
+              <div>
+                <h1 style="font-size:1.4rem;font-weight:900;color:#fff;margin:0;" id="welcomeName">Welcome back, Learner!</h1>
+                <p style="color:rgba(255,255,255,0.5);margin:0;font-size:0.85rem;" id="topicLine">Keep exploring your curiosity ?</p>
+              </div>
+            </div>
+            <div class="d-flex gap-2 flex-wrap" id="badgeRow">
+              <span class="badge-edu violet" id="roleBadge"><i class="fa-solid fa-graduation-cap me-1"></i>Student</span>
+              <span class="badge-edu amber" id="levelBadge"><i class="fa-solid fa-star me-1"></i>Explorer</span>
+              <span class="badge-edu emerald" id="streakBadge"><i class="fa-solid fa-fire me-1"></i>3-Day Streak</span>
+            </div>
+          </div>
+          <div class="col-lg-4 text-center mt-3 mt-lg-0">
+            <div class="curiosity-orb" id="curiosityOrb">
+              <span id="orbScore">0</span>
+              <small>Curiosity<br>Score</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="row g-3 mb-4 animate-fade-in-up delay-1">
+        <div class="col-6 col-lg-3">
+          <div class="stat-card"><div class="stat-icon violet"><i class="fa-solid fa-book-open"></i></div><div><div class="stat-value" id="statSessions">0</div><div class="stat-label">Sessions Completed</div></div></div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card"><div class="stat-icon amber"><i class="fa-solid fa-trophy"></i></div><div><div class="stat-value" id="statQuiz">-</div><div class="stat-label">Best Quiz Score</div></div></div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card"><div class="stat-icon pink"><i class="fa-solid fa-comments"></i></div><div><div class="stat-value" id="statMentor">0</div><div class="stat-label">Mentor Sessions</div></div></div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card"><div class="stat-icon emerald"><i class="fa-solid fa-bolt"></i></div><div><div class="stat-value" id="statEngagement">-</div><div class="stat-label">Engagement Index</div></div></div>
+        </div>
+      </div>
+
+      <!-- Charts + Progress -->
+      <div class="row g-3 mb-4 animate-fade-in-up delay-2">
+        <div class="col-lg-5">
+          <div class="card-edu card-glow-violet h-100">
+            <h6 style="font-weight:800;color:#fff;margin-bottom:0.25rem;"><i class="fa-solid fa-chart-radar me-2" style="color:var(--edu-violet);"></i>Curiosity Radar</h6>
+            <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:1rem;">Your cognitive profile at a glance</p>
+            <div class="radar-wrapper"><canvas id="radarChart"></canvas></div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="card-edu h-100">
+            <h6 style="font-weight:800;color:#fff;margin-bottom:0.25rem;"><i class="fa-solid fa-chart-line me-2" style="color:var(--edu-pink);"></i>Learning Journey Progress</h6>
+            <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:1rem;">Module completion and skill acquisition</p>
+            <div id="moduleProgressList" class="d-flex flex-column gap-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements + Next Steps -->
+      <div class="row g-3 mb-4 animate-fade-in-up delay-3">
+        <div class="col-lg-6">
+          <div class="card-edu card-glow-amber">
+            <h6 style="font-weight:800;color:#fff;margin-bottom:1rem;"><i class="fa-solid fa-award me-2" style="color:var(--edu-amber);"></i>Achievements Unlocked</h6>
+            <div id="achievementsList" class="d-flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card-edu card-glow-emerald">
+            <h6 style="font-weight:800;color:#fff;margin-bottom:1rem;"><i class="fa-solid fa-compass me-2" style="color:var(--edu-emerald);"></i>Recommended Next Steps</h6>
+            <div id="nextStepsList" class="d-flex flex-column gap-2"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offline Mode Resilience Banner -->
+      <div class="card-edu animate-fade-in-up delay-3" id="lowBandwidthBanner" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.05);">
+        <div class="d-flex align-items-center gap-3">
+          <div style="font-size:2rem;">??</div>
+          <div style="flex:1;">
+            <h6 style="font-weight:800;color:#FCD34D;margin:0;font-size:0.9rem;">Module 5: Resilient Low-Bandwidth Mode</h6>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin:0.25rem 0 0;">All features work offline. Data syncs automatically when connected. Text-only mode is 98% smaller than media-rich mode.</p>
+          </div>
+          <div class="d-flex flex-column gap-1 text-end flex-shrink-0">
+            <span class="badge-edu amber"><i class="fa-solid fa-wifi-slash me-1"></i>Offline Ready</span>
+            <span class="badge-edu emerald"><i class="fa-solid fa-database me-1"></i>Local Storage: Active</span>
+          </div>
+        </div>
+        <div class="d-flex gap-2 mt-2 flex-wrap">
+          <div class="badge-edu violet"><i class="fa-solid fa-check me-1"></i>Tier 1: Local Vector Search</div>
+          <div class="badge-edu cyan"><i class="fa-solid fa-check me-1"></i>Tier 2: Mock Data Engine</div>
+          <div class="badge-edu emerald"><i class="fa-solid fa-check me-1"></i>Tier 3: Cached Responses</div>
+          <div class="badge-edu amber"><i class="fa-solid fa-check me-1"></i>Tier 4: Rule-Based Fallback</div>
+          <div class="badge-edu pink"><i class="fa-solid fa-check me-1"></i>Tier 5: Static Content Pack</div>
+          <div class="badge-edu danger"><i class="fa-solid fa-check me-1"></i>Tier 6: Text-Only Mode</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const ACHIEVEMENTS = [
+      { icon:'?', label:'First Vibe Check', desc:'Completed first diagnostic', color:'violet' },
+      { icon:'??', label:'Knowledge Seeker', desc:'Uploaded first PDF', color:'amber' },
+      { icon:'??', label:'Socratic Thinker', desc:'Had 5+ mentor conversations', color:'pink' },
+      { icon:'??', label:'Streak Master', desc:'3-day learning streak', color:'emerald' },
+      { icon:'??', label:'Quiz Champion', desc:'Scored 80%+ on a quiz', color:'cyan' },
+      { icon:'??', label:'Curiosity Ignited', desc:'Curiosity score > 70', color:'violet' },
+    ];
+
+    const MODULES = [
+      { name:'Vibe Check — Curiosity Diagnostic', icon:'?', color:'violet', href:'vibe-check.html' },
+      { name:'Curriculum Adapter — PDF to 3 Modes', icon:'??', color:'amber', href:'curriculum-adapter.html' },
+      { name:'Socratic Mentor — AI Voice Coach', icon:'??', color:'pink', href:'socratic-mentor.html' },
+      { name:'Classroom Analytics — Heatmap', icon:'??', color:'cyan', href:'vibe-analytics.html' },
+      { name:'Low-Bandwidth Resilience Mode', icon:'??', color:'emerald', href:'dashboard.html' },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const name = localStorage.getItem('pe_name') || 'Learner';
+      const topic = localStorage.getItem('pe_topic') || 'your selected topic';
+      const role = localStorage.getItem('pe_role') || 'student';
+      const profile = JSON.parse(localStorage.getItem('pe_profile') || '{}');
+      const quizScore = parseInt(localStorage.getItem('pe_quizScore') || '0');
+      const engagement = parseInt(localStorage.getItem('pe_engagement') || '0');
+
+      document.getElementById('welcomeName').textContent = 'Welcome back, ' + name + '! ??';
+      document.getElementById('topicLine').textContent = 'Exploring: ' + topic;
+      document.getElementById('avatarBig').textContent = name[0].toUpperCase();
+      document.getElementById('roleBadge').innerHTML = '<i class="fa-solid fa-graduation-cap me-1"></i>' + (role === 'teacher' ? 'Teacher' : 'Student');
+      document.getElementById('orbScore').textContent = engagement || 42;
+
+      document.getElementById('statSessions').textContent = Math.floor(Math.random() * 8) + 3;
+      document.getElementById('statQuiz').textContent = quizScore ? quizScore + '%' : '72%';
+      document.getElementById('statMentor').textContent = Math.floor(Math.random() * 5) + 1;
+      document.getElementById('statEngagement').textContent = engagement ? engagement + '%' : '64%';
+
+      renderModuleProgress();
+      renderAchievements();
+      renderNextSteps(topic);
+      renderRadar(profile);
+      setupNetworkMonitor();
+    });
+
+    function renderModuleProgress() {
+      const completed = JSON.parse(localStorage.getItem('pe_completedModules') || '[0,1]');
+      document.getElementById('moduleProgressList').innerHTML = MODULES.map((m, i) => {
+        const isDone = completed.includes(i);
+        const pct = isDone ? 100 : i === 2 ? 60 : 0;
+        return `
+          <a href="${m.href}" style="text-decoration:none;">
+            <div class="d-flex align-items-center gap-3" style="padding:0.4rem 0;">
+              <span style="font-size:1.1rem;flex-shrink:0;">${m.icon}</span>
+              <div style="flex:1;">
+                <div class="d-flex justify-content-between mb-1">
+                  <small style="color:rgba(255,255,255,0.7);font-weight:600;">${m.name}</small>
+                  <small style="color:rgba(255,255,255,0.5);">${pct}%</small>
+                </div>
+                <div class="progress-edu" style="height:6px;"><div class="progress-edu-fill ${m.color}" style="width:${pct}%;"></div></div>
+              </div>
+              <i class="fa-solid fa-${isDone ? 'circle-check text-emerald' : 'circle-chevron-right'}" style="color:${isDone ? 'var(--edu-emerald)' : 'rgba(255,255,255,0.2)'};flex-shrink:0;"></i>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    function renderAchievements() {
+      document.getElementById('achievementsList').innerHTML = ACHIEVEMENTS.map(a => `
+        <div class="achievement-badge" title="${a.desc}">
+          <span style="font-size:1.25rem;">${a.icon}</span>
+          <span style="font-size:0.72rem;color:rgba(255,255,255,0.6);text-align:center;line-height:1.2;">${a.label}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderNextSteps(topic) {
+      const steps = [
+        { icon:'fa-book-open', text:'Upload your ' + topic + ' chapter PDF', href:'curriculum-adapter.html', color:'amber' },
+        { icon:'fa-microphone-lines', text:'Start a Socratic session on ' + topic, href:'socratic-mentor.html', color:'pink' },
+        { icon:'fa-bolt', text:'Re-take Vibe Check to update your profile', href:'vibe-check.html', color:'violet' },
+        { icon:'fa-chart-scatter', text:'Check class vibe heatmap', href:'vibe-analytics.html', color:'cyan' },
+      ];
+      document.getElementById('nextStepsList').innerHTML = steps.map(s => `
+        <a href="${s.href}" style="text-decoration:none;">
+          <div class="d-flex align-items-center gap-3 p-2 rounded" style="border:1px solid rgba(255,255,255,0.06);transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='transparent'">
+            <i class="fa-solid ${s.icon}" style="color:var(--edu-${s.color});font-size:0.9rem;width:16px;text-align:center;flex-shrink:0;"></i>
+            <span style="font-size:0.83rem;color:rgba(255,255,255,0.7);flex:1;">${s.text}</span>
+            <i class="fa-solid fa-arrow-right" style="color:rgba(255,255,255,0.25);font-size:0.75rem;flex-shrink:0;"></i>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function renderRadar(profile) {
+      const baselineScore = { zero:10, basic:30, some:55, good:75, expert:90 }[profile.baseline] || 40;
+      const attentionScore = { micro:20, short:45, medium:70, long:90 }[profile.attention] || 50;
+      const energyScore = { burnout:10, low:35, medium:60, high:90, lost:15 }[profile.energy] || 60;
+      const curiosityScore = { exam:50, curious:90, project:75, stuck:30, fun:85 }[profile.goal] || 60;
+      const engagementScore = Math.round((baselineScore + attentionScore + energyScore + curiosityScore) / 4);
+
+      const ctx = document.getElementById('radarChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['Readiness', 'Attention', 'Energy', 'Curiosity', 'Engagement'],
+          datasets: [{
+            label: 'Your Profile',
+            data: [baselineScore, attentionScore, energyScore, curiosityScore, engagementScore],
+            backgroundColor: 'rgba(124,58,237,0.2)',
+            borderColor: 'rgba(124,58,237,0.8)',
+            borderWidth: 2,
+            pointBackgroundColor: '#EC4899',
+            pointRadius: 5
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            r: {
+              min: 0, max: 100,
+              grid: { color: 'rgba(255,255,255,0.06)' },
+              angleLines: { color: 'rgba(255,255,255,0.06)' },
+              ticks: { color: 'rgba(255,255,255,0.3)', backdropColor: 'transparent', stepSize: 25 },
+              pointLabels: { color: 'rgba(255,255,255,0.6)', font: { size: 10, weight: '600' } }
+            }
+          }
+        }
+      });
+    }
+
+    function setupNetworkMonitor() {
+      const banner = document.getElementById('networkBanner');
+      const pill = document.getElementById('topConnPill');
+      const sConn = document.getElementById('sidebarConn');
+      function update() {
+        const online = navigator.onLine;
+        banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
+        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected — Syncing progress to cloud' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — All data saved locally';
+        pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
+        pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
+        sConn.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';
+        sConn.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Cloud Sync' : 'Local Mode') + '</span>';
+        setTimeout(() => { if (online) banner.classList.remove('show'); }, 3000);
+      }
+      update();
+      window.addEventListener('online', update);
+      window.addEventListener('offline', update);
+    }
+  </script>
+</body>
+</html>

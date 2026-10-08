@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pragya-Edu | Classroom Vibe Analytics</title>
+  <meta name="description" content="Module 4: Classroom Vibe and Peer Heatmap - Disengagement detection and peer pairing">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="networkBanner" class="network-banner offline">
+    <i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Analytics Engine Active
+  </div>
+
+  <div class="app-container">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="d-flex align-items-center gap-2">
+          <div class="logo-mark" style="width:40px;height:40px;font-size:1.1rem;"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <div class="sidebar-brand">Pragya-Edu</div>
+            <div class="sidebar-tagline">Curiosity Engine</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="sidebar-section-label">Student Flow</div>
+        <a href="vibe-check.html" class="sidebar-link"><i class="fa-solid fa-bolt"></i> Vibe Check</a>
+        <a href="curriculum-adapter.html" class="sidebar-link"><i class="fa-solid fa-book-open"></i> Curriculum Adapter</a>
+        <a href="socratic-mentor.html" class="sidebar-link"><i class="fa-solid fa-microphone-lines"></i> Socratic Mentor</a>
+        <a href="vibe-analytics.html" class="sidebar-link active"><i class="fa-solid fa-chart-scatter"></i> Class Analytics</a>
+        <div class="sidebar-section-label mt-3">Profile</div>
+        <a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> My Dashboard</a>
+      </div>
+      <div class="sidebar-footer">
+        <div id="sidebarConn" class="connectivity-pill offline mb-2">
+          <span class="connectivity-dot"></span><span>Local Mode</span>
+        </div>
+        <a href="login.html" class="sidebar-link text-danger"><i class="fa-solid fa-right-from-bracket"></i> Exit</a>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="topbar">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn-edu-ghost d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+          <span style="font-weight:700;font-size:0.9rem;">Module 4 <span class="badge-edu cyan ms-1"><i class="fa-solid fa-chart-scatter me-1"></i>Class Analytics</span></span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <div class="pill-toggle" style="width:auto;">
+            <button class="active" onclick="setView('class',this)" id="btnClass">Class View</button>
+            <button onclick="setView('peer',this)" id="btnPeer">Peer Pairs</button>
+            <button onclick="setView('atRisk',this)" id="btnRisk">At-Risk</button>
+          </div>
+          <div id="topConnPill" class="connectivity-pill offline"><span class="connectivity-dot"></span><span>Offline</span></div>
+        </div>
+      </div>
+
+      <!-- Stat Cards Row -->
+      <div class="row g-3 mb-4 animate-fade-in-up">
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon emerald"><i class="fa-solid fa-users"></i></div>
+            <div><div class="stat-value">32</div><div class="stat-label">Total Students</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon violet"><i class="fa-solid fa-bolt"></i></div>
+            <div><div class="stat-value">18</div><div class="stat-label">Actively Engaged</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon amber"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div><div class="stat-value">7</div><div class="stat-label">At-Risk (Silent)</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="stat-card">
+            <div class="stat-icon pink"><i class="fa-solid fa-fire"></i></div>
+            <div><div class="stat-value">56%</div><div class="stat-label">Class Vibe Score</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Class Heatmap View -->
+      <div id="viewClass" class="animate-fade-in-up delay-1">
+        <div class="row g-3">
+          <div class="col-lg-8">
+            <div class="card-edu card-glow-violet">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 style="font-weight:800;color:#fff;margin:0;"><i class="fa-solid fa-fire me-2" style="color:var(--edu-rose);"></i>Classroom Disengagement Heatmap</h5>
+                <div class="badge-edu amber"><i class="fa-solid fa-clock me-1"></i>Live</div>
+              </div>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:1rem;">Click any student cell to view their engagement profile</p>
+              <div class="heatmap-grid" id="heatmapGrid"></div>
+              <div class="d-flex gap-3 mt-3 flex-wrap">
+                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(244,63,94,0.4);display:inline-block;"></span><small style="color:rgba(255,255,255,0.5);">Burnout/At-Risk</small></div>
+                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(245,158,11,0.4);display:inline-block;"></span><small style="color:rgba(255,255,255,0.5);">Warning</small></div>
+                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(16,185,129,0.25);display:inline-block;"></span><small style="color:rgba(255,255,255,0.5);">Engaged</small></div>
+                <div class="d-flex align-items-center gap-2"><span style="width:12px;height:12px;border-radius:3px;background:rgba(6,182,212,0.25);display:inline-block;"></span><small style="color:rgba(255,255,255,0.5);">High Energy</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card-edu card-glow-pink mb-3">
+              <h6 style="font-weight:800;color:#fff;margin-bottom:1rem;"><i class="fa-solid fa-chart-bar me-2" style="color:var(--edu-pink);"></i>Engagement Distribution</h6>
+              <div style="height:200px;"><canvas id="distChart"></canvas></div>
+            </div>
+            <div class="card-edu" id="studentDetailCard" style="display:none;">
+              <h6 style="font-weight:800;color:#fff;margin-bottom:0.75rem;" id="detailName">Student Profile</h6>
+              <div id="detailContent"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Peer Pairs View -->
+      <div id="viewPeer" style="display:none;" class="animate-fade-in-up">
+        <div class="card-edu card-glow-emerald mb-3">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span style="font-size:1.5rem;">??</span>
+            <div>
+              <h5 style="font-weight:800;color:#fff;margin:0;">Suggested Peer Pairings</h5>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;">Complementary engagement profiles matched for collaborative learning</p>
+            </div>
+          </div>
+          <div id="peerPairsGrid" class="row g-3"></div>
+        </div>
+      </div>
+
+      <!-- At-Risk View -->
+      <div id="viewAtRisk" style="display:none;" class="animate-fade-in-up">
+        <div class="card-edu card-glow-amber mb-3">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span style="font-size:1.5rem;">??</span>
+            <div>
+              <h5 style="font-weight:800;color:#fff;margin:0;">Silent Burnout Detection</h5>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;">Students showing signs of disengagement or isolation</p>
+            </div>
+          </div>
+          <div id="atRiskList" class="d-flex flex-column gap-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Student Detail Modal -->
+  <div id="studentModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);" onclick="closeModal(event)">
+    <div id="modalBox" class="card-edu animate-fade-in-up" style="max-width:400px;width:90%;max-height:80vh;overflow-y:auto;" onclick="event.stopPropagation()">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 id="modalName" style="font-weight:800;color:#fff;margin:0;"></h5>
+        <button class="btn-edu-ghost" onclick="document.getElementById('studentModal').style.display='none'"><i class="fa-solid fa-times"></i></button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const STUDENTS = [
+      { name:'Aarav M.', energy:'high', quiz:82, sessions:12, status:'high', risk:'Low' },
+      { name:'Priya S.', energy:'burnout', quiz:28, sessions:2, status:'burnout', risk:'Critical' },
+      { name:'Rohan K.', energy:'medium', quiz:65, sessions:8, status:'engaged', risk:'Low' },
+      { name:'Ananya T.', energy:'low', quiz:42, sessions:4, status:'warning', risk:'Moderate' },
+      { name:'Kabir J.', energy:'high', quiz:88, sessions:14, status:'high', risk:'Low' },
+      { name:'Sneha P.', energy:'burnout', quiz:15, sessions:1, status:'burnout', risk:'Critical' },
+      { name:'Dev R.', energy:'medium', quiz:71, sessions:9, status:'engaged', risk:'Low' },
+      { name:'Meera V.', energy:'low', quiz:38, sessions:3, status:'warning', risk:'Moderate' },
+      { name:'Arjun B.', energy:'high', quiz:91, sessions:16, status:'high', risk:'Low' },
+      { name:'Nisha D.', energy:'burnout', quiz:22, sessions:2, status:'burnout', risk:'Critical' },
+      { name:'Vivek C.', energy:'medium', quiz:58, sessions:7, status:'engaged', risk:'Low' },
+      { name:'Pooja L.', energy:'high', quiz:79, sessions:11, status:'high', risk:'Low' },
+      { name:'Harsh N.', energy:'low', quiz:44, sessions:5, status:'warning', risk:'Moderate' },
+      { name:'Tanya G.', energy:'medium', quiz:67, sessions:9, status:'engaged', risk:'Low' },
+      { name:'Ishaan F.', energy:'burnout', quiz:18, sessions:1, status:'burnout', risk:'Critical' },
+      { name:'Zara M.', energy:'high', quiz:85, sessions:13, status:'high', risk:'Low' },
+      { name:'Kiran O.', energy:'low', quiz:35, sessions:4, status:'warning', risk:'Moderate' },
+      { name:'Raj P.', energy:'medium', quiz:62, sessions:8, status:'engaged', risk:'Low' },
+      { name:'Aisha Q.', energy:'high', quiz:77, sessions:10, status:'high', risk:'Low' },
+      { name:'Sai R.', energy:'burnout', quiz:25, sessions:2, status:'burnout', risk:'Critical' },
+      { name:'Lakshmi S.', energy:'medium', quiz:69, sessions:9, status:'engaged', risk:'Low' },
+      { name:'Nitin T.', energy:'high', quiz:84, sessions:12, status:'high', risk:'Low' },
+      { name:'Poonam U.', energy:'low', quiz:41, sessions:5, status:'warning', risk:'Moderate' },
+      { name:'Suresh V.', energy:'medium', quiz:55, sessions:7, status:'engaged', risk:'Low' },
+      { name:'Renu W.', energy:'burnout', quiz:12, sessions:1, status:'burnout', risk:'Critical' },
+      { name:'Mohan X.', energy:'high', quiz:93, sessions:15, status:'high', risk:'Low' },
+      { name:'Geeta Y.', energy:'medium', quiz:64, sessions:8, status:'engaged', risk:'Low' },
+      { name:'Ajay Z.', energy:'low', quiz:48, sessions:6, status:'warning', risk:'Moderate' },
+      { name:'Bindiya A.', energy:'high', quiz:80, sessions:11, status:'high', risk:'Low' },
+      { name:'Chetan B.', energy:'medium', quiz:72, sessions:10, status:'engaged', risk:'Low' },
+      { name:'Divya C.', energy:'burnout', quiz:20, sessions:1, status:'burnout', risk:'Critical' },
+      { name:'Elan D.', energy:'high', quiz:87, sessions:13, status:'high', risk:'Low' },
+    ];
+
+    const PEER_PAIRS = [
+      { a:0, b:3, reason:'High-energy Aarav can help low-energy Ananya find momentum' },
+      { a:4, b:1, reason:'Kabir\'s enthusiasm can re-engage burned-out Priya' },
+      { a:8, b:7, reason:'Arjun\'s deep engagement complements Meera\'s cautious learning style' },
+      { a:11, b:9, reason:'Pooja\'s consistent engagement pairs well with Nisha\'s recovery phase' },
+      { a:15, b:14, reason:'Zara\'s high energy can help reignite Ishaan\'s curiosity' },
+      { a:21, b:24, reason:'Nitin\'s strong foundation can support Renu\'s rebuilding phase' },
+    ];
+
+    let currentView = 'class';
+    let distChartInstance = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderHeatmap();
+      renderDistChart();
+      renderPeerPairs();
+      renderAtRisk();
+      setupNetworkMonitor();
+    });
+
+    function setView(view, btn) {
+      currentView = view;
+      document.querySelectorAll('.pill-toggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('viewClass').style.display = view === 'class' ? 'block' : 'none';
+      document.getElementById('viewPeer').style.display = view === 'peer' ? 'block' : 'none';
+      document.getElementById('viewAtRisk').style.display = view === 'atRisk' ? 'block' : 'none';
+    }
+
+    function renderHeatmap() {
+      const grid = document.getElementById('heatmapGrid');
+      grid.innerHTML = STUDENTS.map((s, i) => `
+        <div class="heatmap-cell ${s.status}" onclick="showStudentDetail(${i})" title="${s.name}: ${s.quiz}% quiz score">
+          <div style="font-size:0.75rem;margin-bottom:2px;">${s.name}</div>
+          <div style="font-size:0.7rem;opacity:0.75;">${s.quiz}%</div>
+          ${s.risk === 'Critical' ? '<div style="font-size:0.65rem;">??</div>' : ''}
+        </div>
+      `).join('');
+    }
+
+    function renderDistChart() {
+      const ctx = document.getElementById('distChart').getContext('2d');
+      const burnout = STUDENTS.filter(s => s.status === 'burnout').length;
+      const warning = STUDENTS.filter(s => s.status === 'warning').length;
+      const engaged = STUDENTS.filter(s => s.status === 'engaged').length;
+      const high = STUDENTS.filter(s => s.status === 'high').length;
+      distChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Burnout/At-Risk', 'Warning', 'Engaged', 'High Energy'],
+          datasets: [{
+            data: [burnout, warning, engaged, high],
+            backgroundColor: ['rgba(244,63,94,0.7)', 'rgba(245,158,11,0.7)', 'rgba(16,185,129,0.7)', 'rgba(6,182,212,0.7)'],
+            borderColor: ['rgba(244,63,94,0.9)', 'rgba(245,158,11,0.9)', 'rgba(16,185,129,0.9)', 'rgba(6,182,212,0.9)'],
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom', labels: { color: 'rgba(255,255,255,0.6)', font: { family: 'Outfit', size: 10 }, padding: 10 } } },
+          cutout: '65%'
+        }
+      });
+    }
+
+    function renderPeerPairs() {
+      const grid = document.getElementById('peerPairsGrid');
+      grid.innerHTML = PEER_PAIRS.map(pair => {
+        const sa = STUDENTS[pair.a]; const sb = STUDENTS[pair.b];
+        return `
+          <div class="col-md-6">
+            <div class="card-edu" style="border-color:rgba(16,185,129,0.2);">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <div class="peer-chip">
+                  <div class="peer-avatar" style="background:var(--grad-cool);color:#fff;">${sa.name[0]}</div>
+                  <span style="font-size:0.85rem;font-weight:700;color:#fff;">${sa.name}</span>
+                  <span class="badge-edu ${sa.status === 'high' ? 'cyan' : 'emerald'}" style="margin-left:4px;font-size:0.65rem;">${sa.energy}</span>
+                </div>
+                <span style="color:rgba(255,255,255,0.4);font-size:1.2rem;">??</span>
+                <div class="peer-chip">
+                  <div class="peer-avatar" style="background:var(--grad-hot);color:#fff;">${sb.name[0]}</div>
+                  <span style="font-size:0.85rem;font-weight:700;color:#fff;">${sb.name}</span>
+                  <span class="badge-edu ${sb.status === 'burnout' ? 'danger' : 'amber'}" style="margin-left:4px;font-size:0.65rem;">${sb.energy}</span>
+                </div>
+              </div>
+              <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin:0;font-style:italic;">${pair.reason}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderAtRisk() {
+      const atRisk = STUDENTS.filter(s => s.risk === 'Critical' || s.risk === 'Moderate');
+      document.getElementById('atRiskList').innerHTML = atRisk.map((s, i) => `
+        <div class="card-edu" style="border-color:${s.risk === 'Critical' ? 'rgba(244,63,94,0.3)' : 'rgba(245,158,11,0.3)'};">
+          <div class="d-flex align-items-center gap-3">
+            <div class="peer-avatar" style="background:${s.risk === 'Critical' ? 'rgba(244,63,94,0.3)' : 'rgba(245,158,11,0.25)'};color:${s.risk === 'Critical' ? '#FDA4AF' : '#FCD34D'};font-size:1rem;width:44px;height:44px;">${s.name[0]}</div>
+            <div style="flex:1;">
+              <div class="d-flex align-items-center gap-2">
+                <strong style="color:#fff;">${s.name}</strong>
+                <span class="badge-edu ${s.risk === 'Critical' ? 'danger' : 'amber'}">${s.risk} Risk</span>
+              </div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);">Quiz: ${s.quiz}% | Sessions: ${s.sessions} | Vibe: ${s.energy}</div>
+              <div class="progress-edu mt-1"><div class="progress-edu-fill ${s.risk === 'Critical' ? 'pink' : 'amber'}" style="width:${s.quiz}%;"></div></div>
+            </div>
+            <button class="btn-edu-ghost" onclick="showStudentDetail(${STUDENTS.findIndex(st => st.name === s.name)})" style="flex-shrink:0;"><i class="fa-solid fa-eye"></i></button>
+          </div>
+          <div style="margin-top:0.75rem;padding:0.6rem 0.75rem;background:rgba(245,158,11,0.05);border-radius:8px;border-left:3px solid ${s.risk === 'Critical' ? 'var(--edu-rose)' : 'var(--edu-amber)'};">
+            <strong style="font-size:0.78rem;color:${s.risk === 'Critical' ? '#FDA4AF' : '#FCD34D'};">Recommended Action:</strong>
+            <span style="font-size:0.78rem;color:rgba(255,255,255,0.6);"> ${s.risk === 'Critical' ? '1-on-1 check-in needed. Switch to ELI5 story mode and micro-bites. Pair with high-energy mentor student.' : 'Monitor closely. Offer simplified content and extra encouragement. Suggest peer study group.'}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function showStudentDetail(idx) {
+      const s = STUDENTS[idx];
+      document.getElementById('studentModal').style.display = 'flex';
+      document.getElementById('modalName').textContent = s.name + '\'s Profile';
+      document.getElementById('modalContent').innerHTML = `
+        <div class="d-flex flex-column gap-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="badge-edu ${s.status === 'burnout' ? 'danger' : s.status === 'warning' ? 'amber' : s.status === 'high' ? 'cyan' : 'emerald'}">${s.energy} energy</span>
+            <span class="badge-edu ${s.risk === 'Critical' ? 'danger' : s.risk === 'Moderate' ? 'amber' : 'emerald'}">${s.risk} Risk</span>
+          </div>
+          ${[
+            { label:'Quiz Score', val:s.quiz, max:100 },
+            { label:'Sessions Completed', val:s.sessions, max:20 }
+          ].map(m => `
+            <div>
+              <div class="d-flex justify-content-between mb-1">
+                <small style="color:rgba(255,255,255,0.6);font-weight:600;">${m.label}</small>
+                <small style="font-weight:800;color:#fff;">${m.val}${m.label.includes('Score') ? '%' : ' / ' + m.max}</small>
+              </div>
+              <div class="progress-edu"><div class="progress-edu-fill ${m.val >= 70 ? 'emerald' : m.val >= 40 ? 'amber' : 'pink'}" style="width:${(m.val/m.max)*100}%;"></div></div>
+            </div>
+          `).join('')}
+          <div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:0.75rem;">
+            <strong style="font-size:0.82rem;color:var(--edu-violet);">AI Recommendation:</strong>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.7);margin:0.4rem 0 0;">${
+              s.risk === 'Critical'
+                ? 'Immediate intervention needed. Schedule a 1-on-1 session, switch to Micro-Bites mode, and pair with a high-energy peer.'
+                : s.risk === 'Moderate'
+                  ? 'Gentle nudge recommended. Try ELI5 Story mode and encourage the Socratic Mentor sessions.'
+                  : 'On track! Keep engaging with challenging content and consider peer mentoring role.'
+            }</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('studentModal')) {
+        document.getElementById('studentModal').style.display = 'none';
+      }
+    }
+
+    function setupNetworkMonitor() {
+      const banner = document.getElementById('networkBanner');
+      const pill = document.getElementById('topConnPill');
+      const sConn = document.getElementById('sidebarConn');
+      function update() {
+        const online = navigator.onLine;
+        banner.className = 'network-banner show ' + (online ? 'online' : 'offline');
+        banner.innerHTML = online ? '<i class="fa-solid fa-wifi me-2"></i>Connected — Real-time Analytics Active' : '<i class="fa-solid fa-wifi-slash me-2"></i>Offline Mode — Local Analytics Engine Active';
+        pill.className = 'connectivity-pill ' + (online ? 'online' : 'offline');
+        pill.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Online' : 'Offline') + '</span>';
+        sConn.className = 'connectivity-pill ' + (online ? 'online' : 'offline') + ' mb-2';
+        sConn.innerHTML = '<span class="connectivity-dot"></span><span>' + (online ? 'Cloud AI' : 'Local Mode') + '</span>';
+        setTimeout(() => { if (online) banner.classList.remove('show'); }, 3000);
+      }
+      update();
+      window.addEventListener('online', update);
+      window.addEventListener('offline', update);
+    }
+  </script>
+</body>
+</html>
