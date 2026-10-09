@@ -47,7 +47,7 @@
 
   /* Fonts */
   --font-main: "Inter", sans-serif;
-  --font-pixel: "Pixelify Sans", "VT323", monospace;
+  --font-pixel: "VT323", "Pixelify Sans", monospace;
   
   /* Comic Style Borders & Shadows */
   --border-thick: 4px solid var(--edu-ink); /* Thicker comic borders */
@@ -59,7 +59,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 125%; }
 
 /* Animated Background */
 @keyframes bgScroll {

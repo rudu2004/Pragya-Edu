@@ -30,7 +30,7 @@
         <a href="vibe-check.html" class="sidebar-link"><i class="fa-solid fa-bolt"></i> Vibe Check</a>
         <a href="curriculum-adapter.html" class="sidebar-link"><i class="fa-solid fa-book-open"></i> Curriculum Adapter</a>
         <a href="socratic-mentor.html" class="sidebar-link active"><i class="fa-solid fa-microphone-lines"></i> Socratic Mentor</a>
-        <a href="vibe-analytics.html" class="sidebar-link"><i class="fa-solid fa-chart-scatter"></i> Class Analytics</a>
+        <a href="vibe-analytics.html" class="sidebar-link d-none"><i class="fa-solid fa-chart-scatter"></i> Class Analytics</a>
         <div class="sidebar-section-label mt-3">Profile</div>
         <a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> My Dashboard</a>
       </div>
@@ -340,5 +340,60 @@
       window.addEventListener('offline', update);
     }
   </script>
+
+<script>
+  window.openingQuestion = function() {}; // Disable old mock init function
+  // Override mock functions with real AI calls
+
+    const BASE_URL = 'http://127.0.0.1:8000/api';
+    const SESSION_ID = 'sess_' + Math.random().toString(36).substring(2);
+    let currentDepth = 'surface';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const topic = localStorage.getItem('pe_topic') || 'Machine Learning';
+      document.getElementById('currentTopicDisplay').textContent = topic;
+      setupNetworkMonitor();
+      
+      // Start real backend session
+      fetch(BASE_URL + '/socratic-mentor/start', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ session_id: SESSION_ID, topic: topic, depth: currentDepth })
+      }).then(res => res.json()).then(data => {
+          addMentorMessage(data.question || data.error);
+      }).catch(err => {
+          addMentorMessage("I'm currently offline, but let's think about this: What is the core concept here?");
+      });
+    });
+
+    async function sendMessage(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      addStudentMessage(text);
+      input.value = '';
+      
+      document.getElementById('typingIndicator').style.display = 'block';
+      const topic = localStorage.getItem('pe_topic') || 'Machine Learning';
+      
+      try {
+          const res = await fetch(BASE_URL + '/socratic-mentor/continue', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({ session_id: SESSION_ID, topic: topic, depth: currentDepth, user_answer: text })
+          });
+          const data = await res.json();
+          document.getElementById('typingIndicator').style.display = 'none';
+          addMentorMessage(data.next_question || data.question);
+      } catch(err) {
+          document.getElementById('typingIndicator').style.display = 'none';
+          addMentorMessage("Offline fallback: Fascinating! But WHY does that happen? What's the underlying mechanism that drives it?");
+      }
+    }
+
+</script>
+
 </body>
 </html>

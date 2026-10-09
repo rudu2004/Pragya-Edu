@@ -547,7 +547,7 @@ Return JSON:
         return data
     except Exception as e:
         print(f"[socratic] failed: {e}")
-        return json.loads(_local_fallback(f'socratic question topic: "{topic}" depth: "{depth}"'))
+        return json.loads(_local_fallback(f'socratic probe topic: "{topic}" depth: "{depth}"'))
 
 
 def analyze_vibe(mood_score: float, energy: str, quiz_scores: list,

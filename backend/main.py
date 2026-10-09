@@ -6,6 +6,9 @@ Routes for all 4 Modules + Dashboard + Analytics
 """
 
 import os
+import sys
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 import json
 import time
 import datetime
